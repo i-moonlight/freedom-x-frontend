@@ -9,6 +9,10 @@ import { Deposite } from "./pages/deposite/Deposite";
 import { Bet } from "./pages/bet/Bet";
 import { Withdraw } from "./pages/withdraw/Withdraw";
 import { DepositeNew } from "./pages/deposite/DepositeNew";
+import { Settings } from "./pages/settings/Settings";
+import { Faq } from "./pages/faq/Faq";
+import { History } from "./pages/history/History";
+import { Analytics } from "./pages/analytics/Analytics";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +35,25 @@ const router = createBrowserRouter([
   {
     path: "/bet",
     element: <Bet />,
+  },
+
+  {
+    path: "/settings",
+    element: <Settings />,
+  },
+
+  {
+    path: "/faq",
+    element: <Faq />,
+  },
+
+  {
+    path: "/history",
+    element: <History />,
+  },
+  {
+    path: "/analytics",
+    element: <Analytics />,
   },
 ]);
 

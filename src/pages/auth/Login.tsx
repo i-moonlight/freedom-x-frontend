@@ -20,7 +20,7 @@ export const Login = () => {
       <div className="w-[90%] max-w-[1158px] p-[30px] bg-[#23284F] rounded-[24px] grid grid-cols-[1fr_601px] gap-6 items-center border-[1px] border-[#444869] 1lg:grid-cols-1 sm:p-4">
         <div className="sm:flex sm:flex-col sm:items-center">
           <img src={logo} alt="" />
-          <h1 className="text-[30px] mt-8 font-bold text-[#EFEFEF]">
+          <h1 className="text-[30px] md:text-center mt-8 font-bold text-[#EFEFEF]">
             Welcome to Bet History
           </h1>
           <p className="text-[#EFEFEF] sm:text-center text-[17px] mt-5 mb-8">

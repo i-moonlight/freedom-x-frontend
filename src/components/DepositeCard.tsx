@@ -1,12 +1,17 @@
 import logo from "../assets/img/logo.svg";
 import { DropdownCustom } from "../components/Dropdown";
 import tether from "../assets/img/tether.svg";
-import copy from "../assets/img/copy.svg";
+import copys from "../assets/img/copy.svg";
 import copyQr from "../assets/img/copy-qr.svg";
 import QRCode from "react-qr-code";
+import copy from "copy-to-clipboard";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export const DepositeCard = ({ logoCustom }: any) => {
+  const notify = () => toast("Copied The Content");
   return (
     <div>
+      <ToastContainer hideProgressBar={true} />
       <div className="md:w-[90%] mx-auto  w-[534px] p-[30px] bg-[#23284F] rounded-[24px] border-[1px] border-[#444869] sm:p-[16px]">
         {logoCustom && <img src={logo} alt="" className="mx-auto" />}
 
@@ -17,6 +22,7 @@ export const DepositeCard = ({ logoCustom }: any) => {
 
           <DropdownCustom
             props={{ img: tether, coin: "USDT", subcoin: "TetherUS" }}
+            list={["3.10 USDC", "12.32 USDT", "0.00 BUSD", "0.00 TUSD"]}
           />
         </div>
         <div className="mt-6">
@@ -30,6 +36,7 @@ export const DepositeCard = ({ logoCustom }: any) => {
               coin: "BNB ",
               subcoin: "Smart Chain (BEP20)",
             }}
+            list={["BSC BNB Smart Chain (BEP20)"]}
           />
         </div>
         <div className="mt-6 flex items-center  gap-[13px]">
@@ -45,7 +52,15 @@ export const DepositeCard = ({ logoCustom }: any) => {
               <p className="w-[194px] break-words text-[#FFFFFF] text-[14px] sm:w-[150px]">
                 0xkshjdahfl98765rfgbnjki87ytfvbnjki87ytfvbnm2345678
               </p>
-              <img src={copyQr} alt="" className="cursor-pointer" />
+              <img
+                src={copyQr}
+                alt=""
+                className="cursor-pointer"
+                onClick={(e) => {
+                  notify();
+                  copy("0xkshjdahfl98765rfgbnjki87ytfvbnjki87ytfvbnm2345678");
+                }}
+              />
             </div>
           </div>
         </div>
@@ -60,7 +75,15 @@ export const DepositeCard = ({ logoCustom }: any) => {
               className="bg-[transparent] text-[#CCCCCC] text-[16px] flex-1 w-full outline-none border-0"
               value="................"
             />
-            <img src={copy} alt="" className="cursor-pointer" />
+            <img
+              src={copys}
+              alt=""
+              className="cursor-pointer"
+              onClick={(e) => {
+                notify();
+                copy("................");
+              }}
+            />
           </div>
         </div>
         <button className="text-[#FFFFFF] tect-[16px] w-full h-[49px] bg-[#3958FF]  rounded-[12px]">

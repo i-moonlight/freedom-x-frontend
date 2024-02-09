@@ -1,5 +1,6 @@
 import { Header } from "../../components/Header";
 import dropdownBet from "../../assets/img/dropdown-bet.svg";
+import dropdownBetWhite from "../../assets/img/plus-white.svg";
 import one from "../../assets/img/table-bet/one.svg";
 import two from "../../assets/img/table-bet/two.svg";
 import three from "../../assets/img/table-bet/three.svg";
@@ -12,14 +13,20 @@ import front from "../../assets/img/arrow-front-dbl.svg";
 
 import backSingle from "../../assets/img/arrow-back-single.svg";
 import frontSingle from "../../assets/img/arrow-front-single.svg";
+import { useState } from "react";
 
 export const Bet = () => {
+  const [active, setActive] = useState(false);
   return (
     <div className="w-full">
       <Header active={1} page="Bet History" />
       <div className="1lg:w-[90%] sm:!w-full sm:pl-4   w-[1140px] mx-auto mt-[36px] ">
         <div className="grid grid-cols-3 gap-3 mb-8 sm:flex sm:overflow-scroll">
-          <div className="px-[20px] sm:px-[15px]   py-[12px] sm:min-w-[181px] rounded-[16px] bg-[#3958FF]">
+          <div
+            className={`px-[20px] sm:px-[15px]   py-[12px] sm:min-w-[181px] rounded-[16px] bg-[#3958FF] relative sm:static ${
+              active && "rounded-bl-none rounded-br-none"
+            }`}
+          >
             <h1 className="text-[16px] text-[#CCCCCC] lg:text-[13px] font-bold">
               Balance
             </h1>
@@ -27,9 +34,39 @@ export const Bet = () => {
               <p className="text-[30px] text-[#EFEFEF] font-bold lg:text-[20px]">
                 2500 USDT
               </p>
-              <img src={dropdownBet} alt="" className="cursor-pointer" />
+              {active ? (
+                <img
+                  src={dropdownBetWhite}
+                  alt=""
+                  className="cursor-pointer"
+                  onClick={(e) => {
+                    setActive(!active);
+                  }}
+                />
+              ) : (
+                <img
+                  src={dropdownBet}
+                  alt=""
+                  className="cursor-pointer"
+                  onClick={(e) => {
+                    setActive(!active);
+                  }}
+                />
+              )}
             </div>
+            {active && (
+              <ul className="bg-[#23284F] px-[20px] border-[1px] border-[#3958FF] rounded-bl-[8px] left-0 top-[100%] rounded-br-[8px] absolute w-full z-20 sm:top-[185px] sm:w-[181px] sm:left-[1rem]">
+                {["3.10 USDC", "12.32 USDT", "0.00 BUSD", "0.00 TUSD"].map(
+                  (EachList: String) => (
+                    <li className="text-[16px] font-bold text-[#EFEFEF] h-[56px] border-b-[1px] border-b-[#444869] flex items-center cursor-pointer">
+                      {EachList}
+                    </li>
+                  )
+                )}
+              </ul>
+            )}
           </div>
+
           <div className="px-[20px] sm:min-w-[94px] py-[12px] rounded-[16px] bg-[#23284F] border-[1px] border-[#444869]  sm:px-[15px]">
             <h1 className="text-[16px] text-[#CCCCCC]  lg:text-[13px]  font-bold">
               Profit

@@ -8,11 +8,48 @@ body {
   background-image: url("./assets/img/bg-main.png");
   font-family: "Manrope", sans-serif;
 }
-
+.Manrope {
+  font-family: "Manrope", sans-serif;
+}
 .DropdownCustom button {
   width: 100%;
 }
-
+.toggle-bg {
+  background-color: #3958ff;
+  border-color: #3958ff;
+}
+.toggle-bg::after {
+  background-color: #fff;
+  border-radius: 50%;
+}
+.radiomultiplier:checked + label {
+  background-color: #3958ff;
+  border-color: #5771ff;
+}
+.Toastify__toast {
+  background-color: rgb(46 38 51 / 1) !important;
+  border: 1px solid rgb(252 134 35 / 1) !important;
+}
+.Toastify__toast-body > div:last-child,
+.Toastify__close-button > svg {
+  color: #fff !important;
+}
+.Toastify__close-button {
+  opacity: 1 !important;
+}
+.checkbox-type + label {
+  cursor: pointer;
+}
+.checkbox-type:checked + label {
+  background-color: #3958ff;
+  border-color: #3958ff;
+}
+.checkbox-type:checked + label img {
+  display: block;
+}
+.info-area:hover + span {
+  opacity: 1;
+}
 @media screen and (max-height: 851px) {
   .Deposite {
     height: unset;
