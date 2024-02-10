@@ -181,7 +181,7 @@ export const SettingsCard = () => {
           Save Changes
         </button>
       </div>
-      <button className="text-[#fff] font-semibold text-[16px] w-[249px] h-[49px] border-[1px] border-[#EB5757] rounded-[12px] absolute left-1/2 -translate-x-1/2 bottom-5 skipbutton md:w-[90%]">
+      <button className="text-[#fff] font-semibold text-[16px] w-[249px] h-[49px] border-[1px] border-[#EB5757] rounded-[12px] absolute left-1/2 -translate-x-1/2 bottom-5 skipbutton md:w-[90%] sm:static sm:translate-x-0 sm:mx-auto sm:mb-7 sm:block">
         Delete Account
       </button>
     </div>

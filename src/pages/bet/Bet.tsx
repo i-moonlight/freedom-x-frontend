@@ -130,10 +130,10 @@ export const Bet = () => {
                 </p>
               </div>
               <div className="w-[268px] 1lg:w-full 1lg:justify-start flex items-center justify-end gap-2">
-                <span className="flex items-center justify-center text-[#fff] font-bold  border-[1px] border-[#3958FF] 1lg:w-full px-[20px] py-[9px] rounded-[10px]  sm:px-[10px]">
+                <span className="flex items-center justify-center text-[#fff] font-bold  border-[1px] border-[#3958FF] 1lg:w-full px-[20px] py-[9px] rounded-[10px]  sm:px-[10px] sm:text-[12px]">
                   Odd: 1.2
                 </span>
-                <span className="flex items-center justify-center text-[#3958FF] font-bold bg-[#1D285D] border-[1px] 1lg:w-full border-[#3958FF] px-[20px] py-[9px] rounded-[10px] sm:px-[10px]">
+                <span className="flex items-center justify-center text-[#3958FF] font-bold bg-[#1D285D] border-[1px] 1lg:w-full border-[#3958FF] px-[20px] py-[9px] rounded-[10px] sm:px-[10px] sm:text-[12px]">
                   Live
                 </span>
               </div>
@@ -154,13 +154,13 @@ export const Bet = () => {
                 </p>
               </div>
               <div className="w-[268px] 1lg:w-full 1lg:justify-start flex items-center justify-end gap-2">
-                <span className="flex items-center justify-center text-[#EB5757] font-semibold px-[10px] rounded-[10px] text-[18px] 1lg:w-[70%]">
+                <span className="flex items-center justify-center text-[#EB5757] font-semibold  px-[10px] sm:text-[12px] rounded-[10px] text-[18px] 1lg:w-[70%]">
                   -42
                 </span>
-                <span className="flex items-center justify-center text-[#fff] font-bold  border-[1px] border-[#3958FF] px-[20px] py-[9px] rounded-[10px] 1lg:w-full sm:px-[10px]">
+                <span className="flex items-center justify-center text-[#fff] font-bold  border-[1px] border-[#3958FF] px-[20px] py-[9px] rounded-[10px] 1lg:w-full sm:px-[10px] sm:text-[12px]">
                   Odd: 1.2
                 </span>
-                <span className="flex items-center justify-center text-[#EB5757] font-bold bg-[#2D2139] border-[1px] border-[#EB5757] px-[20px] py-[9px] rounded-[10px] 1lg:w-full sm:px-[10px]">
+                <span className="flex items-center justify-center text-[#EB5757] font-bold bg-[#2D2139] border-[1px] border-[#EB5757] px-[20px] py-[9px] rounded-[10px] 1lg:w-full sm:px-[10px] sm:text-[12px]">
                   Lost
                 </span>
               </div>
@@ -181,13 +181,13 @@ export const Bet = () => {
                 </p>
               </div>
               <div className="w-[268px] 1lg:w-full 1lg:justify-start flex items-center justify-end gap-2">
-                <span className="flex items-center justify-center text-[#27AE60] font-semibold px-[10px] rounded-[10px] text-[18px] 1lg:w-[70%]">
+                <span className="flex items-center justify-center text-[#27AE60] font-semibold px-[10px] rounded-[10px] sm:text-[12px] text-[18px] 1lg:w-[70%]">
                   +1035
                 </span>
-                <span className="flex items-center justify-center text-[#fff] font-bold  border-[1px] border-[#3958FF] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px]">
+                <span className="flex items-center justify-center text-[#fff] font-bold  border-[1px] border-[#3958FF] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px] sm:text-[12px] ">
                   Odd: 1.2
                 </span>
-                <span className="flex items-center justify-center text-[#27AE60] font-bold bg-[#182738] border-[1px] border-[#27AE60] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px]">
+                <span className="flex items-center justify-center text-[#27AE60] font-bold bg-[#182738] border-[1px] border-[#27AE60] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px] sm:text-[12px]">
                   Won
                 </span>
               </div>
@@ -211,13 +211,13 @@ export const Bet = () => {
                 </p>
               </div>
               <div className="w-[268px] 1lg:w-full 1lg:justify-start flex items-center justify-end gap-2">
-                <span className="flex items-center justify-center text-[#27AE60] font-semibold px-[10px] rounded-[10px] text-[18px] 1lg:w-[70%]">
+                <span className="flex items-center justify-center text-[#27AE60] font-semibold px-[10px] rounded-[10px] sm:text-[12px] text-[18px] 1lg:w-[70%]">
                   +1035
                 </span>
-                <span className="flex items-center justify-center text-[#fff] font-bold  border-[1px] border-[#3958FF] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px]">
+                <span className="flex items-center justify-center text-[#fff] font-bold  border-[1px] border-[#3958FF] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px] sm:text-[12px] ">
                   Odd: 1.2
                 </span>
-                <span className="flex items-center justify-center text-[#27AE60] font-bold bg-[#182738] border-[1px] border-[#27AE60] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px]">
+                <span className="flex items-center justify-center text-[#27AE60] font-bold bg-[#182738] border-[1px] border-[#27AE60] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px] sm:text-[12px]">
                   Won
                 </span>
               </div>
@@ -242,13 +242,13 @@ export const Bet = () => {
                 </p>
               </div>
               <div className="w-[268px] 1lg:w-full 1lg:justify-start flex items-center justify-end gap-2">
-                <span className="flex items-center justify-center text-[#27AE60] font-semibold px-[10px] rounded-[10px] text-[18px] 1lg:w-[70%]">
+                <span className="flex items-center justify-center text-[#27AE60] font-semibold px-[10px] rounded-[10px] sm:text-[12px] text-[18px] 1lg:w-[70%]">
                   +1035
                 </span>
-                <span className="flex items-center justify-center text-[#fff] font-bold  border-[1px] border-[#3958FF] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px]">
+                <span className="flex items-center justify-center text-[#fff] font-bold  border-[1px] border-[#3958FF] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px] sm:text-[12px] ">
                   Odd: 1.2
                 </span>
-                <span className="flex items-center justify-center text-[#27AE60] font-bold bg-[#182738] border-[1px] border-[#27AE60] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px]">
+                <span className="flex items-center justify-center text-[#27AE60] font-bold bg-[#182738] border-[1px] border-[#27AE60] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px] sm:text-[12px]">
                   Won
                 </span>
               </div>
@@ -269,13 +269,13 @@ export const Bet = () => {
                 </p>
               </div>
               <div className="w-[268px] 1lg:w-full 1lg:justify-start flex items-center justify-end gap-2">
-                <span className="flex items-center justify-center text-[#27AE60] font-semibold px-[10px] rounded-[10px] text-[18px] 1lg:w-[70%]">
+                <span className="flex items-center justify-center text-[#27AE60] font-semibold px-[10px] rounded-[10px] sm:text-[12px] text-[18px] 1lg:w-[70%]">
                   +1035
                 </span>
-                <span className="flex items-center justify-center text-[#fff] font-bold  border-[1px] border-[#3958FF] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px]">
+                <span className="flex items-center justify-center text-[#fff] font-bold  border-[1px] border-[#3958FF] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px] sm:text-[12px] ">
                   Odd: 1.2
                 </span>
-                <span className="flex items-center justify-center text-[#27AE60] font-bold bg-[#182738] border-[1px] border-[#27AE60] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px]">
+                <span className="flex items-center justify-center text-[#27AE60] font-bold bg-[#182738] border-[1px] border-[#27AE60] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px] sm:text-[12px]">
                   Won
                 </span>
               </div>
@@ -296,13 +296,13 @@ export const Bet = () => {
                 </p>
               </div>
               <div className="w-[268px] 1lg:w-full 1lg:justify-start flex items-center justify-end gap-2">
-                <span className="flex items-center justify-center text-[#27AE60] font-semibold px-[10px] rounded-[10px] text-[18px] 1lg:w-[70%]">
+                <span className="flex items-center justify-center text-[#27AE60] font-semibold px-[10px] rounded-[10px] sm:text-[12px] text-[18px] 1lg:w-[70%]">
                   +1035
                 </span>
-                <span className="flex items-center justify-center text-[#fff] font-bold  border-[1px] border-[#3958FF] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px]">
+                <span className="flex items-center justify-center text-[#fff] font-bold  border-[1px] border-[#3958FF] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px] sm:text-[12px] ">
                   Odd: 1.2
                 </span>
-                <span className="flex items-center justify-center text-[#27AE60] font-bold bg-[#182738] border-[1px] border-[#27AE60] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px]">
+                <span className="flex items-center justify-center text-[#27AE60] font-bold bg-[#182738] border-[1px] border-[#27AE60] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px] sm:text-[12px]">
                   Won
                 </span>
               </div>
