@@ -2,26 +2,42 @@ import { Header } from "../../components/Header";
 import dropdownBet from "../../assets/img/dropdown-bet.svg";
 import dropdownBetWhite from "../../assets/img/plus-white.svg";
 import one from "../../assets/img/table-bet/one.svg";
-import two from "../../assets/img/table-bet/two.svg";
-import three from "../../assets/img/table-bet/three.svg";
-import four from "../../assets/img/table-bet/four.svg";
-import five from "../../assets/img/table-bet/five.svg";
-import six from "../../assets/img/table-bet/six.svg";
-
+import ReactPaginate from "react-paginate";
 import back from "../../assets/img/arrow-back-dbl.svg";
 import front from "../../assets/img/arrow-front-dbl.svg";
-
 import backSingle from "../../assets/img/arrow-back-single.svg";
 import frontSingle from "../../assets/img/arrow-front-single.svg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { bets } from "../../assets/axios/Bets";
+import { account } from "../../assets/axios/Account";
 
 export const Bet = () => {
   const [active, setActive] = useState(false);
   const [pagination, setPagination] = useState(1);
-  const [balance, setbalance] = useState({
-    value: "2500",
-    coin: "USDT",
+  const [betsState, setbetsState] = useState([]);
+  const [betsStateBackup, setbetsStateBackup] = useState([]);
+  const [userAccount, setuserAccount] = useState([]);
+  const [currentBalance, setcurrentBalance] = useState({
+    balance: "0",
+    commission: "0",
+    pnl: "0",
+    symbol: "",
+    unsettled_balance: "0",
   });
+
+  useEffect(() => {
+    bets.getBets(setbetsState, setbetsStateBackup);
+    account.getUserData(setuserAccount, setcurrentBalance);
+  }, []);
+
+  const paginationSetter = (page: any) => {
+    setbetsState(
+      betsStateBackup.filter((item: any, index: any) => {
+        return index >= page * 3 && index < (page + 1) * 3;
+      })
+    );
+  };
+
   return (
     <div className="w-full">
       <Header active={1} page="Bet History" />
@@ -38,9 +54,9 @@ export const Bet = () => {
             <div className="flex items-center justify-between mt-2">
               <p className="text-[30px] text-[#EFEFEF] font-bold lg:text-[20px]">
                 <span className=" inline-block w-[80px] sm:w-[unset] sm:mr-1">
-                  {balance.value}
+                  {currentBalance.balance}
                 </span>
-                {balance.coin}
+                {currentBalance.symbol}
               </p>
               {active ? (
                 <img
@@ -64,27 +80,22 @@ export const Bet = () => {
             </div>
             {active && (
               <ul className="bg-[#23284F] px-[20px] border-[1px] border-[#3958FF] rounded-bl-[8px] left-0 top-[100%] rounded-br-[8px] absolute w-full z-20 sm:top-[185px] sm:w-[181px] sm:left-[1rem]">
-                {["3.10 USDC", "12.32 USDT", "0.00 BUSD", "0.00 TUSD"].map(
-                  (EachList: String) => (
-                    <li
-                      onClick={(e) => {
-                        setActive(false);
-                        setbalance({
-                          value: EachList.split(" ")[0],
-                          coin: EachList.split(" ")[1],
-                        });
-                      }}
-                      className="text-[16px] font-bold text-[#EFEFEF] h-[56px] border-b-[1px] border-b-[#444869] flex items-center cursor-pointer sm:w-[unset]"
-                    >
-                      <span className="inline-block w-[70px] sm:w-[unset] mr-3 text-right sm:text-left ">
-                        {EachList.split(" ")[0]}
-                      </span>
-                      <span className=" inline-block w-[80px] ">
-                        {EachList.split(" ")[1]}
-                      </span>
-                    </li>
-                  )
-                )}
+                {userAccount.map((EachList: any) => (
+                  <li
+                    onClick={(e) => {
+                      setActive(false);
+                      setcurrentBalance(EachList);
+                    }}
+                    className="text-[16px] font-bold text-[#EFEFEF] h-[56px] border-b-[1px] border-b-[#444869] flex items-center cursor-pointer sm:w-[unset]"
+                  >
+                    <span className="inline-block w-[70px] sm:w-[unset] mr-3 text-right sm:text-left ">
+                      {EachList.balance}
+                    </span>
+                    <span className=" inline-block w-[80px] ">
+                      {EachList.symbol}
+                    </span>
+                  </li>
+                ))}
               </ul>
             )}
           </div>
@@ -95,7 +106,7 @@ export const Bet = () => {
             </h1>
             <div className="flex items-center justify-between mt-2">
               <p className="text-[30px] text-[#27AE60] font-bold lg:text-[20px]">
-                +357
+                +{currentBalance.pnl}
               </p>
             </div>
           </div>
@@ -105,7 +116,7 @@ export const Bet = () => {
             </h1>
             <div className="flex items-center justify-between mt-2">
               <p className="text-[30px] text-[#EFEFEF] font-bold lg:text-[20px]">
-                3
+                {currentBalance.unsettled_balance}
               </p>
             </div>
           </div>
@@ -114,199 +125,70 @@ export const Bet = () => {
       <div className="1lg:w-[90%]  w-[1140px] mx-auto  mb-[60px]">
         <div className="p-[30px] rounded-[24px] bg-[#23284F] border-[1px] border-[#444869] sm:p-4">
           <ul className="flex flex-col gap-4">
-            <li className=" bg-[#171B35] py-4 px-5 rounded-[16px]  border-[1px] border-[#444869] flex items-center 1lg:flex-col 1lg:items-start 1lg:gap-2">
-              <div className="w-[377px] flex items-center gap-3 1lg:w-full">
-                <img src={one} alt="" />
-                <p className="text-[#EFEFEF] font-bold">FIFA World cup</p>
-              </div>
-              <div className="w-[168px] 1lg:w-full">
-                <p className="text-[#EFEFEF] text-[16px]">
-                  Under 2.5 Yellow Cards whilst on live whatever
-                </p>
-              </div>
-              <div className="flex-1 flex items-center justify-center">
-                <p className="text-[#EFEFEF] text-[16px] font-medium">
-                  Stake: 50 USDT
-                </p>
-              </div>
-              <div className="w-[268px] 1lg:w-full 1lg:justify-start flex items-center justify-end gap-2">
-                <span className="flex items-center justify-center text-[#fff] font-bold  border-[1px] border-[#3958FF] 1lg:w-full px-[20px] py-[9px] rounded-[10px]  sm:px-[10px] sm:text-[12px]">
-                  Odd: 1.2
-                </span>
-                <span className="flex items-center justify-center text-[#3958FF] font-bold bg-[#1D285D] border-[1px] 1lg:w-full border-[#3958FF] px-[20px] py-[9px] rounded-[10px] sm:px-[10px] sm:text-[12px]">
-                  Live
-                </span>
-              </div>
-            </li>
-            <li className=" bg-[#171B35] py-4 px-5 rounded-[16px]  border-[1px] border-[#444869] flex items-center 1lg:flex-col 1lg:items-start 1lg:gap-2">
-              <div className="w-[377px] flex items-center gap-3 1lg:w-full">
-                <img src={two} alt="" />
-                <p className="text-[#EFEFEF] font-bold">Tennis</p>
-              </div>
-              <div className="w-[168px] 1lg:w-full">
-                <p className="text-[#EFEFEF] text-[16px]">
-                  Under 2.5 Yellow Cards whilst on live whatever
-                </p>
-              </div>
-              <div className="flex-1 flex items-center justify-center">
-                <p className="text-[#EFEFEF] text-[16px] font-medium">
-                  Stake: 50 USDT
-                </p>
-              </div>
-              <div className="w-[268px] 1lg:w-full 1lg:justify-start flex items-center justify-end gap-2">
-                <span className="flex items-center justify-center text-[#EB5757] font-semibold  px-[10px] sm:text-[12px] rounded-[10px] text-[18px] 1lg:w-[70%]">
-                  -42
-                </span>
-                <span className="flex items-center justify-center text-[#fff] font-bold  border-[1px] border-[#3958FF] px-[20px] py-[9px] rounded-[10px] 1lg:w-full sm:px-[10px] sm:text-[12px]">
-                  Odd: 1.2
-                </span>
-                <span className="flex items-center justify-center text-[#EB5757] font-bold bg-[#2D2139] border-[1px] border-[#EB5757] px-[20px] py-[9px] rounded-[10px] 1lg:w-full sm:px-[10px] sm:text-[12px]">
-                  Lost
-                </span>
-              </div>
-            </li>
-            <li className=" bg-[#171B35] py-4 px-5 rounded-[16px]  border-[1px] border-[#444869] flex items-center 1lg:flex-col 1lg:items-start 1lg:gap-2">
-              <div className="w-[377px]  flex items-center gap-3 1lg:w-full">
-                <img src={three} alt="" />
-                <p className="text-[#EFEFEF] font-bold">Cricket World Cup</p>
-              </div>
-              <div className="w-[168px] 1lg:w-full">
-                <p className="text-[#EFEFEF] text-[16px]">
-                  Under 2.5 Yellow Cards whilst on live whatever
-                </p>
-              </div>
-              <div className="flex-1 flex items-center justify-center">
-                <p className="text-[#EFEFEF] text-[16px] font-medium">
-                  Stake: 50 USDT
-                </p>
-              </div>
-              <div className="w-[268px] 1lg:w-full 1lg:justify-start flex items-center justify-end gap-2">
-                <span className="flex items-center justify-center text-[#27AE60] font-semibold px-[10px] rounded-[10px] sm:text-[12px] text-[18px] 1lg:w-[70%]">
-                  +1035
-                </span>
-                <span className="flex items-center justify-center text-[#fff] font-bold  border-[1px] border-[#3958FF] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px] sm:text-[12px] ">
-                  Odd: 1.2
-                </span>
-                <span className="flex items-center justify-center text-[#27AE60] font-bold bg-[#182738] border-[1px] border-[#27AE60] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px] sm:text-[12px]">
-                  Won
-                </span>
-              </div>
-            </li>
-            <li className=" bg-[#171B35] py-4 px-5 rounded-[16px]  border-[1px] border-[#444869] flex items-center 1lg:flex-col 1lg:items-start 1lg:gap-2">
-              <div className="w-[377px] 1lg:w-full flex items-center gap-3">
-                <img src={four} alt="" />
-                <p className="text-[#EFEFEF] font-bold">
-                  ICC Cricket World Cup U19. 2024: <br className="sm:hidden" />{" "}
-                  Sri Lanka U19 vs Australia U19..
-                </p>
-              </div>
-              <div className="w-[168px] 1lg:w-full">
-                <p className="text-[#EFEFEF] text-[16px]">
-                  Under 2.5 Yellow Cards whilst on live whatever
-                </p>
-              </div>
-              <div className="flex-1 flex items-center justify-center">
-                <p className="text-[#EFEFEF] text-[16px] font-medium">
-                  Stake: 50 USDT
-                </p>
-              </div>
-              <div className="w-[268px] 1lg:w-full 1lg:justify-start flex items-center justify-end gap-2">
-                <span className="flex items-center justify-center text-[#27AE60] font-semibold px-[10px] rounded-[10px] sm:text-[12px] text-[18px] 1lg:w-[70%]">
-                  +1035
-                </span>
-                <span className="flex items-center justify-center text-[#fff] font-bold  border-[1px] border-[#3958FF] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px] sm:text-[12px] ">
-                  Odd: 1.2
-                </span>
-                <span className="flex items-center justify-center text-[#27AE60] font-bold bg-[#182738] border-[1px] border-[#27AE60] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px] sm:text-[12px]">
-                  Won
-                </span>
-              </div>
-            </li>
-            <li className=" bg-[#171B35] py-4 px-5 rounded-[16px]  border-[1px] border-[#444869] flex items-center 1lg:flex-col 1lg:items-start 1lg:gap-2">
-              <div className="w-[377px] 1lg:w-full flex items-center gap-3">
-                <img src={two} alt="" />
-                <p className="text-[#EFEFEF] font-bold">
-                  Team 1 Total Runs In Over: 25 - Over,{" "}
-                  <br className="sm:hidden" /> Total Runs Sri Lanka U19 Under
-                  4.5
-                </p>
-              </div>
-              <div className="w-[168px] 1lg:w-full">
-                <p className="text-[#EFEFEF] text-[16px]">
-                  Under 2.5 Yellow Cards whilst on live whatever
-                </p>
-              </div>
-              <div className="flex-1 flex items-center justify-center">
-                <p className="text-[#EFEFEF] text-[16px] font-medium">
-                  Stake: 50 USDT
-                </p>
-              </div>
-              <div className="w-[268px] 1lg:w-full 1lg:justify-start flex items-center justify-end gap-2">
-                <span className="flex items-center justify-center text-[#27AE60] font-semibold px-[10px] rounded-[10px] sm:text-[12px] text-[18px] 1lg:w-[70%]">
-                  +1035
-                </span>
-                <span className="flex items-center justify-center text-[#fff] font-bold  border-[1px] border-[#3958FF] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px] sm:text-[12px] ">
-                  Odd: 1.2
-                </span>
-                <span className="flex items-center justify-center text-[#27AE60] font-bold bg-[#182738] border-[1px] border-[#27AE60] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px] sm:text-[12px]">
-                  Won
-                </span>
-              </div>
-            </li>
-            <li className=" bg-[#171B35] py-4 px-5 rounded-[16px]  border-[1px] border-[#444869] flex items-center 1lg:flex-col 1lg:items-start 1lg:gap-2">
-              <div className="w-[377px] 1lg:w-full flex items-center gap-3">
-                <img src={five} alt="" />
-                <p className="text-[#EFEFEF] font-bold">Tennis</p>
-              </div>
-              <div className="w-[168px] 1lg:w-full">
-                <p className="text-[#EFEFEF] text-[16px]">
-                  Under 2.5 Yellow Cards whilst on live whatever
-                </p>
-              </div>
-              <div className="flex-1 flex items-center justify-center">
-                <p className="text-[#EFEFEF] text-[16px] font-medium">
-                  Stake: 50 USDT
-                </p>
-              </div>
-              <div className="w-[268px] 1lg:w-full 1lg:justify-start flex items-center justify-end gap-2">
-                <span className="flex items-center justify-center text-[#27AE60] font-semibold px-[10px] rounded-[10px] sm:text-[12px] text-[18px] 1lg:w-[70%]">
-                  +1035
-                </span>
-                <span className="flex items-center justify-center text-[#fff] font-bold  border-[1px] border-[#3958FF] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px] sm:text-[12px] ">
-                  Odd: 1.2
-                </span>
-                <span className="flex items-center justify-center text-[#27AE60] font-bold bg-[#182738] border-[1px] border-[#27AE60] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px] sm:text-[12px]">
-                  Won
-                </span>
-              </div>
-            </li>
-            <li className=" bg-[#171B35] py-4 px-5 rounded-[16px]  border-[1px] border-[#444869] flex items-center 1lg:flex-col 1lg:items-start 1lg:gap-2">
-              <div className="w-[377px] 1lg:w-full flex items-center gap-3">
-                <img src={six} alt="" />
-                <p className="text-[#EFEFEF] font-bold">La Liga</p>
-              </div>
-              <div className="w-[168px] 1lg:w-full">
-                <p className="text-[#EFEFEF] text-[16px]">
-                  Under 2.5 Yellow Cards whilst on live whatever
-                </p>
-              </div>
-              <div className="flex-1 flex items-center justify-center">
-                <p className="text-[#EFEFEF] text-[16px] font-medium">
-                  Stake: 50 USDT
-                </p>
-              </div>
-              <div className="w-[268px] 1lg:w-full 1lg:justify-start flex items-center justify-end gap-2">
-                <span className="flex items-center justify-center text-[#27AE60] font-semibold px-[10px] rounded-[10px] sm:text-[12px] text-[18px] 1lg:w-[70%]">
-                  +1035
-                </span>
-                <span className="flex items-center justify-center text-[#fff] font-bold  border-[1px] border-[#3958FF] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px] sm:text-[12px] ">
-                  Odd: 1.2
-                </span>
-                <span className="flex items-center justify-center text-[#27AE60] font-bold bg-[#182738] border-[1px] border-[#27AE60] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px] sm:text-[12px]">
-                  Won
-                </span>
-              </div>
-            </li>
+            {betsState.map((EachBet: any) => (
+              <li
+                key={EachBet._id}
+                className=" bg-[#171B35] py-4 px-5 rounded-[16px]  border-[1px] border-[#444869] flex items-center 1lg:flex-col 1lg:items-start 1lg:gap-2"
+              >
+                <div className="w-[377px] flex items-center gap-3 1lg:w-full">
+                  <img src={one} alt="" />
+                  <p className="text-[#EFEFEF] font-bold">{EachBet["event"]}</p>
+                </div>
+                <div className="w-[168px] 1lg:w-full">
+                  <p className="text-[#EFEFEF] text-[16px]">{EachBet["bet"]}</p>
+                </div>
+                <div className="flex-1 flex items-center justify-center">
+                  <p className="text-[#EFEFEF] text-[16px] font-medium">
+                    Stake: {EachBet["stake"]}
+                  </p>
+                </div>
+                <div className="w-[268px] 1lg:w-full 1lg:justify-start flex items-center justify-end gap-2">
+                  <span
+                    className="flex text-[14px] items-center justify-center font-semibold  px-[10px] sm:text-[12px] rounded-[10px] text-[18px] 1lg:w-[70%]"
+                    style={
+                      EachBet["status"] == "win"
+                        ? {
+                            color: "#27AE60",
+                          }
+                        : {
+                            color: "#EB5757",
+                          }
+                    }
+                  >
+                    {EachBet["status"] == "win" &&
+                      Math.abs(EachBet["stake"] * (1 - EachBet["odd"])).toFixed(
+                        3
+                      )}
+
+                    {EachBet["status"] == "lose" &&
+                      Number(EachBet["stake"] * (1 - EachBet["odd"])).toFixed(
+                        3
+                      )}
+                  </span>
+                  <span className="flex text-[14px] items-center justify-center text-[#fff] font-bold  border-[1px] border-[#3958FF] 1lg:w-full px-[10px] py-[9px] rounded-[10px]  sm:px-[10px] sm:text-[12px]">
+                    Odd: {EachBet["odd"]}
+                  </span>
+                  <span
+                    className="flex items-center text-[14px] justify-center  font-bold border-[1px] 1lg:w-full  px-[20px] py-[9px] rounded-[10px] sm:px-[10px] sm:text-[12px] capitalize"
+                    style={
+                      EachBet["status"] == "win"
+                        ? {
+                            color: "#3958FF",
+                            borderColor: "#3958FF",
+                            backgroundColor: "#1D285D",
+                          }
+                        : {
+                            color: "#EB5757",
+                            borderColor: "#EB5757",
+                            backgroundColor: "#2D2139",
+                          }
+                    }
+                  >
+                    {EachBet["status"]}
+                  </span>
+                </div>
+              </li>
+            ))}
           </ul>
 
           <div className="flex items-center mt-5 justify-center gap-[5px] sm:gap-[2px]">
@@ -332,6 +214,7 @@ export const Bet = () => {
                 pagination == 2 && "bg-[#3958FF]"
               }`}
               onClick={(e) => {
+                paginationSetter(2);
                 setPagination(2);
               }}
             >
