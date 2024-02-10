@@ -2,12 +2,17 @@ import { DropdownCustom } from "../components/Dropdown";
 import tether from "../assets/img/tether.svg";
 import copys from "../assets/img/copy.svg";
 import { useState } from "react";
-import copy from "copy-to-clipboard";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { DropdownNetwork } from "./DropdownNetwork";
+import eye from "../assets/img/eye.svg";
 export const WithdrawCard = ({ setDone }: any) => {
   const notify = () => toast("Copied The Content");
   const [active, setActive] = useState("");
+  const [Amount, setAmount] = useState("");
+  const maxValue = "2321";
+  const [password, setPassword] = useState(true);
   function randomIntFromInterval(min: any, max: any) {
     // min and max included
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -23,7 +28,32 @@ export const WithdrawCard = ({ setDone }: any) => {
 
           <DropdownCustom
             props={{ img: tether, coin: "USDT", subcoin: "TetherUS" }}
-            list={["3.10 USDC", "12.32 USDT", "0.00 BUSD", "0.00 TUSD"]}
+            list={[
+              {
+                value: "3.10",
+                coin: "USDC",
+                subcoin: "USDC",
+                img: tether,
+              },
+              {
+                value: "12.32",
+                coin: "USDT",
+                subcoin: "USDT",
+                img: tether,
+              },
+              {
+                value: "0.00",
+                coin: "BUSD",
+                img: tether,
+                subcoin: "BUSD",
+              },
+              {
+                value: "0.00",
+                coin: "TUSD",
+                subcoin: "TUSD",
+                img: tether,
+              },
+            ]}
           />
         </div>
 
@@ -38,7 +68,7 @@ export const WithdrawCard = ({ setDone }: any) => {
             }`}
           >
             <input
-              type="password"
+              type={password ? "password" : "text"}
               className="bg-[transparent] text-[#CCCCCC] text-[16px] flex-1 w-full outline-none border-0"
               placeholder="Enter address"
               value={active}
@@ -46,13 +76,23 @@ export const WithdrawCard = ({ setDone }: any) => {
                 setActive(e.target.value);
               }}
             />
+
+            <img
+              src={eye}
+              alt=""
+              className="w-[20px] mr-2"
+              onClick={(e) => {
+                setPassword(!password);
+              }}
+            />
+
             <img
               src={copys}
               alt=""
               className="cursor-pointer"
-              onClick={(e) => {
-                notify();
-                copy(active);
+              onClick={async (e) => {
+                const text = await navigator.clipboard.readText();
+                setActive(text);
               }}
             />
           </div>
@@ -85,12 +125,8 @@ export const WithdrawCard = ({ setDone }: any) => {
             Network
           </label>
 
-          <DropdownCustom
-            props={{
-              mainheading: "BSC",
-              coin: "BNB ",
-              subcoin: "Smart Chain (BEP20)",
-            }}
+          <DropdownNetwork
+            props="BSC BNB Smart Chain (BEP20)"
             list={["BSC BNB Smart Chain (BEP20)"]}
           />
         </div>
@@ -99,11 +135,20 @@ export const WithdrawCard = ({ setDone }: any) => {
             <p className="text-[#CCCCCC] text-[16px] ">Amount</p>
             <div className="flex items-center">
               <input
-                type="password"
+                type="number"
                 className="bg-[transparent] text-[#CCCCCC] text-[16px] flex-1 w-full outline-none border-0 placeholder:text-[#EFEFEF]"
                 placeholder="0 USDT"
+                value={Amount}
+                onChange={(e) => {
+                  setAmount(e.target.value);
+                }}
               />
-              <button className="text-[#EFEFEF] text-[15px] border-[1px] border-[#3958FF]  h-[31px] w-[60px] rounded">
+              <button
+                className="text-[#EFEFEF] text-[15px] border-[1px] border-[#3958FF]  h-[31px] w-[60px] rounded"
+                onClick={(e) => {
+                  setAmount(maxValue);
+                }}
+              >
                 Max{" "}
               </button>
             </div>
@@ -115,10 +160,11 @@ export const WithdrawCard = ({ setDone }: any) => {
             <input
               type="password"
               className="bg-[transparent] text-[#CCCCCC] text-[16px] flex-1 w-full outline-none border-0"
+              readOnly
               placeholder="Fee"
             />
             <p className="text-[#EFEFEF] text-[18px] font-semibold">
-              0.29 USDT
+              {Number(Number(Amount) * 0.2).toFixed(2)} USDT
             </p>
           </div>
         </div>

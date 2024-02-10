@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import dropdown from "../assets/img/dropdown.svg";
-export const DropdownCustom = ({ props, list }: any) => {
+export const DropdownNetwork = ({ props, list }: any) => {
   const [active, setActive] = useState(false);
   const [activeList, setActiveList] = useState(props);
   return (
@@ -15,15 +15,8 @@ export const DropdownCustom = ({ props, list }: any) => {
           setActive(!active);
         }}
       >
-        {activeList.img && <img src={activeList.img} alt="" />}
-        {activeList.mainheading && (
-          <h1 className="text-[#fff] text-[16px]">{activeList.mainheading}</h1>
-        )}
+        <h1 className="text-[#fff] text-[16px] flex-1">{activeList}</h1>
 
-        <h1 className="text-[#CCCCCC] text-[16px] mx-2">{activeList.coin}</h1>
-        <h1 className="text-[#CCCCCC] text-[16px] flex-1">
-          {activeList.subcoin}
-        </h1>
         <img src={dropdown} alt="" />
       </div>
       {active && (
@@ -36,7 +29,7 @@ export const DropdownCustom = ({ props, list }: any) => {
                 setActive(false);
               }}
             >
-              {EachList.value} {EachList.coin}
+              {EachList}
             </li>
           ))}
         </ul>

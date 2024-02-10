@@ -7,8 +7,13 @@ import QRCode from "react-qr-code";
 import copy from "copy-to-clipboard";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { DropdownNetwork } from "./DropdownNetwork";
+import eye from "../assets/img/eye.svg";
+import { useState } from "react";
 export const DepositeCard = ({ logoCustom }: any) => {
   const notify = () => toast("Copied The Content");
+  const [password, setPassword] = useState(true);
+  const [pasteValue, setpasteValue] = useState("Atif Asim");
   return (
     <div>
       <ToastContainer hideProgressBar={true} />
@@ -22,7 +27,32 @@ export const DepositeCard = ({ logoCustom }: any) => {
 
           <DropdownCustom
             props={{ img: tether, coin: "USDT", subcoin: "TetherUS" }}
-            list={["3.10 USDC", "12.32 USDT", "0.00 BUSD", "0.00 TUSD"]}
+            list={[
+              {
+                value: "3.10",
+                coin: "USDC",
+                subcoin: "USDC",
+                img: tether,
+              },
+              {
+                value: "12.32",
+                coin: "USDT",
+                subcoin: "USDT",
+                img: tether,
+              },
+              {
+                value: "0.00",
+                coin: "BUSD",
+                img: tether,
+                subcoin: "BUSD",
+              },
+              {
+                value: "0.00",
+                coin: "TUSD",
+                subcoin: "TUSD",
+                img: tether,
+              },
+            ]}
           />
         </div>
         <div className="mt-6">
@@ -30,12 +60,8 @@ export const DepositeCard = ({ logoCustom }: any) => {
             Select network
           </label>
 
-          <DropdownCustom
-            props={{
-              mainheading: "BSC",
-              coin: "BNB ",
-              subcoin: "Smart Chain (BEP20)",
-            }}
+          <DropdownNetwork
+            props="BSC BNB Smart Chain (BEP20)"
             list={["BSC BNB Smart Chain (BEP20)"]}
           />
         </div>
@@ -71,17 +97,26 @@ export const DepositeCard = ({ logoCustom }: any) => {
 
           <div className="flex bg-[#171B35] w-full rounded-[12px] border-[1px] border-[#3B3D53] h-[50px] items-center px-3 cursor-pointer">
             <input
-              type="password"
+              type={password ? "password" : "text"}
               className="bg-[transparent] text-[#CCCCCC] text-[16px] flex-1 w-full outline-none border-0"
-              value="................"
+              value={pasteValue}
+            />
+
+            <img
+              src={eye}
+              alt=""
+              className="w-[20px] mr-2"
+              onClick={(e) => {
+                setPassword(!password);
+              }}
             />
             <img
               src={copys}
               alt=""
               className="cursor-pointer"
-              onClick={(e) => {
-                notify();
-                copy("................");
+              onClick={async (e) => {
+                const text = await navigator.clipboard.readText();
+                setpasteValue(text);
               }}
             />
           </div>

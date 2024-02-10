@@ -17,6 +17,11 @@ import { useState } from "react";
 
 export const Bet = () => {
   const [active, setActive] = useState(false);
+  const [pagination, setPagination] = useState(1);
+  const [balance, setbalance] = useState({
+    value: "2500",
+    coin: "USDT",
+  });
   return (
     <div className="w-full">
       <Header active={1} page="Bet History" />
@@ -32,7 +37,10 @@ export const Bet = () => {
             </h1>
             <div className="flex items-center justify-between mt-2">
               <p className="text-[30px] text-[#EFEFEF] font-bold lg:text-[20px]">
-                2500 USDT
+                <span className=" inline-block w-[80px] sm:w-[unset] sm:mr-1">
+                  {balance.value}
+                </span>
+                {balance.coin}
               </p>
               {active ? (
                 <img
@@ -58,8 +66,22 @@ export const Bet = () => {
               <ul className="bg-[#23284F] px-[20px] border-[1px] border-[#3958FF] rounded-bl-[8px] left-0 top-[100%] rounded-br-[8px] absolute w-full z-20 sm:top-[185px] sm:w-[181px] sm:left-[1rem]">
                 {["3.10 USDC", "12.32 USDT", "0.00 BUSD", "0.00 TUSD"].map(
                   (EachList: String) => (
-                    <li className="text-[16px] font-bold text-[#EFEFEF] h-[56px] border-b-[1px] border-b-[#444869] flex items-center cursor-pointer">
-                      {EachList}
+                    <li
+                      onClick={(e) => {
+                        setActive(false);
+                        setbalance({
+                          value: EachList.split(" ")[0],
+                          coin: EachList.split(" ")[1],
+                        });
+                      }}
+                      className="text-[16px] font-bold text-[#EFEFEF] h-[56px] border-b-[1px] border-b-[#444869] flex items-center cursor-pointer sm:w-[unset]"
+                    >
+                      <span className="inline-block w-[70px] sm:w-[unset] mr-3 text-right sm:text-left ">
+                        {EachList.split(" ")[0]}
+                      </span>
+                      <span className=" inline-block w-[80px] ">
+                        {EachList.split(" ")[1]}
+                      </span>
                     </li>
                   )
                 )}
@@ -132,7 +154,7 @@ export const Bet = () => {
                 </p>
               </div>
               <div className="w-[268px] 1lg:w-full 1lg:justify-start flex items-center justify-end gap-2">
-                <span className="flex items-center justify-center text-[#EB5757] font-semibold px-[10px] rounded-[10px] text-[18px]">
+                <span className="flex items-center justify-center text-[#EB5757] font-semibold px-[10px] rounded-[10px] text-[18px] 1lg:w-[70%]">
                   -42
                 </span>
                 <span className="flex items-center justify-center text-[#fff] font-bold  border-[1px] border-[#3958FF] px-[20px] py-[9px] rounded-[10px] 1lg:w-full sm:px-[10px]">
@@ -159,7 +181,7 @@ export const Bet = () => {
                 </p>
               </div>
               <div className="w-[268px] 1lg:w-full 1lg:justify-start flex items-center justify-end gap-2">
-                <span className="flex items-center justify-center text-[#27AE60] font-semibold px-[10px] rounded-[10px] text-[18px] ">
+                <span className="flex items-center justify-center text-[#27AE60] font-semibold px-[10px] rounded-[10px] text-[18px] 1lg:w-[70%]">
                   +1035
                 </span>
                 <span className="flex items-center justify-center text-[#fff] font-bold  border-[1px] border-[#3958FF] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px]">
@@ -189,7 +211,7 @@ export const Bet = () => {
                 </p>
               </div>
               <div className="w-[268px] 1lg:w-full 1lg:justify-start flex items-center justify-end gap-2">
-                <span className="flex items-center justify-center text-[#27AE60] font-semibold px-[10px] rounded-[10px] text-[18px] ">
+                <span className="flex items-center justify-center text-[#27AE60] font-semibold px-[10px] rounded-[10px] text-[18px] 1lg:w-[70%]">
                   +1035
                 </span>
                 <span className="flex items-center justify-center text-[#fff] font-bold  border-[1px] border-[#3958FF] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px]">
@@ -220,7 +242,7 @@ export const Bet = () => {
                 </p>
               </div>
               <div className="w-[268px] 1lg:w-full 1lg:justify-start flex items-center justify-end gap-2">
-                <span className="flex items-center justify-center text-[#27AE60] font-semibold px-[10px] rounded-[10px] text-[18px] ">
+                <span className="flex items-center justify-center text-[#27AE60] font-semibold px-[10px] rounded-[10px] text-[18px] 1lg:w-[70%]">
                   +1035
                 </span>
                 <span className="flex items-center justify-center text-[#fff] font-bold  border-[1px] border-[#3958FF] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px]">
@@ -247,7 +269,7 @@ export const Bet = () => {
                 </p>
               </div>
               <div className="w-[268px] 1lg:w-full 1lg:justify-start flex items-center justify-end gap-2">
-                <span className="flex items-center justify-center text-[#27AE60] font-semibold px-[10px] rounded-[10px] text-[18px] ">
+                <span className="flex items-center justify-center text-[#27AE60] font-semibold px-[10px] rounded-[10px] text-[18px] 1lg:w-[70%]">
                   +1035
                 </span>
                 <span className="flex items-center justify-center text-[#fff] font-bold  border-[1px] border-[#3958FF] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px]">
@@ -274,7 +296,7 @@ export const Bet = () => {
                 </p>
               </div>
               <div className="w-[268px] 1lg:w-full 1lg:justify-start flex items-center justify-end gap-2">
-                <span className="flex items-center justify-center text-[#27AE60] font-semibold px-[10px] rounded-[10px] text-[18px] ">
+                <span className="flex items-center justify-center text-[#27AE60] font-semibold px-[10px] rounded-[10px] text-[18px] 1lg:w-[70%]">
                   +1035
                 </span>
                 <span className="flex items-center justify-center text-[#fff] font-bold  border-[1px] border-[#3958FF] px-[20px] py-[9px] rounded-[10px]  1lg:w-full sm:px-[10px]">
@@ -295,19 +317,47 @@ export const Bet = () => {
               <img src={backSingle} alt="" />
             </button>
 
-            <button className="w-8 h-8 rounded-full bg-[#171B35] border-[1px] border-[#3B3D53] text-[#CCCCCC] text-[12px] flex items-center justify-center">
+            <button
+              className={`w-8 h-8 rounded-full bg-[#171B35] border-[1px] border-[#3B3D53] text-[#CCCCCC] text-[12px] flex items-center justify-center ${
+                pagination == 1 && "bg-[#3958FF]"
+              }`}
+              onClick={(e) => {
+                setPagination(1);
+              }}
+            >
               1
             </button>
-            <button className="w-8 h-8 rounded-full bg-[#171B35] border-[1px] border-[#3B3D53] text-[#CCCCCC] text-[12px] flex items-center justify-center">
+            <button
+              className={`w-8 h-8 rounded-full bg-[#171B35] border-[1px] border-[#3B3D53] text-[#CCCCCC] text-[12px] flex items-center justify-center ${
+                pagination == 2 && "bg-[#3958FF]"
+              }`}
+              onClick={(e) => {
+                setPagination(2);
+              }}
+            >
               2
             </button>
-            <button className="w-8 h-8 rounded-full bg-[#171B35] border-[1px] border-[#3B3D53] text-[#CCCCCC] text-[12px] flex items-center justify-center">
+            <button
+              className={`w-8 h-8 rounded-full bg-[#171B35] border-[1px] border-[#3B3D53] text-[#CCCCCC] text-[12px] flex items-center justify-center ${
+                pagination == 3 && "bg-[#3958FF]"
+              }`}
+              onClick={(e) => {
+                setPagination(3);
+              }}
+            >
               3
             </button>
             <button className="w-8 h-8 rounded-[8px] bg-[#171B35] text-[#CCCCCC] text-[12px] flex items-center justify-center">
               ...
             </button>
-            <button className="w-8 h-8 rounded-full bg-[#171B35] border-[1px] border-[#3B3D53] text-[#CCCCCC] text-[12px] flex items-center justify-center">
+            <button
+              className={`w-8 h-8 rounded-full bg-[#171B35] border-[1px] border-[#3B3D53] text-[#CCCCCC] text-[12px] flex items-center justify-center ${
+                pagination == 10 && "bg-[#3958FF]"
+              }`}
+              onClick={(e) => {
+                setPagination(10);
+              }}
+            >
               10
             </button>
             <button className="w-8 h-8 rounded-full bg-[#171B35] border-[1px] border-[#3B3D53] flex items-center justify-center">
