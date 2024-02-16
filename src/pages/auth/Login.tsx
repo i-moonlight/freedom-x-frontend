@@ -19,6 +19,9 @@ export const Login = () => {
 
   const loginUser = useGoogleLogin({
     onSuccess: (tokenResponse) => {
+      window.localStorage.setItem("token", tokenResponse["access_token"]);
+
+      navigate("/bet");
       console.log(tokenResponse);
     },
     onError: () => {

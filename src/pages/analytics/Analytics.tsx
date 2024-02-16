@@ -10,7 +10,7 @@ import { account } from "../../assets/axios/Account";
 // 922c8fdc-dbff-4059-b351-4dd6d3790074
 
 // google
-// ("ya29.a0AfB_byAK8m2hQ7nbeOaKqOyiZI1O2c8DL4SskVfFf4I2JW_AznhivuTsmKFp611g8atRcpwVw2_mBMs48NMzXlQZw03mAdi1qoKGR_7psVJiMczJzUa7G2mY3Oujcu2SluDEpd8NCPYRqFp2diMXKc79cBUjrKr2cgaCgYKAdUSAQ8SFQHGX2MiTcIb6ECkdJqY3OREQuFeuA0169");
+// ("ya29.a0AfB_byAW1gVgIcqcRTIMrXxEtZ16BHCU61cwQzRcg_W2Q3nvnQXCAL72YrkvevfWh_YPsvSfAZ4u4jnj58z-DaTLc1ObmLZJ2uAuR7l0_zx0HR1wdA1V-hHr9MiBrNoPuQLPN6bGB0V4YjxkWesec-GDX3V8T9-pUAaCgYKAe4SAQ8SFQHGX2Mi2Y_UFS3fXsXvSDWRAJDnfQ0169");
 
 export const Analytics = () => {
   const [chartsData, setchartsData] = useState(null);
