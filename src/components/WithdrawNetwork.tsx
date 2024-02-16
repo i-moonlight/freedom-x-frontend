@@ -2,19 +2,13 @@
 
 import { useEffect, useState } from "react";
 import dropdown from "../assets/img/dropdown.svg";
-export const DropdownNetwork = ({
-  list,
-  setAddress,
-  setnetworkSelect,
-  setSymbol,
-}: any) => {
+export const WithdrawNetwork = ({ list }: any) => {
   const [active, setActive] = useState(false);
   const [activeList, setActiveList] = useState(list[0]);
 
   useEffect(() => {
     if (list.length > 0) {
       setActiveList(list[0]);
-      setAddress(list[0]["our_addresses"][0]);
     }
   }, [list]);
   return (
@@ -38,9 +32,6 @@ export const DropdownNetwork = ({
               className="text-[16px] font-bold text-[#EFEFEF] h-[56px] border-b-[1px] border-b-[#444869] flex items-center cursor-pointer"
               onClick={(e) => {
                 setActiveList(EachList);
-                setnetworkSelect(EachList["_id"]);
-                setSymbol(EachList["symbols"]["0"]["id"]);
-                setAddress(EachList["our_addresses"][0]);
                 setActive(false);
               }}
             >

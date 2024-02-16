@@ -25,16 +25,27 @@ input[type="number"] {
   width: 100%;
 }
 .toggle-bg {
+  /* background-color: #3958ff;
+  border-color: #3958ff; */
+  box-shadow: none !important;
+}
+.toggle-bg.bg-cyan-700 {
   background-color: #3958ff;
   border-color: #3958ff;
 }
 .toggle-bg::after {
-  background-color: #fff;
+  background-color: #3958ff;
   border-radius: 50%;
+}
+.toggle-bg.bg-cyan-700::after {
+  background-color: #fff;
 }
 .radiomultiplier:checked + label {
   background-color: #3958ff;
   border-color: #5771ff;
+}
+.toggle-bg.dark\:bg-gray-700 {
+  background-color: #fff !important;
 }
 .Toastify__toast {
   background-color: rgb(46 38 51 / 1) !important;

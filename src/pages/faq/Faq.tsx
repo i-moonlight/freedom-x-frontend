@@ -1,6 +1,7 @@
 import { Header } from "../../components/Header";
 
 import { FaqOver } from "../../components/FaqOver";
+import { FaqUtil } from "../../assets/js/Util/Faq";
 
 export const Faq = () => {
   return (
@@ -18,15 +19,9 @@ export const Faq = () => {
           duis enim velit mollit.{" "}
         </p>
         <ul className="flex flex-col gap-4">
-          <FaqOver />
-          <FaqOver />
-          <FaqOver />
-          <FaqOver />
-          <FaqOver />
-          <FaqOver />
-          <FaqOver />
-          <FaqOver />
-          <FaqOver />
+          {FaqUtil.map((EachFaq) => (
+            <FaqOver EachFaq={EachFaq} />
+          ))}
         </ul>
       </div>
     </div>

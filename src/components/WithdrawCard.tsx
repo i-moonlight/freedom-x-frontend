@@ -1,22 +1,52 @@
 import { DropdownCustom } from "../components/Dropdown";
-import tether from "../assets/img/tether.svg";
 import copys from "../assets/img/copy.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { DropdownNetwork } from "./DropdownNetwork";
 import eye from "../assets/img/eye.svg";
+import { account } from "../assets/axios/Account";
+import { depositObj } from "../assets/axios/Deposit";
+import { WithdrawNetwork } from "./WithdrawNetwork";
+import { withdrawObj } from "../assets/axios/Withdraw";
 export const WithdrawCard = ({ setDone }: any) => {
   const notify = () => toast("Copied The Content");
   const [active, setActive] = useState("");
   const [Amount, setAmount] = useState("");
-  const maxValue = "2321";
   const [password, setPassword] = useState(true);
+  const [globalDataAccount, setglobalDataAccount] = useState({
+    balance: "0",
+    commission: "0",
+    pnl: "0",
+    symbol: "",
+    unsettled_balance: "0",
+  });
+  const [networksState, setnetworksState] = useState([]);
+  const [additionState, setadditionState] = useState([]);
+  const [userAccount, setuserAccount] = useState(true);
+  const [currentBalance, setcurrentBalance] = useState(true);
+  const [currentFee, setcurrentFee] = useState("");
+
   function randomIntFromInterval(min: any, max: any) {
     // min and max included
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
+
+  useEffect(() => {
+    account.getUserData(setuserAccount, setcurrentBalance);
+    depositObj.Network(setnetworksState);
+  }, []);
+
+  const startWithdrawProcess = (e: any) => {
+    withdrawObj.withdraw(
+      additionState[0]["_id"],
+      Amount,
+      active,
+      additionState[0]["symbols"][0]["id"],
+      setDone
+    );
+  };
+
   return (
     <div>
       <ToastContainer hideProgressBar={true} />
@@ -27,33 +57,11 @@ export const WithdrawCard = ({ setDone }: any) => {
           </label>
 
           <DropdownCustom
-            props={{ img: tether, coin: "USDT", subcoin: "TetherUS" }}
-            list={[
-              {
-                value: "3.10",
-                coin: "USDC",
-                subcoin: "USDC",
-                img: tether,
-              },
-              {
-                value: "12.32",
-                coin: "USDT",
-                subcoin: "USDT",
-                img: tether,
-              },
-              {
-                value: "0.00",
-                coin: "BUSD",
-                img: tether,
-                subcoin: "BUSD",
-              },
-              {
-                value: "0.00",
-                coin: "TUSD",
-                subcoin: "TUSD",
-                img: tether,
-              },
-            ]}
+            list={userAccount}
+            setglobalDataAccount={setglobalDataAccount}
+            networksState={networksState}
+            setadditionState={setadditionState}
+            setcurrentFee={setcurrentFee}
           />
         </div>
 
@@ -96,7 +104,7 @@ export const WithdrawCard = ({ setDone }: any) => {
               }}
             />
           </div>
-
+          {/* 
           {active.length > 0 && (
             <ul className="bg-[#23284F] px-[20px] border-[1px] border-[#3958FF] rounded-bl-[8px] rounded-br-[8px] absolute w-full z-20">
               {[
@@ -117,7 +125,7 @@ export const WithdrawCard = ({ setDone }: any) => {
                 </li>
               ))}
             </ul>
-          )}
+          )} */}
         </div>
 
         <div className="mt-6">
@@ -125,10 +133,7 @@ export const WithdrawCard = ({ setDone }: any) => {
             Network
           </label>
 
-          <DropdownNetwork
-            props="BSC BNB Smart Chain (BEP20)"
-            list={["BSC BNB Smart Chain (BEP20)"]}
-          />
+          <WithdrawNetwork list={additionState} />
         </div>
         <div className="mt-6">
           <div className=" bg-[#171B35] w-full rounded-[12px] border-[1px] border-[#3B3D53] h-[81px]  px-3 cursor-pointer flex flex-col justify-center">
@@ -137,7 +142,7 @@ export const WithdrawCard = ({ setDone }: any) => {
               <input
                 type="number"
                 className="bg-[transparent] text-[#CCCCCC] text-[16px] flex-1 w-full outline-none border-0 placeholder:text-[#EFEFEF]"
-                placeholder="0 USDT"
+                placeholder={`${globalDataAccount?.balance} ${globalDataAccount?.symbol}`}
                 value={Amount}
                 onChange={(e) => {
                   setAmount(e.target.value);
@@ -146,14 +151,16 @@ export const WithdrawCard = ({ setDone }: any) => {
               <button
                 className="text-[#EFEFEF] text-[15px] border-[1px] border-[#3958FF]  h-[31px] w-[60px] rounded"
                 onClick={(e) => {
-                  setAmount(maxValue);
+                  setAmount(globalDataAccount?.balance);
                 }}
               >
                 Max{" "}
               </button>
             </div>
           </div>
-          <p className="text-[#EFEFEF] text-[12px] mt-2">Available 2321 USDT</p>
+          <p className="text-[#EFEFEF] text-[12px] mt-2">
+            Available {globalDataAccount?.balance} {globalDataAccount?.symbol}
+          </p>
         </div>
         <div className="mt-4 mb-6">
           <div className="flex bg-[#171B35] w-full rounded-[12px] border-[1px] border-[#3B3D53] h-[50px] items-center px-3 cursor-pointer">
@@ -164,21 +171,14 @@ export const WithdrawCard = ({ setDone }: any) => {
               placeholder="Fee"
             />
             <p className="text-[#EFEFEF] text-[18px] font-semibold">
-              {Number(Number(Amount) * 0.2).toFixed(2)} USDT
+              {currentFee} {globalDataAccount?.symbol}
             </p>
           </div>
         </div>
 
         <button
           className="text-[#FFFFFF] tect-[16px] w-full h-[49px] bg-[#3958FF]  rounded-[12px]"
-          onClick={(e) => {
-            const rndInt = randomIntFromInterval(1, 2);
-            setDone(rndInt === 1 ? true : false);
-
-            setTimeout(() => {
-              setDone(null);
-            }, 4000);
-          }}
+          onClick={startWithdrawProcess}
         >
           Submit
         </button>

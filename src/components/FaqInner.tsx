@@ -1,7 +1,7 @@
 import { useState } from "react";
 import plus from "../assets/img/plus.svg";
 import minus from "../assets/img/minus.svg";
-export const FaqInner = () => {
+export const FaqInner = ({ EachList }: any) => {
   const [active, setActive] = useState(false);
   return (
     <li
@@ -16,19 +16,16 @@ export const FaqInner = () => {
         }}
       >
         <h1 className="text-[#EFEFEF] font-semibold text-[18px]">
-          Amet minim mollit non deserunt ullamco.
+          {EachList.heading}
         </h1>
         {active ? <img src={minus} alt="" /> : <img src={plus} alt="" />}
       </div>
       {active && (
-        <p className="px-[20px] mb-5 text-[#fff] text-[14px]">
-          Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
-          sint. Velit officia consequat duis enim velit mollit. Exercitation
-          veniam consequat sunt nostrud amet.Amet minim mollit non deserunt
-          ullamco est sit aliqua dolor do amet sint. Velit officia consequat
-          duis enim velit mollit. Exercitation veniam consequat sunt nostrud
-          amet.
-        </p>
+        <>
+          {EachList.para.map((eacpara: any) => (
+            <p className="px-[20px] mb-5 text-[#fff] text-[14px]">{eacpara}</p>
+          ))}
+        </>
       )}
     </li>
   );

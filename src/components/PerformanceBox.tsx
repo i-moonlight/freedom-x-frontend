@@ -3,78 +3,76 @@ import lineimg from "../assets/img/line.svg";
 import pieImg from "../assets/img/pie.svg";
 import ReactApexChart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
+import { useEffect } from "react";
 export const PerformanceBox = ({
   heading,
   number,
   line = null,
   pie = null,
   bar = null,
+  chartsData = null,
 }: any) => {
-  const options: ApexOptions = {
-    chart: {
-      toolbar: {
-        show: false,
-      },
-    },
-    plotOptions: {
-      bar: {
-        horizontal: false,
-        columnWidth: "55%",
-      },
-    },
-    colors: ["#3958FF"],
-    dataLabels: {
-      enabled: false,
-    },
-    stroke: {
-      show: true,
-      width: 2,
-      colors: ["transparent"],
-    },
-    xaxis: {
-      categories: [
-        "2023/08",
-        "2023/09",
-        "2023/10",
-        "2023/11",
-        "2023/12",
-        "2024/01",
-      ],
-      labels: {
-        style: {
-          colors: "#CCCCCC",
-          fontSize: "14px",
-          cssClass: "Manrope",
+  let options: ApexOptions = {};
+  if (chartsData != null) {
+    options = {
+      chart: {
+        toolbar: {
+          show: false,
         },
       },
-      axisBorder: {
-        show: false,
+      plotOptions: {
+        bar: {
+          horizontal: false,
+          columnWidth: "55%",
+        },
       },
-      axisTicks: {
-        show: false,
+      colors: ["#3958FF"],
+      dataLabels: {
+        enabled: false,
       },
-    },
+      stroke: {
+        show: true,
+        width: 2,
+        colors: ["transparent"],
+      },
+      xaxis: {
+        categories: chartsData["XAxis"],
+        labels: {
+          style: {
+            colors: "#CCCCCC",
+            fontSize: "14px",
+            cssClass: "Manrope",
+          },
+        },
+        axisBorder: {
+          show: false,
+        },
+        axisTicks: {
+          show: false,
+        },
+      },
 
-    yaxis: {
-      labels: {
-        style: {
-          colors: "#CCCCCC",
-          fontSize: "14px",
-          cssClass: "Manrope",
+      yaxis: {
+        labels: {
+          style: {
+            colors: "#CCCCCC",
+            fontSize: "14px",
+            cssClass: "Manrope",
+          },
         },
       },
-    },
-    fill: {
-      opacity: 1,
-    },
-    tooltip: {
-      y: {
-        formatter: function (val) {
-          return val + " Compound Profit";
+      fill: {
+        opacity: 1,
+      },
+      tooltip: {
+        y: {
+          formatter: function (val) {
+            return val + " Compound Profit";
+          },
         },
       },
-    },
-  };
+    };
+  }
 
   return (
     <div
@@ -105,8 +103,8 @@ export const PerformanceBox = ({
           options={options}
           series={[
             {
-              name: "Servers",
-              data: [44, 55, 57, 56, 61, 58],
+              name: "Compound Profit",
+              data: chartsData["YAxis"],
             },
           ]}
           type="bar"

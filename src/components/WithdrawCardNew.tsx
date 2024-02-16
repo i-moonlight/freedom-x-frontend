@@ -11,8 +11,7 @@ import { DropdownNetwork } from "./DropdownNetwork";
 import eye from "../assets/img/eye.svg";
 import { useEffect, useState } from "react";
 import { depositObj } from "../assets/axios/Deposit";
-import { account } from "../assets/axios/Account";
-export const DepositeCard = ({ logoCustom }: any) => {
+export const WithdrawCardNew = ({ logoCustom }: any) => {
   const notify = () => toast("Copied The Content");
 
   const Errornotify = (errorContent: String) => toast(errorContent);
@@ -23,23 +22,13 @@ export const DepositeCard = ({ logoCustom }: any) => {
   const [address, setAddress] = useState("");
   const [networkSelect, setnetworkSelect] = useState("");
   const [symbol, setSymbol] = useState("");
-  const [userAccount, setuserAccount] = useState(true);
-  const [currentBalance, setcurrentBalance] = useState(true);
-  const [globalDataAccount, setglobalDataAccount] = useState({
-    balance: "0",
-    commission: "0",
-    pnl: "0",
-    symbol: "",
-    unsettled_balance: "0",
-  });
 
   useEffect(() => {
-    account.getUserData(setuserAccount, setcurrentBalance);
     depositObj.Network(setnetworksState);
   }, []);
 
   const startDeposit = (e: any) => {
-    depositObj.deposit(networkSelect, pasteValue, symbol, Errornotify);
+    depositObj.deposit(networkSelect, address, symbol, Errornotify);
   };
 
   return (
@@ -54,8 +43,33 @@ export const DepositeCard = ({ logoCustom }: any) => {
           </label>
 
           <DropdownCustom
-            list={userAccount}
-            setglobalDataAccount={setglobalDataAccount}
+            props={{ img: tether, coin: "USDT", subcoin: "TetherUS" }}
+            list={[
+              {
+                value: "3.10",
+                coin: "USDC",
+                subcoin: "USDC",
+                img: tether,
+              },
+              {
+                value: "12.32",
+                coin: "USDT",
+                subcoin: "USDT",
+                img: tether,
+              },
+              {
+                value: "0.00",
+                coin: "BUSD",
+                img: tether,
+                subcoin: "BUSD",
+              },
+              {
+                value: "0.00",
+                coin: "TUSD",
+                subcoin: "TUSD",
+                img: tether,
+              },
+            ]}
           />
         </div>
         <div className="mt-6">

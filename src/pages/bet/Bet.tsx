@@ -1,8 +1,18 @@
 import { Header } from "../../components/Header";
 import dropdownBet from "../../assets/img/dropdown-bet.svg";
 import dropdownBetWhite from "../../assets/img/plus-white.svg";
-import one from "../../assets/img/table-bet/one.svg";
-import ReactPaginate from "react-paginate";
+import football from "../../assets/img/sports/Football.jpeg";
+import Alpine from "../../assets/img/sports/Alpine.jpg";
+import Athletics from "../../assets/img/sports/Athletics.jpg";
+import Curling from "../../assets/img/sports/Curling.jpg";
+import Skiing from "../../assets/img/sports/Skiing.jpg";
+import Biathlon from "../../assets/img/sports/Biathlon.jpg";
+import Cricket from "../../assets/img/sports/Cricket.jpeg";
+import Cycling from "../../assets/img/sports/Cycling.jpeg";
+import Formula from "../../assets/img/sports/Formula 1.jpeg";
+import Motorcycling from "../../assets/img/sports/Motorcycling.jpeg";
+import Tennis from "../../assets/img/sports/Tennis.jpeg";
+
 import back from "../../assets/img/arrow-back-dbl.svg";
 import front from "../../assets/img/arrow-front-dbl.svg";
 import backSingle from "../../assets/img/arrow-back-single.svg";
@@ -131,7 +141,86 @@ export const Bet = () => {
                 className=" bg-[#171B35] py-4 px-5 rounded-[16px]  border-[1px] border-[#444869] flex items-center 1lg:flex-col 1lg:items-start 1lg:gap-2"
               >
                 <div className="w-[377px] flex items-center gap-3 1lg:w-full">
-                  <img src={one} alt="" />
+                  {EachBet.sport == "Football" && (
+                    <img
+                      src={football}
+                      className="w-[45px] rounded-full"
+                      alt=""
+                    />
+                  )}
+                  {EachBet.sport == "Alpine Skiing" && (
+                    <img
+                      src={Alpine}
+                      className="w-[45px] rounded-full"
+                      alt=""
+                    />
+                  )}
+                  {EachBet.sport == "Biathlon" && (
+                    <img
+                      src={Biathlon}
+                      className="w-[45px] rounded-full"
+                      alt=""
+                    />
+                  )}
+                  {EachBet.sport == "Cricket" && (
+                    <img
+                      src={Cricket}
+                      className="w-[45px] rounded-full"
+                      alt=""
+                    />
+                  )}
+                  {EachBet.sport == "Cycling" && (
+                    <img
+                      src={Cycling}
+                      className="w-[45px] rounded-full"
+                      alt=""
+                    />
+                  )}
+                  {EachBet.sport == "Formula 1" && (
+                    <img
+                      src={Formula}
+                      className="w-[45px] rounded-full"
+                      alt=""
+                    />
+                  )}
+                  {EachBet.sport == "Motorcycling" && (
+                    <img
+                      src={Motorcycling}
+                      className="w-[45px] rounded-full"
+                      alt=""
+                    />
+                  )}
+                  {EachBet.sport == "Tennis" && (
+                    <img
+                      src={Tennis}
+                      className="w-[45px] rounded-full"
+                      alt=""
+                    />
+                  )}
+
+                  {EachBet.sport == "Athletics" && (
+                    <img
+                      src={Athletics}
+                      className="w-[45px] rounded-full"
+                      alt=""
+                    />
+                  )}
+                  {EachBet.sport == "Skiing" && (
+                    <img
+                      src={Skiing}
+                      className="w-[45px] rounded-full"
+                      alt=""
+                    />
+                  )}
+
+                  {EachBet.sport == "Curling" && (
+                    <img
+                      src={Curling}
+                      className="w-[45px] rounded-full"
+                      alt=""
+                    />
+                  )}
+
                   <p className="text-[#EFEFEF] font-bold">{EachBet["event"]}</p>
                 </div>
                 <div className="w-[168px] 1lg:w-full">

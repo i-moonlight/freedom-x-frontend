@@ -1,10 +1,35 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import dropdown from "../assets/img/dropdown.svg";
-export const DropdownCustom = ({ props, list }: any) => {
+export const DropdownCustom = ({
+  list,
+  setglobalDataAccount,
+  networksState = null,
+  setadditionState = null,
+  setcurrentFee = null,
+}: any) => {
   const [active, setActive] = useState(false);
-  const [activeList, setActiveList] = useState(props);
+  const [activeList, setActiveList] = useState(list[0]);
+
+  useEffect(() => {
+    setActiveList(list[0]);
+    setglobalDataAccount(list[0]);
+    if (setadditionState != null) {
+      if (networksState.length > 0) {
+        let additionalnetwork = networksState.filter((EachNetwork: any) => {
+          if (EachNetwork.symbols[0]["id"] == list[0].symbol) {
+            setcurrentFee(EachNetwork.symbols[0]["fee"]);
+            return true;
+          }
+
+          return false;
+        });
+        setadditionState(additionalnetwork);
+      }
+    }
+  }, [list]);
+
   return (
     <div className="relative">
       <div
@@ -15,15 +40,8 @@ export const DropdownCustom = ({ props, list }: any) => {
           setActive(!active);
         }}
       >
-        {activeList.img && <img src={activeList.img} alt="" />}
-        {activeList.mainheading && (
-          <h1 className="text-[#fff] text-[16px]">{activeList.mainheading}</h1>
-        )}
+        <h1 className="text-[#fff] text-[16px] flex-1">{activeList?.symbol}</h1>
 
-        <h1 className="text-[#CCCCCC] text-[16px] mx-2">{activeList.coin}</h1>
-        <h1 className="text-[#CCCCCC] text-[16px] flex-1">
-          {activeList.subcoin}
-        </h1>
         <img src={dropdown} alt="" />
       </div>
       {active && (
@@ -33,10 +51,24 @@ export const DropdownCustom = ({ props, list }: any) => {
               className="text-[16px] font-bold text-[#EFEFEF] h-[56px] border-b-[1px] border-b-[#444869] flex items-center cursor-pointer"
               onClick={(e) => {
                 setActiveList(EachList);
+                setglobalDataAccount(EachList);
                 setActive(false);
+                if (setadditionState != null) {
+                  let additionalnetwork = networksState.filter(
+                    (EachNetwork: any) => {
+                      if (EachNetwork.symbols[0]["id"] == EachList.symbol) {
+                        setcurrentFee(EachNetwork.symbols[0]["fee"]);
+                        return true;
+                      }
+
+                      return false;
+                    }
+                  );
+                  setadditionState(additionalnetwork);
+                }
               }}
             >
-              {EachList.value} {EachList.coin}
+              {EachList.symbol}
             </li>
           ))}
         </ul>

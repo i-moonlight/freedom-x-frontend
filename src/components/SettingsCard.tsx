@@ -1,17 +1,31 @@
 "use client";
 import { ToggleSwitch } from "flowbite-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import copyQr from "../assets/img/copy-qr.svg";
 import avatar from "../assets/img/avatar.svg";
 import copy from "copy-to-clipboard";
 import eye from "../assets/img/eye.svg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { setting } from "../assets/axios/Settings";
 export const SettingsCard = () => {
   const [switch1, setSwitch1] = useState(false);
   const [refCode, setrefCode] = useState("");
   const [password, setPassword] = useState(true);
+  const [multiplier, setmultiplier] = useState([]);
+  const [multiplierVal, setmultiplierVal] = useState("");
   const notify = () => toast("Copied The Content");
+
+  useEffect(() => {
+    setting.getUser(setmultiplier, setmultiplierVal);
+  }, []);
+
+  const setSettings = (e: any) => {
+    if (multiplierVal != "") {
+      setting.patchUser(multiplierVal);
+    }
+  };
+
   return (
     <div>
       {" "}
@@ -109,75 +123,36 @@ export const SettingsCard = () => {
               Multiplier
             </label>
             <div className="flex gap-[10px]">
-              <div>
-                <input
-                  type="radio"
-                  id="radio1"
-                  name="multiplier"
-                  value="0.5×"
-                  className="hidden radiomultiplier"
-                />
+              {multiplier.map((Each, key) => (
+                <div>
+                  <input
+                    type="radio"
+                    id={`radio${key + 1}`}
+                    name="multiplier"
+                    value={Each}
+                    className="hidden radiomultiplier"
+                    defaultChecked={multiplierVal == Each}
+                  />
 
-                <label
-                  htmlFor="radio1"
-                  className="text-[#CCCCCC] text-[16px]   outline-none  flex bg-[#171B35] w-[50px] rounded-[12px] border-[1px] border-[#3B3D53] h-[50px]  items-center justify-center cursor-pointer"
-                >
-                  0.5×
-                </label>
-              </div>
-              <div>
-                <input
-                  type="radio"
-                  id="radio2"
-                  name="multiplier"
-                  value="0.5×"
-                  className="hidden radiomultiplier"
-                />
-
-                <label
-                  htmlFor="radio2"
-                  className="text-[#CCCCCC] text-[16px]   outline-none  flex bg-[#171B35] w-[50px] rounded-[12px] border-[1px] border-[#3B3D53] h-[50px]  items-center justify-center cursor-pointer"
-                >
-                  0.5×
-                </label>
-              </div>
-              <div>
-                <input
-                  type="radio"
-                  id="radio3"
-                  name="multiplier"
-                  value="0.5×"
-                  className="hidden radiomultiplier"
-                />
-
-                <label
-                  htmlFor="radio3"
-                  className="text-[#CCCCCC] text-[16px]   outline-none  flex bg-[#171B35] w-[50px] rounded-[12px] border-[1px] border-[#3B3D53] h-[50px]  items-center justify-center cursor-pointer"
-                >
-                  0.5×
-                </label>
-              </div>
-              <div>
-                <input
-                  type="radio"
-                  id="radio4"
-                  name="multiplier"
-                  value="0.5×"
-                  className="hidden radiomultiplier"
-                />
-
-                <label
-                  htmlFor="radio4"
-                  className="text-[#CCCCCC] text-[16px]   outline-none  flex bg-[#171B35] w-[50px] rounded-[12px] border-[1px] border-[#3B3D53] h-[50px]  items-center justify-center cursor-pointer"
-                >
-                  0.5×
-                </label>
-              </div>
+                  <label
+                    htmlFor={`radio${key + 1}`}
+                    onClick={(e) => {
+                      setmultiplierVal(Each);
+                    }}
+                    className="text-[#CCCCCC] text-[16px]   outline-none  flex bg-[#171B35] w-[50px] rounded-[12px] border-[1px] border-[#3B3D53] h-[50px]  items-center justify-center cursor-pointer"
+                  >
+                    {Each}x
+                  </label>
+                </div>
+              ))}
             </div>
           </div>
         </div>
 
-        <button className="text-[#FFFFFF] tect-[16px] w-full h-[49px] bg-[#3958FF]  rounded-[12px]">
+        <button
+          className="text-[#FFFFFF] tect-[16px] w-full h-[49px] bg-[#3958FF]  rounded-[12px]"
+          onClick={setSettings}
+        >
           Save Changes
         </button>
       </div>

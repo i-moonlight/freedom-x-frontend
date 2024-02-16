@@ -1,8 +1,32 @@
+import { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
 import { MonthDropdown } from "../../components/MonthDropdown";
 
 import { PerformanceBox } from "../../components/PerformanceBox";
+import { analytics } from "../../assets/axios/Analytics";
+import { account } from "../../assets/axios/Account";
+
+// token website
+// 922c8fdc-dbff-4059-b351-4dd6d3790074
+
+// google
+// ("ya29.a0AfB_byAK8m2hQ7nbeOaKqOyiZI1O2c8DL4SskVfFf4I2JW_AznhivuTsmKFp611g8atRcpwVw2_mBMs48NMzXlQZw03mAdi1qoKGR_7psVJiMczJzUa7G2mY3Oujcu2SluDEpd8NCPYRqFp2diMXKc79cBUjrKr2cgaCgYKAdUSAQ8SFQHGX2MiTcIb6ECkdJqY3OREQuFeuA0169");
+
 export const Analytics = () => {
+  const [chartsData, setchartsData] = useState(null);
+  const [analyticsData, setanalyticsData] = useState({
+    compound_return: "0",
+    largest_drawdown: "0",
+    monthly_return: "0",
+    montly_sharpe_ratio: "",
+    winning_bets_ratio: "0",
+    yearly_return: "0",
+  });
+  useEffect(() => {
+    analytics.getAnalyticsData(setanalyticsData);
+    account.getAccountMoreDetails(setchartsData);
+  }, []);
+
   return (
     <div className="w-full">
       <Header active={2} page="Analytics" />
@@ -16,12 +40,40 @@ export const Analytics = () => {
             <MonthDropdown />
           </div>
           <div className="grid grid-cols-3  mt-4 gap-4 lg:grid-cols-2 md:!grid-cols-1">
-            <PerformanceBox heading="Average Monthly Return" number="13.54%" />
-            <PerformanceBox heading="Sharp Ratio" number="1.81" />
-            <PerformanceBox heading="Largest Drawdown" number="0.00%" />
-            <PerformanceBox heading="Winning bets %" number="54.6%" />
-            <PerformanceBox heading="Compound Return " number="86.4%" />
-            <PerformanceBox heading="Annualised Return" number="349.29%" />
+            <PerformanceBox
+              heading="Average Monthly Return"
+              number={`${Number(
+                Number(analyticsData.monthly_return) * 100
+              ).toFixed(2)}%`}
+            />
+            <PerformanceBox
+              heading="Sharp Ratio"
+              number={`${analyticsData.montly_sharpe_ratio}`}
+            />
+            <PerformanceBox
+              heading="Largest Drawdown"
+              number={`${Number(
+                Number(analyticsData.largest_drawdown) * 100
+              ).toFixed(2)}%`}
+            />
+            <PerformanceBox
+              heading="Winning bets %"
+              number={`${Number(
+                Number(analyticsData.winning_bets_ratio) * 100
+              ).toFixed(2)}%`}
+            />
+            <PerformanceBox
+              heading="Compound Return "
+              number={`${Number(
+                Number(analyticsData.compound_return) * 100
+              ).toFixed(2)}%`}
+            />
+            <PerformanceBox
+              heading="Annualised Return"
+              number={`${Number(
+                Number(analyticsData.yearly_return) * 100
+              ).toFixed(2)}%`}
+            />
           </div>
         </div>
         <div className="p-[30px] mt-[30px] md:mt-0 rounded-[24px] bg-[#171B35] border-[1px] border-[#31354C] sm:p-4 relative">
@@ -37,7 +89,14 @@ export const Analytics = () => {
               <PerformanceBox heading="PnL (%)" number="+30.45%" pie={1} />
               <PerformanceBox heading="PnL (%)" number="+30.45%" pie={1} />
             </div>
-            <PerformanceBox heading="Compound Profit" number="" bar={1} />
+            {chartsData && (
+              <PerformanceBox
+                chartsData={chartsData}
+                heading="Compound Profit"
+                number=""
+                bar={1}
+              />
+            )}
           </div>
         </div>
       </div>

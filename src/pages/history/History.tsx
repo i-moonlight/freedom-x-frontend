@@ -8,13 +8,20 @@ import front from "../../assets/img/arrow-front-dbl.svg";
 
 import backSingle from "../../assets/img/arrow-back-single.svg";
 import frontSingle from "../../assets/img/arrow-front-single.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HistoryUtil } from "../../assets/js/Util/History";
+import { account } from "../../assets/axios/Account";
 
 export const History = () => {
   const [active, setActive] = useState(false);
-  const [historyUtilArea, sethistoryUtilArea] = useState(HistoryUtil);
+  const [historyUtilArea, sethistoryUtilArea] = useState<any>([]);
+  const [accountHistory, setAccountHistory] = useState<any>([]);
   const [pagination, setPagination] = useState(1);
+
+  useEffect(() => {
+    account.getHistory(setAccountHistory, sethistoryUtilArea);
+  }, []);
+
   return (
     <div className="w-full">
       <Header active={3} page="Account History" />
@@ -135,7 +142,7 @@ export const History = () => {
                     type="checkbox"
                     id="listseven"
                     className="checkbox-type hidden"
-                    value="win"
+                    value="bet win"
                   />
                   <label
                     htmlFor="listseven"
@@ -152,7 +159,7 @@ export const History = () => {
                     type="checkbox"
                     id="listeight"
                     className="checkbox-type hidden"
-                    value="void"
+                    value="Bet Void"
                   />
                   <label
                     htmlFor="listeight"
@@ -173,7 +180,7 @@ export const History = () => {
                         parent?.querySelectorAll("li input:checked");
 
                       if (checkedInputs?.length == 0) {
-                        sethistoryUtilArea(HistoryUtil);
+                        setAccountHistory(historyUtilArea);
                         setActive(false);
                         return;
                       }
@@ -186,18 +193,19 @@ export const History = () => {
                         checkboxvalues.push(input.value);
                       });
 
-                      HistoryUtil.forEach((Each) => {
-                        let type = Each.type.name.toLowerCase();
+                      historyUtilArea.forEach((Each: any) => {
+                        let type = Each.type.toLowerCase();
 
                         checkboxvalues.forEach((EachValue: any) => {
                           let valueLower = EachValue.toLowerCase();
+                          console.log(valueLower);
                           if (valueLower == type) {
                             historyLocal.push(Each);
                           }
                         });
                       });
 
-                      sethistoryUtilArea(historyLocal);
+                      setAccountHistory(historyLocal);
                       setActive(false);
                     }}
                   >
@@ -237,37 +245,48 @@ export const History = () => {
               </div>
             </li>
 
-            {historyUtilArea.map((Each, key) => (
+            {accountHistory.map((Each: any, key: any) => (
               <li
                 key={key}
                 className=" bg-[#171B35] py-4 px-5 rounded-[16px]  border-[1px] border-[#444869] flex items-center 1lg:grid 1lg:grid-cols-2 1lg:items-start 1lg:gap-2"
               >
-                <div className="w-[255px] flex items-center gap-3 1lg:w-full">
+                <div className="w-[255px] flex items-center gap-3 1lg:w-full pr-3">
                   <img src={date} alt="" />
                   <p className="text-[#EFEFEF] text-[16px] font-medium">
-                    {Each.date}
+                    {Each.created_at}
                   </p>
                 </div>
                 <div className="w-[211px] 1lg:w-[101px] 1lg:ml-auto">
                   <button
-                    className="flex items-center justify-center font-bold  border-[1px]  1lg:w-full px-[20px] py-[9px] rounded-[10px]  sm:px-[10px]"
-                    style={{
-                      background: `${Each.type.bgColor}`,
-                      borderColor: `${Each.type.color}`,
-                      color: `${Each.type.color}`,
-                    }}
+                    className="flex items-center justify-center font-bold  border-[1px]  1lg:w-full px-[20px] py-[9px] text-[#27AE60] bg-[#18293A] border-[#27AE60] rounded-[10px]  sm:px-[10px]"
+                    style={
+                      Each.type == "bet placed"
+                        ? {
+                            background: `#2D2139`,
+                            borderColor: `#EB5757`,
+                            color: `#EB5757`,
+                          }
+                        : {}
+                    }
                   >
-                    {Each.type.name}
+                    {Each.type}
                   </button>
                 </div>
-                <div className="flex-1 flex items-center 1lg:col-span-2">
-                  <p className="text-[#EFEFEF] text-[16px] font-medium">
-                    {Each.desc}
+                <div className="flex-1 flex items-center 1lg:col-span-2 pr-3">
+                  <p
+                    className="text-[#EFEFEF] text-[16px] font-medium"
+                    style={{ wordBreak: "break-all" }}
+                  >
+                    {Each.description}
                   </p>
                 </div>
                 <div className="w-[172px] 1lg:w-full 1lg:justify-start flex items-center  gap-2">
-                  <p className="text-[#27AE60] text-[16px] font-medium">
-                    {Each.amount}
+                  <p
+                    className={`text-[#27AE60] text-[16px] font-medium ${
+                      Each.change.split("-").length > 1 && "text-[#EB5757]"
+                    }`}
+                  >
+                    {Each.change}
                   </p>
                 </div>
                 <div className="w-[104px] 1lg:w-full 1lg:justify-end flex items-center justify-end ">
