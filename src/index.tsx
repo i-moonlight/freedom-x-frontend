@@ -19,7 +19,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <GoogleOAuthProvider clientId="22521161050-3t79330drrrd9i0d8n1bel5nrgv7j5pu.apps.googleusercontent.com">
+      <GoogleOAuthProvider clientId="1615663126-la4qosnrjjn1f34h9q518vqdidcj3a7f.apps.googleusercontent.com&as=6qkL%2Bx0FANQkmoo5RXSNvg">
         <Login />
       </GoogleOAuthProvider>
     ),
