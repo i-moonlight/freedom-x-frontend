@@ -1,9 +1,9 @@
 import logo from "../../assets/img/logo.svg";
 import google from "../../assets/img/google.svg";
 import placeholder from "../../assets/img/video-placeholder.svg";
-
+import { GoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
-
+import { useGoogleLogin } from "@react-oauth/google";
 export const Login = () => {
   const navigate = useNavigate();
 
@@ -16,6 +16,17 @@ export const Login = () => {
 
     return null;
   }
+
+  const loginUser = useGoogleLogin({
+    onSuccess: (tokenResponse) => {
+      window.localStorage.setItem("token", tokenResponse["access_token"]);
+
+      console.log(tokenResponse);
+    },
+    onError: () => {
+      console.log("Login Failed");
+    },
+  });
 
   return (
     <div className="h-[100vh] w-full flex items-center justify-center">
@@ -30,13 +41,20 @@ export const Login = () => {
             sint. Velit officia consequat duis enim velit mollit. Exercitation
             veniam consequat sunt nostrud amet.
           </p>
-          <div
-            id="g_id_onload"
-            data-client_id="1615663126-la4qosnrjjn1f34h9q518vqdidcj3a7f.apps.googleusercontent.com"
-            data-login_uri="https://freedom-x.co/login"
-          ></div>
 
-          <button className="flex items-center gap-2 w-[215px] h-[45px] bg-[#171B35] border-[2px] border-[#3958FF] text-[#EFEFEF] justify-center rounded-full text-[17px] sm:w-full">
+          <button
+            className="flex items-center gap-2 w-[215px] h-[45px] bg-[#171B35] border-[2px] border-[#3958FF] text-[#EFEFEF] justify-center rounded-full text-[17px] sm:w-full"
+            onClick={() => loginUser()}
+            // onClick={(e) => {
+            //   // const firstTimeDone = getCookie("token");
+            //   // if (firstTimeDone) {
+            //   //   navigate("/deposite");
+            //   // } else {
+            //   //   document.cookie = `token=true; path=/`;
+            //   //   navigate("/deposite/new");
+            //   // }
+            // }}
+          >
             <img src={google} alt="" />
             Sign in with Google
           </button>
