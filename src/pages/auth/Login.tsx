@@ -1,7 +1,6 @@
 import logo from "../../assets/img/logo.svg";
 import google from "../../assets/img/google.svg";
 import placeholder from "../../assets/img/video-placeholder.svg";
-import { GoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import { useGoogleLogin } from "@react-oauth/google";
 export const Login = () => {
@@ -19,13 +18,14 @@ export const Login = () => {
 
   const loginUser = useGoogleLogin({
     onSuccess: (tokenResponse) => {
-      window.localStorage.setItem("token", tokenResponse["access_token"]);
+      // window.localStorage.setItem("token", tokenResponse["access_token"]);
 
       console.log(tokenResponse);
     },
     onError: () => {
       console.log("Login Failed");
     },
+    flow: "auth-code",
   });
 
   return (
