@@ -3,7 +3,7 @@ import { URL } from "./Base";
 
 class Withdraw {
   headers = {
-    Authorization: `Bearer ca33ca5d-0be0-40c7-872d-1045b5625a4a`,
+    Authorization: `Bearer e4629009-0c5b-4b55-a76b-aad90fbb85c2`,
   };
 
   async withdraw(network, amount, address, symbol, setDone) {

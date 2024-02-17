@@ -2,30 +2,10 @@ import logo from "../../assets/img/logo.svg";
 import google from "../../assets/img/google.svg";
 import placeholder from "../../assets/img/video-placeholder.svg";
 import { useNavigate } from "react-router-dom";
-import { useGoogleLogin } from "@react-oauth/google";
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 export const Login = () => {
   const navigate = useNavigate();
-
-  function getCookie(name: any) {
-    const value = `; ${document.cookie}`;
-
-    const parts = value.split(`; ${name}=`);
-
-    if (parts.length === 2) return parts?.pop()?.split(";").shift();
-
-    return null;
-  }
-
-  const loginUser = useGoogleLogin({
-    onSuccess: (tokenResponse) => {
-      window.localStorage.setItem("token", tokenResponse["access_token"]);
-
-      console.log(tokenResponse);
-    },
-    onError: () => {
-      console.log("Login Failed");
-    },
-  });
 
   return (
     <div className="h-[100vh] w-full flex items-center justify-center">
@@ -35,16 +15,28 @@ export const Login = () => {
           <h1 className="text-[30px] md:text-center mt-8 font-bold text-[#EFEFEF]">
             Welcome to Bet History
           </h1>
-          <p className="text-[#EFEFEF] sm:text-center text-[17px] mt-5 mb-8">
+          <p className="text-[#EFEFEF] p-login sm:text-center text-[17px] mt-5 mb-8">
             Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
             sint. Velit officia consequat duis enim velit mollit. Exercitation
             veniam consequat sunt nostrud amet.
           </p>
 
-          <button
-            className="flex items-center gap-2 w-[215px] h-[45px] bg-[#171B35] border-[2px] border-[#3958FF] text-[#EFEFEF] justify-center rounded-full text-[17px] sm:w-full"
-            onClick={() => loginUser()}
-          >
+          <div className="relative">
+            <GoogleOAuthProvider clientId="1615663126-la4qosnrjjn1f34h9q518vqdidcj3a7f.apps.googleusercontent.com">
+              <GoogleLogin
+                onSuccess={(credentialResponse: any) => {
+                  console.log(credentialResponse);
+                  const decoded = jwtDecode(credentialResponse["credential"]);
+                  console.log(decoded);
+                }}
+                onError={() => {
+                  console.log("Login Failed");
+                }}
+              />
+            </GoogleOAuthProvider>
+          </div>
+
+          <button className="flex items-center gap-2 w-[215px] h-[45px] bg-[#171B35] border-[2px] border-[#3958FF] text-[#EFEFEF] justify-center rounded-full text-[17px] sm:w-full">
             <img src={google} alt="" />
             Sign in with Google
           </button>

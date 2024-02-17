@@ -15,14 +15,11 @@ import { History } from "./pages/history/History";
 import { Analytics } from "./pages/analytics/Analytics";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
+// 1615663126-la4qosnrjjn1f34h9q518vqdidcj3a7f.apps.googleusercontent.com
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <GoogleOAuthProvider clientId="1615663126-la4qosnrjjn1f34h9q518vqdidcj3a7f.apps.googleusercontent.com">
-        <Login />
-      </GoogleOAuthProvider>
-    ),
+    element: <Login />,
   },
   {
     path: "/deposite",

@@ -71,6 +71,16 @@ input[type="number"] {
 .info-area:hover + span {
   opacity: 1;
 }
+.p-login + div > div {
+  position: absolute;
+}
+.p-login + div {
+  width: 100%;
+  opacity: 0;
+}
+.p-login + div * {
+  width: 100%;
+}
 @media screen and (max-height: 851px) {
   .Deposite {
     height: unset;

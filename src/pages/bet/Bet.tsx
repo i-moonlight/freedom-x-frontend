@@ -64,7 +64,7 @@ export const Bet = () => {
             <div className="flex items-center justify-between mt-2">
               <p className="text-[30px] text-[#EFEFEF] font-bold lg:text-[20px]">
                 <span className=" inline-block w-[80px] sm:w-[unset] sm:mr-1">
-                  {currentBalance.balance}
+                  {Number(currentBalance.balance).toFixed(2)}
                 </span>
                 {currentBalance.symbol}
               </p>
@@ -99,7 +99,7 @@ export const Bet = () => {
                     className="text-[16px] font-bold text-[#EFEFEF] h-[56px] border-b-[1px] border-b-[#444869] flex items-center cursor-pointer sm:w-[unset]"
                   >
                     <span className="inline-block w-[70px] sm:w-[unset] mr-3 text-right sm:text-left ">
-                      {EachList.balance}
+                      {Number(EachList.balance).toFixed(4)}
                     </span>
                     <span className=" inline-block w-[80px] ">
                       {EachList.symbol}
@@ -115,8 +115,15 @@ export const Bet = () => {
               Profit
             </h1>
             <div className="flex items-center justify-between mt-2">
-              <p className="text-[30px] text-[#27AE60] font-bold lg:text-[20px]">
-                +{currentBalance.pnl}
+              <p
+                className={`text-[30px] font-bold lg:text-[20px]
+               ${
+                 currentBalance.pnl.split("-").length > 1
+                   ? "text-[#EB5757] "
+                   : "text-[#27AE60] "
+               }`}
+              >
+                {Number(currentBalance.pnl).toFixed(4)}
               </p>
             </div>
           </div>
@@ -126,7 +133,7 @@ export const Bet = () => {
             </h1>
             <div className="flex items-center justify-between mt-2">
               <p className="text-[30px] text-[#EFEFEF] font-bold lg:text-[20px]">
-                {currentBalance.unsettled_balance}
+                {Number(currentBalance.unsettled_balance).toFixed(4)}
               </p>
             </div>
           </div>
