@@ -4,11 +4,23 @@ import placeholder from "../../assets/img/video-placeholder.svg";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { account } from "../../assets/axios/Account";
+import { useState } from "react";
 export const Login = () => {
   const navigate = useNavigate();
-
+  const [loading, setloading] = useState(true);
   return (
     <div className="h-[100vh] w-full flex items-center justify-center">
+      {loading && (
+        <div
+          className="fixed top-0 left-0 h-[100vh] w-full bg-[#fff] opacity-80 z-50 flex items-center justify-center"
+          style={{ backgroundColor: `rgb(29, 40, 93)` }}
+        >
+          <div className="ring-area">
+            Loading
+            <span></span>
+          </div>
+        </div>
+      )}
       <div className="w-[90%] max-w-[1158px] p-[30px] bg-[#23284F] rounded-[24px] grid grid-cols-[1fr_601px] gap-6 items-center border-[1px] border-[#444869] 1lg:grid-cols-1 sm:p-4">
         <div className="sm:flex sm:flex-col sm:items-center">
           <img src={logo} alt="" />
@@ -25,10 +37,11 @@ export const Login = () => {
             <GoogleOAuthProvider clientId="1615663126-la4qosnrjjn1f34h9q518vqdidcj3a7f.apps.googleusercontent.com">
               <GoogleLogin
                 onSuccess={(credentialResponse: any) => {
-                  console.log(credentialResponse);
-
-                  account.loginUser(credentialResponse["credential"]);
-                  // navigate("/bets");
+                  account.loginUser(
+                    credentialResponse["credential"],
+                    setloading,
+                    navigate
+                  );
                 }}
                 onError={() => {
                   console.log("Login Failed");

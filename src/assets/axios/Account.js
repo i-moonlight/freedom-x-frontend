@@ -2,20 +2,18 @@ import axios from "axios";
 import { URL } from "./Base";
 
 class Account {
-  async loginUser(token) {
+  async loginUser(token, setloading, navigate) {
     try {
       let { data } = await axios.post(`${URL}/sessions`, {
         token: token,
       });
-      // window.sessionStorage.setItem(
-      //   "token",
-      //   credentialResponse["credential"]
-      // );
+      window.sessionStorage.setItem("token", data["token"]);
 
-      console.log(data);
-      // setloading(false);
+      setloading(false);
+
+      // navigate("/bets");
     } catch (err) {
-      // setloading(false);
+      setloading(false);
     }
   }
 
