@@ -8,6 +8,10 @@ import eye from "../assets/img/eye.svg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { setting } from "../assets/axios/Settings";
+import Box from "@mui/material/Box";
+import Slider from "@mui/material/Slider";
+import DiscreteSlider from "./DiscreteSlider";
+
 export const SettingsCard = () => {
   const [switch1, setSwitch1] = useState(false);
   const [refCode, setrefCode] = useState("");
@@ -20,12 +24,34 @@ export const SettingsCard = () => {
     setting.getUser(setmultiplier, setmultiplierVal, setloading);
   }, []);
 
+  const marks = [
+    {
+      value: 0.1,
+      label: "0.1",
+    },
+    {
+      value: 0.5,
+      label: "0.5",
+    },
+    {
+      value: 1,
+      label: "1",
+    },
+    {
+      value: 2,
+      label: "2",
+    },
+  ];
+
   const setSettings = (e: any) => {
     if (multiplierVal != "") {
       setloading(true);
       setting.patchUser(multiplierVal, setloading);
     }
   };
+  function valuetext(value: number) {
+    return `${value}°C`;
+  }
 
   return (
     <div>
@@ -133,6 +159,13 @@ export const SettingsCard = () => {
             >
               Multiplier
             </label>
+            {multiplier.length > 0 && (
+              <DiscreteSlider
+                defaultValue={multiplierVal}
+                setmultiplierVal={setmultiplierVal}
+              />
+            )}
+
             <div className="flex gap-[10px]">
               {multiplier.map((Each, key) => (
                 <div>
@@ -148,6 +181,7 @@ export const SettingsCard = () => {
                   <label
                     htmlFor={`radio${key + 1}`}
                     onClick={(e) => {
+                      console.log(Each);
                       setmultiplierVal(Each);
                     }}
                     className="text-[#CCCCCC] text-[16px]   outline-none  flex bg-[#171B35] w-[50px] rounded-[12px] border-[1px] border-[#3B3D53] h-[50px]  items-center justify-center cursor-pointer"

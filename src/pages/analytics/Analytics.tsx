@@ -6,12 +6,6 @@ import { PerformanceBox } from "../../components/PerformanceBox";
 import { analytics } from "../../assets/axios/Analytics";
 import { account } from "../../assets/axios/Account";
 
-// token website
-// 922c8fdc-dbff-4059-b351-4dd6d3790074
-
-// google
-// ("ya29.a0AfB_byAW1gVgIcqcRTIMrXxEtZ16BHCU61cwQzRcg_W2Q3nvnQXCAL72YrkvevfWh_YPsvSfAZ4u4jnj58z-DaTLc1ObmLZJ2uAuR7l0_zx0HR1wdA1V-hHr9MiBrNoPuQLPN6bGB0V4YjxkWesec-GDX3V8T9-pUAaCgYKAe4SAQ8SFQHGX2Mi2Y_UFS3fXsXvSDWRAJDnfQ0169");
-
 export const Analytics = () => {
   const [chartsData, setchartsData] = useState(null);
   const [loading, setloading] = useState(true);

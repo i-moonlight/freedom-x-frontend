@@ -135,6 +135,17 @@ input[type="number"] {
   right: -8px;
   box-shadow: 0 0 20px rgb(57, 88, 255);
 }
+.css-1919041 .base-Slider-thumb {
+  border: 1px solid #fff;
+  background-color: #3958ff !important;
+}
+.css-1919041 .base-Slider-rail {
+  background-color: #262d61 !important;
+  opacity: 1 !important;
+}
+.css-1919041 .base-Slider-track {
+  background-color: #3958ff !important;
+}
 @keyframes animateC {
   0% {
     transform: rotate(0deg);

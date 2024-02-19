@@ -23,6 +23,7 @@ class Settings {
     }
   }
   async patchUser(multiplierVal, setloading) {
+    console.log(multiplierVal);
     try {
       let { data } = await axios.patch(
         `${URL}/users`,

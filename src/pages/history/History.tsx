@@ -9,7 +9,6 @@ import front from "../../assets/img/arrow-front-dbl.svg";
 import backSingle from "../../assets/img/arrow-back-single.svg";
 import frontSingle from "../../assets/img/arrow-front-single.svg";
 import { useEffect, useState } from "react";
-import { HistoryUtil } from "../../assets/js/Util/History";
 import { account } from "../../assets/axios/Account";
 
 export const History = () => {
