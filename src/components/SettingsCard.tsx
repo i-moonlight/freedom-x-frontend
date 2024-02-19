@@ -17,11 +17,13 @@ export const SettingsCard = () => {
   const [refCode, setrefCode] = useState("");
   const [password, setPassword] = useState(true);
   const [multiplier, setmultiplier] = useState([]);
+  const [OuterData, setOuterData] = useState(null);
+
   const [multiplierVal, setmultiplierVal] = useState("");
   const notify = () => toast("Copied The Content");
   const [loading, setloading] = useState(true);
   useEffect(() => {
-    setting.getUser(setmultiplier, setmultiplierVal, setloading);
+    setting.getUser(setmultiplier, setmultiplierVal, setloading, OuterData);
   }, []);
 
   const setSettings = (e: any) => {

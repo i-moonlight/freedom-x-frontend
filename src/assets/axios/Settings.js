@@ -1,12 +1,13 @@
 import axios from "axios";
 import { URL } from "./Base";
+import { jwtDecode } from "jwt-decode";
 
 class Settings {
   headers = {
     Authorization: `Bearer ${window.localStorage.getItem("token")}`,
   };
 
-  async getUser(setmultiplier, setmultiplierVal, setloading) {
+  async getUser(setmultiplier, setmultiplierVal, setloading, setOuterData) {
     try {
       let { data } = await axios.get(`${URL}/users`, {
         headers: {
@@ -16,6 +17,13 @@ class Settings {
       setmultiplier(data["multipliers"]);
       setmultiplierVal(data["user"][["multiplier"]]);
       console.log(data);
+
+      const decoded = jwtDecode(window.localStorage.getItem("token"));
+      setOuterData({
+        profilePicture: decoded["picture"],
+      });
+      console.log(decoded);
+
       setloading(false);
     } catch (err) {
       setloading(false);
