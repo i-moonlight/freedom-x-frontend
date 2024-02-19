@@ -20,13 +20,13 @@ import frontSingle from "../../assets/img/arrow-front-single.svg";
 import { useState, useEffect } from "react";
 import { bets } from "../../assets/axios/Bets";
 import { account } from "../../assets/axios/Account";
+import Pagination from "@mui/material/Pagination";
 
 export const Bet = () => {
   const [active, setActive] = useState(false);
   const [pagination, setPagination] = useState(1);
   const [betsState, setbetsState] = useState([]);
   const [loading, setloading] = useState(true);
-
   const [betsStateBackup, setbetsStateBackup] = useState([]);
   const [userAccount, setuserAccount] = useState([]);
   const [currentBalance, setcurrentBalance] = useState({
@@ -36,19 +36,32 @@ export const Bet = () => {
     symbol: "",
     unsettled_balance: "0",
   });
+  const [itemOffset, setItemOffset] = useState(0);
+  const [pageCount, setpageCount] = useState(0);
+  const [currentItems, setcurrentItems] = useState([]);
+
+  const handlePageClick = (value: any) => {
+    const newOffset = (value * 10) % betsState.length;
+    console.log(
+      `User requested page number ${value}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+
+    const endOffset = newOffset + 10;
+    setcurrentItems(betsState.slice(newOffset, endOffset));
+  };
 
   useEffect(() => {
-    bets.getBets(setbetsState, setbetsStateBackup, setloading);
+    bets.getBets(
+      setbetsState,
+      setbetsStateBackup,
+      setloading,
+      setpageCount,
+      setcurrentItems,
+      itemOffset
+    );
     account.getUserData(setuserAccount, setcurrentBalance, setloading);
   }, []);
-
-  const paginationSetter = (page: any) => {
-    setbetsState(
-      betsStateBackup.filter((item: any, index: any) => {
-        return index >= page * 3 && index < (page + 1) * 3;
-      })
-    );
-  };
 
   return (
     <div className="w-full">
@@ -155,7 +168,7 @@ export const Bet = () => {
       <div className="1lg:w-[90%]  w-[1140px] mx-auto  mb-[60px]">
         <div className="p-[30px] rounded-[24px] bg-[#23284F] border-[1px] border-[#444869] sm:p-4">
           <ul className="flex flex-col gap-4">
-            {betsState.map((EachBet: any) => (
+            {currentItems.map((EachBet: any) => (
               <li
                 key={EachBet._id}
                 className=" bg-[#171B35] py-4 px-5 rounded-[16px]  border-[1px] border-[#444869] flex items-center 1lg:flex-col 1lg:items-start 1lg:gap-2"
@@ -301,64 +314,13 @@ export const Bet = () => {
           </ul>
 
           <div className="flex items-center mt-5 justify-center gap-[5px] sm:gap-[2px]">
-            <button className="w-8 h-8 rounded-full bg-[#171B35] border-[1px] border-[#3B3D53] flex items-center justify-center">
-              <img src={back} alt="" />
-            </button>
-            <button className="w-8 h-8 rounded-full bg-[#171B35] border-[1px] border-[#3B3D53] flex items-center justify-center">
-              <img src={backSingle} alt="" />
-            </button>
-
-            <button
-              className={`w-8 h-8 rounded-full bg-[#171B35] border-[1px] border-[#3B3D53] text-[#CCCCCC] text-[12px] flex items-center justify-center ${
-                pagination == 1 && "bg-[#3958FF]"
-              }`}
-              onClick={(e) => {
-                setPagination(1);
+            <Pagination
+              count={pageCount}
+              onClick={(e: any) => {
+                handlePageClick(e.target.textContent);
               }}
-            >
-              1
-            </button>
-            <button
-              className={`w-8 h-8 rounded-full bg-[#171B35] border-[1px] border-[#3B3D53] text-[#CCCCCC] text-[12px] flex items-center justify-center ${
-                pagination == 2 && "bg-[#3958FF]"
-              }`}
-              onClick={(e) => {
-                paginationSetter(2);
-                setPagination(2);
-              }}
-            >
-              2
-            </button>
-            <button
-              className={`w-8 h-8 rounded-full bg-[#171B35] border-[1px] border-[#3B3D53] text-[#CCCCCC] text-[12px] flex items-center justify-center ${
-                pagination == 3 && "bg-[#3958FF]"
-              }`}
-              onClick={(e) => {
-                setPagination(3);
-              }}
-            >
-              3
-            </button>
-            <button className="w-8 h-8 rounded-[8px] bg-[#171B35] text-[#CCCCCC] text-[12px] flex items-center justify-center">
-              ...
-            </button>
-            <button
-              className={`w-8 h-8 rounded-full bg-[#171B35] border-[1px] border-[#3B3D53] text-[#CCCCCC] text-[12px] flex items-center justify-center ${
-                pagination == 10 && "bg-[#3958FF]"
-              }`}
-              onClick={(e) => {
-                setPagination(10);
-              }}
-            >
-              10
-            </button>
-            <button className="w-8 h-8 rounded-full bg-[#171B35] border-[1px] border-[#3B3D53] flex items-center justify-center">
-              <img src={frontSingle} alt="" />
-            </button>
-
-            <button className="w-8 h-8 rounded-full bg-[#171B35] border-[1px] border-[#3B3D53] flex items-center justify-center">
-              <img src={front} alt="" />
-            </button>
+              color="primary"
+            />
           </div>
         </div>
       </div>

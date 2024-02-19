@@ -6,7 +6,14 @@ class Bets {
     Authorization: `Bearer ${window.localStorage.getItem("token")}`,
   };
 
-  async getBets(setbetsState, setbetsStateBackup, setloading) {
+  async getBets(
+    setbetsState,
+    setbetsStateBackup,
+    setloading,
+    setpageCount,
+    setcurrentItems,
+    itemOffset
+  ) {
     try {
       let { data } = await axios.get(`${URL}/bets?symbol=BTC`, {
         headers: {
@@ -15,6 +22,11 @@ class Bets {
       });
       setbetsState(data["bets"]);
       setbetsStateBackup(data["bets"]);
+      setpageCount(Math.ceil(data["bets"].length / 10));
+
+      const endOffset = itemOffset + 10;
+      setcurrentItems(data["bets"].slice(itemOffset, endOffset));
+
       setloading(false);
     } catch (err) {
       setloading(false);
