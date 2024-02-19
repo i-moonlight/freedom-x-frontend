@@ -23,7 +23,7 @@ export const SettingsCard = () => {
   const notify = () => toast("Copied The Content");
   const [loading, setloading] = useState(true);
   useEffect(() => {
-    setting.getUser(setmultiplier, setmultiplierVal, setloading, OuterData);
+    setting.getUser(setmultiplier, setmultiplierVal, setloading, setOuterData);
   }, []);
 
   const setSettings = (e: any) => {
