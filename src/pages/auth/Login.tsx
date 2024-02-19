@@ -37,6 +37,7 @@ export const Login = () => {
             <GoogleOAuthProvider clientId="1615663126-la4qosnrjjn1f34h9q518vqdidcj3a7f.apps.googleusercontent.com">
               <GoogleLogin
                 onSuccess={(credentialResponse: any) => {
+                  setloading(true);
                   account.loginUser(
                     credentialResponse["credential"],
                     setloading,

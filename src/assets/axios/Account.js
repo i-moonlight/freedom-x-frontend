@@ -7,7 +7,9 @@ class Account {
       let { data } = await axios.post(`${URL}/sessions`, {
         token: token,
       });
-      window.sessionStorage.setItem("token", data["token"]);
+
+      console.log(data);
+      window.localStorage.setItem("token", data["token"]);
 
       setloading(false);
 
