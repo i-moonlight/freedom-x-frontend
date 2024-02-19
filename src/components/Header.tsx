@@ -9,7 +9,7 @@ export const Header = ({ active, page }: any) => {
   const [navactive, setNavActive] = useState(false);
 
   return (
-    <header className="w-full bg-[#171B35] h-[70px] border-b-[1px] border-b-[#3B3D53]">
+    <header className="w-full sticky top-0 z-[99999] bg-[#171B35] h-[70px] border-b-[1px] border-b-[#3B3D53]">
       {navactive && (
         <ul className="bg-[#171B35] px-[20px] border-[1px] border-[#3958FF] rounded-bl-[8px] right-[3px] hidden 1lg:block py-[16px] top-[70px] w-[315px] rounded-br-[8px] absolute z-50 ">
           <Link
