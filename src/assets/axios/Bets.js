@@ -9,7 +9,9 @@ class Bets {
   async getBets(setbetsState, setbetsStateBackup, setloading) {
     try {
       let { data } = await axios.get(`${URL}/bets?symbol=BTC`, {
-        headers: this.headers,
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+        },
       });
       setbetsState(data["bets"]);
       setbetsStateBackup(data["bets"]);

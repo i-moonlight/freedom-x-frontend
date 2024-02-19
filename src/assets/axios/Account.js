@@ -22,7 +22,9 @@ class Account {
   async getUserData(setuserAccount, setcurrentBalance, setloading) {
     try {
       let { data } = await axios.get(`${URL}/accounts`, {
-        headers: this.headers,
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+        },
       });
       setloading(false);
       setuserAccount(data["accounts"]);

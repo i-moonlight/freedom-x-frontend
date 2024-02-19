@@ -27,7 +27,9 @@ class Deposit {
           symbol,
         },
         {
-          headers: this.headers,
+          headers: {
+            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+          },
         }
       );
       if (data.error) {

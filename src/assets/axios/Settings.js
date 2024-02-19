@@ -9,7 +9,9 @@ class Settings {
   async getUser(setmultiplier, setmultiplierVal, setloading) {
     try {
       let { data } = await axios.get(`${URL}/users`, {
-        headers: this.headers,
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+        },
       });
       setmultiplier(data["multipliers"]);
       setmultiplierVal(data["user"][["multiplier"]]);
@@ -28,7 +30,9 @@ class Settings {
           multiplier: multiplierVal,
         },
         {
-          headers: this.headers,
+          headers: {
+            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+          },
         }
       );
 
