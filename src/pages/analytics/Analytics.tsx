@@ -14,6 +14,7 @@ import { account } from "../../assets/axios/Account";
 
 export const Analytics = () => {
   const [chartsData, setchartsData] = useState(null);
+  const [loading, setloading] = useState(true);
   const [analyticsData, setanalyticsData] = useState({
     compound_return: "0",
     largest_drawdown: "0",
@@ -23,12 +24,24 @@ export const Analytics = () => {
     yearly_return: "0",
   });
   useEffect(() => {
-    analytics.getAnalyticsData(setanalyticsData);
-    account.getAccountMoreDetails(setchartsData);
+    analytics.getAnalyticsData(setanalyticsData, setloading);
+    account.getAccountMoreDetails(setchartsData, setloading);
   }, []);
 
   return (
     <div className="w-full">
+      {loading && (
+        <div
+          className="fixed top-0 left-0 h-[100vh] w-full bg-[#fff] opacity-80 z-50 flex items-center justify-center"
+          style={{ backgroundColor: `rgb(29, 40, 93)` }}
+        >
+          <div className="ring-area">
+            Loading
+            <span></span>
+          </div>
+        </div>
+      )}
+
       <Header active={2} page="Analytics" />
 
       <div className="1lg:w-[90%] md:flex md:gap-[30px] md:flex-col-reverse  w-[1140px] mx-auto  mt-[36px] mb-[60px]">

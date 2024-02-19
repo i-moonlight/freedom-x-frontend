@@ -6,7 +6,7 @@ class Settings {
     Authorization: `Bearer ${window.localStorage.getItem("token")}`,
   };
 
-  async getUser(setmultiplier, setmultiplierVal) {
+  async getUser(setmultiplier, setmultiplierVal, setloading) {
     try {
       let { data } = await axios.get(`${URL}/users`, {
         headers: this.headers,
@@ -14,11 +14,13 @@ class Settings {
       setmultiplier(data["multipliers"]);
       setmultiplierVal(data["user"][["multiplier"]]);
       console.log(data);
+      setloading(false);
     } catch (err) {
+      setloading(false);
       console.log(err.response.data.error);
     }
   }
-  async patchUser(multiplierVal) {
+  async patchUser(multiplierVal, setloading) {
     try {
       let { data } = await axios.patch(
         `${URL}/users`,
@@ -30,9 +32,9 @@ class Settings {
         }
       );
 
-      console.log(data);
+      setloading(false);
     } catch (err) {
-      console.log(err.response.data.error);
+      setloading(false);
     }
   }
 }

@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 export const Header = ({ active, page }: any) => {
   const [navactive, setNavActive] = useState(false);
+
   return (
     <header className="w-full bg-[#171B35] h-[70px] border-b-[1px] border-b-[#3B3D53]">
       {navactive && (
@@ -179,6 +180,9 @@ export const Header = ({ active, page }: any) => {
           </nav>
           <nav className="flex items-center h-[52px] border-[1px] border-[#3B3D53] rounded-full px-1">
             <Link
+              onClick={(e) => {
+                window.localStorage.removeItem("token");
+              }}
               to="/"
               className="text-[#FFFFFF] font-semibold text-[16px] h-[44px] px-4 justify-center flex items-center "
             >

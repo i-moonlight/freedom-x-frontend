@@ -6,7 +6,7 @@ class Withdraw {
     Authorization: `Bearer ${window.localStorage.getItem("token")}`,
   };
 
-  async withdraw(network, amount, address, symbol, setDone) {
+  async withdraw(network, amount, address, symbol, setDone, setloading) {
     try {
       let { data } = await axios.post(
         `${URL}/withdrawals`,
@@ -29,12 +29,14 @@ class Withdraw {
       setTimeout(() => {
         setDone([null]);
       }, 2000);
+      setloading(false);
     } catch (err) {
       setDone([false, err.response.data.error]);
       setTimeout(() => {
         setDone([null]);
       }, 2000);
-      console.log(err.response.data.error);
+
+      setloading(false);
     }
   }
 }

@@ -25,6 +25,8 @@ export const Bet = () => {
   const [active, setActive] = useState(false);
   const [pagination, setPagination] = useState(1);
   const [betsState, setbetsState] = useState([]);
+  const [loading, setloading] = useState(true);
+
   const [betsStateBackup, setbetsStateBackup] = useState([]);
   const [userAccount, setuserAccount] = useState([]);
   const [currentBalance, setcurrentBalance] = useState({
@@ -36,8 +38,8 @@ export const Bet = () => {
   });
 
   useEffect(() => {
-    bets.getBets(setbetsState, setbetsStateBackup);
-    account.getUserData(setuserAccount, setcurrentBalance);
+    bets.getBets(setbetsState, setbetsStateBackup, setloading);
+    account.getUserData(setuserAccount, setcurrentBalance, setloading);
   }, []);
 
   const paginationSetter = (page: any) => {
@@ -50,6 +52,17 @@ export const Bet = () => {
 
   return (
     <div className="w-full">
+      {loading && (
+        <div
+          className="fixed top-0 left-0 h-[100vh] w-full bg-[#fff] opacity-80 z-50 flex items-center justify-center"
+          style={{ backgroundColor: `rgb(29, 40, 93)` }}
+        >
+          <div className="ring-area">
+            Loading
+            <span></span>
+          </div>
+        </div>
+      )}
       <Header active={1} page="Bet History" />
       <div className="1lg:w-[90%] sm:!w-full sm:pl-4   w-[1140px] mx-auto mt-[36px] ">
         <div className="grid grid-cols-3 gap-3 mb-8 sm:flex sm:overflow-scroll">

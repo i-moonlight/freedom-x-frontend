@@ -2,37 +2,50 @@ import axios from "axios";
 import { URL } from "./Base";
 
 class Account {
-  headers = {
-    Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-  };
+  async loginUser(token) {
+    try {
+      let { data } = await axios.post(`${URL}/sessions`, {
+        token: token,
+      });
+      // window.sessionStorage.setItem(
+      //   "token",
+      //   credentialResponse["credential"]
+      // );
 
-  async getUserData(setuserAccount, setcurrentBalance) {
+      console.log(data);
+      // setloading(false);
+    } catch (err) {
+      // setloading(false);
+    }
+  }
+
+  async getUserData(setuserAccount, setcurrentBalance, setloading) {
     try {
       let { data } = await axios.get(`${URL}/accounts`, {
         headers: this.headers,
       });
-
-      console.log(data["accounts"]);
+      setloading(false);
       setuserAccount(data["accounts"]);
       setcurrentBalance(data["accounts"][0]);
     } catch (err) {
-      console.log(err.response);
+      setloading(false);
     }
   }
 
-  async getHistory(setAccountHistory, sethistoryUtilArea) {
+  async getHistory(setAccountHistory, sethistoryUtilArea, setloading) {
     try {
       let { data } = await axios.get(`${URL}/ledger?symbol=USDT`, {
         headers: this.headers,
       });
+      setloading(false);
       sethistoryUtilArea(data["ledger"]);
       setAccountHistory(data["ledger"]);
     } catch (err) {
-      console.log(err.response);
+      setloading(false);
     }
   }
 
-  async getAccountMoreDetails(setchartsData) {
+  async getAccountMoreDetails(setchartsData, setloading) {
     let objectInitXAxis = [];
     let objectInitYAxis = [];
 
@@ -51,11 +64,10 @@ class Account {
         }
       });
 
-      console.log({ YAxis: objectInitYAxis, XAxis: objectInitXAxis });
-
+      setloading(false);
       setchartsData({ YAxis: objectInitYAxis, XAxis: objectInitXAxis });
     } catch (err) {
-      console.log(err.response);
+      setloading(false);
     }
   }
 }

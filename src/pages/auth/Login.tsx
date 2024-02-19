@@ -3,6 +3,7 @@ import google from "../../assets/img/google.svg";
 import placeholder from "../../assets/img/video-placeholder.svg";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
+import { account } from "../../assets/axios/Account";
 export const Login = () => {
   const navigate = useNavigate();
 
@@ -25,10 +26,8 @@ export const Login = () => {
               <GoogleLogin
                 onSuccess={(credentialResponse: any) => {
                   console.log(credentialResponse);
-                  window.sessionStorage.setItem(
-                    "token",
-                    credentialResponse["credential"]
-                  );
+
+                  account.loginUser(credentialResponse["credential"]);
                   navigate("/bets");
                 }}
                 onError={() => {

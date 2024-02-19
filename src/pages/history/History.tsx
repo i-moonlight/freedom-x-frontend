@@ -14,16 +14,29 @@ import { account } from "../../assets/axios/Account";
 
 export const History = () => {
   const [active, setActive] = useState(false);
+  const [loading, setloading] = useState(true);
   const [historyUtilArea, sethistoryUtilArea] = useState<any>([]);
   const [accountHistory, setAccountHistory] = useState<any>([]);
   const [pagination, setPagination] = useState(1);
 
   useEffect(() => {
-    account.getHistory(setAccountHistory, sethistoryUtilArea);
+    account.getHistory(setAccountHistory, sethistoryUtilArea, setloading);
   }, []);
 
   return (
     <div className="w-full">
+      {loading && (
+        <div
+          className="fixed top-0 left-0 h-[100vh] w-full bg-[#fff] opacity-80 z-50 flex items-center justify-center"
+          style={{ backgroundColor: `rgb(29, 40, 93)` }}
+        >
+          <div className="ring-area">
+            Loading
+            <span></span>
+          </div>
+        </div>
+      )}
+
       <Header active={3} page="Account History" />
 
       <div className="1lg:w-[90%]  w-[1140px] mx-auto  mt-[36px] mb-[60px]">
@@ -198,7 +211,7 @@ export const History = () => {
 
                         checkboxvalues.forEach((EachValue: any) => {
                           let valueLower = EachValue.toLowerCase();
-                          console.log(valueLower);
+
                           if (valueLower == type) {
                             historyLocal.push(Each);
                           }
@@ -286,12 +299,12 @@ export const History = () => {
                       Each.change.split("-").length > 1 && "text-[#EB5757]"
                     }`}
                   >
-                    {Each.change}
+                    {Number(Each.change).toFixed(6)}
                   </p>
                 </div>
                 <div className="w-[104px] 1lg:w-full 1lg:justify-end flex items-center justify-end ">
                   <p className="text-[#EFEFEF] text-[16px] font-medium">
-                    {Each.balance}
+                    {Number(Each.balance).toFixed(6)}
                   </p>
                 </div>
               </li>

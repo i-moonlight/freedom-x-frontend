@@ -6,17 +6,16 @@ class Bets {
     Authorization: `Bearer ${window.localStorage.getItem("token")}`,
   };
 
-  async getBets(setbetsState, setbetsStateBackup) {
+  async getBets(setbetsState, setbetsStateBackup, setloading) {
     try {
       let { data } = await axios.get(`${URL}/bets?symbol=BTC`, {
         headers: this.headers,
       });
       setbetsState(data["bets"]);
       setbetsStateBackup(data["bets"]);
-
-      console.log(data);
+      setloading(false);
     } catch (err) {
-      console.log(err.response);
+      setloading(false);
     }
   }
 }

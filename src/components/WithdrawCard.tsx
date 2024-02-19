@@ -12,6 +12,7 @@ import { withdrawObj } from "../assets/axios/Withdraw";
 export const WithdrawCard = ({ setDone }: any) => {
   const notify = () => toast("Copied The Content");
   const [active, setActive] = useState("");
+  const [loading, setloading] = useState(true);
   const [Amount, setAmount] = useState("");
   const [password, setPassword] = useState(true);
   const [globalDataAccount, setglobalDataAccount] = useState({
@@ -27,28 +28,36 @@ export const WithdrawCard = ({ setDone }: any) => {
   const [currentBalance, setcurrentBalance] = useState(true);
   const [currentFee, setcurrentFee] = useState("");
 
-  function randomIntFromInterval(min: any, max: any) {
-    // min and max included
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  }
-
   useEffect(() => {
-    account.getUserData(setuserAccount, setcurrentBalance);
-    depositObj.Network(setnetworksState);
+    account.getUserData(setuserAccount, setcurrentBalance, setloading);
+    depositObj.Network(setnetworksState, setloading);
   }, []);
 
   const startWithdrawProcess = (e: any) => {
+    setloading(true);
     withdrawObj.withdraw(
       additionState[0]["_id"],
       Amount,
       active,
       additionState[0]["symbols"][0]["id"],
-      setDone
+      setDone,
+      setloading
     );
   };
 
   return (
     <div>
+      {loading && (
+        <div
+          className="fixed top-0 left-0 h-[100vh] w-full bg-[#fff] opacity-80 z-50 flex items-center justify-center"
+          style={{ backgroundColor: `rgb(29, 40, 93)` }}
+        >
+          <div className="ring-area">
+            Loading
+            <span></span>
+          </div>
+        </div>
+      )}
       <ToastContainer hideProgressBar={true} />
       <div className="md:w-[90%] mx-auto  w-[534px] p-[30px] bg-[#23284F] rounded-[24px] border-[1px] border-[#444869] sm:p-[16px] mb-5">
         <div className="mt-6">

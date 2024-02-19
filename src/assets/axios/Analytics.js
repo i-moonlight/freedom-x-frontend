@@ -6,7 +6,7 @@ class Analytics {
     Authorization: `Bearer ${window.localStorage.getItem("token")}`,
   };
 
-  async getAnalyticsData(setanalyticsData) {
+  async getAnalyticsData(setanalyticsData, setloading) {
     try {
       let { data } = await axios.get(
         `${URL}/analytics?start=2024-02-01T00:00:00`,
@@ -14,11 +14,10 @@ class Analytics {
           headers: this.headers,
         }
       );
-
-      console.log(data["analytics"]);
+      setloading(false);
       setanalyticsData(data["analytics"]);
     } catch (err) {
-      console.log(err.response);
+      setloading(false);
     }
   }
 }

@@ -15,20 +15,31 @@ export const SettingsCard = () => {
   const [multiplier, setmultiplier] = useState([]);
   const [multiplierVal, setmultiplierVal] = useState("");
   const notify = () => toast("Copied The Content");
-
+  const [loading, setloading] = useState(true);
   useEffect(() => {
-    setting.getUser(setmultiplier, setmultiplierVal);
+    setting.getUser(setmultiplier, setmultiplierVal, setloading);
   }, []);
 
   const setSettings = (e: any) => {
     if (multiplierVal != "") {
-      setting.patchUser(multiplierVal);
+      setloading(true);
+      setting.patchUser(multiplierVal, setloading);
     }
   };
 
   return (
     <div>
-      {" "}
+      {loading && (
+        <div
+          className="fixed top-0 left-0 h-[100vh] w-full bg-[#fff] opacity-80 z-50 flex items-center justify-center"
+          style={{ backgroundColor: `rgb(29, 40, 93)` }}
+        >
+          <div className="ring-area">
+            Loading
+            <span></span>
+          </div>
+        </div>
+      )}
       <ToastContainer hideProgressBar={true} />
       <div className="md:w-[90%] mx-auto  w-[575px] p-[30px] bg-[#23284F] rounded-[24px] border-[1px] border-[#444869] sm:p-[16px] mb-5">
         <div className="flex items-center justify-center">

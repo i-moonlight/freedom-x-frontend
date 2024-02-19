@@ -16,7 +16,7 @@ export const DepositeCard = ({ logoCustom }: any) => {
   const notify = () => toast("Copied The Content");
 
   const Errornotify = (errorContent: String) => toast(errorContent);
-
+  const [loading, setloading] = useState(true);
   const [password, setPassword] = useState(true);
   const [pasteValue, setpasteValue] = useState("Atif Asim");
   const [networksState, setnetworksState] = useState([]);
@@ -34,16 +34,35 @@ export const DepositeCard = ({ logoCustom }: any) => {
   });
 
   useEffect(() => {
-    account.getUserData(setuserAccount, setcurrentBalance);
-    depositObj.Network(setnetworksState);
+    account.getUserData(setuserAccount, setcurrentBalance, setloading);
+    depositObj.Network(setnetworksState, setloading);
   }, []);
 
   const startDeposit = (e: any) => {
-    depositObj.deposit(networkSelect, pasteValue, symbol, Errornotify);
+    setloading(true);
+    depositObj.deposit(
+      networkSelect,
+      pasteValue,
+      symbol,
+      Errornotify,
+      setloading
+    );
   };
 
   return (
     <div>
+      {loading && (
+        <div
+          className="fixed top-0 left-0 h-[100vh] w-full bg-[#fff] opacity-80 z-50 flex items-center justify-center"
+          style={{ backgroundColor: `rgb(29, 40, 93)` }}
+        >
+          <div className="ring-area">
+            Loading
+            <span></span>
+          </div>
+        </div>
+      )}
+
       <ToastContainer hideProgressBar={true} />
       <div className="md:w-[90%] mx-auto  w-[534px] p-[30px] bg-[#23284F] rounded-[24px] border-[1px] border-[#444869] sm:p-[16px]">
         {logoCustom && <img src={logo} alt="" className="mx-auto" />}
