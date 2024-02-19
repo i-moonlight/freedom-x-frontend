@@ -13,7 +13,7 @@ class Account {
 
       setloading(false);
 
-      // navigate("/bets");
+      navigate("/bets");
     } catch (err) {
       setloading(false);
     }
