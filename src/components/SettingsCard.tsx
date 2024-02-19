@@ -17,7 +17,7 @@ export const SettingsCard = () => {
   const [refCode, setrefCode] = useState("");
   const [password, setPassword] = useState(true);
   const [multiplier, setmultiplier] = useState([]);
-  const [OuterData, setOuterData] = useState(null);
+  const [OuterData, setOuterData] = useState<any>(null);
 
   const [multiplierVal, setmultiplierVal] = useState("");
   const notify = () => toast("Copied The Content");
@@ -64,8 +64,9 @@ export const SettingsCard = () => {
             </label>
             <div className="flex w-full rounded-[12px] border-[1px] border-[#444869] h-[50px] items-center px-3">
               <input
-                type="password"
+                type="text"
                 readOnly
+                value={OuterData != null ? OuterData["name"].split(" ")[0] : ""}
                 className="bg-[transparent] text-[#EFEFEF] text-[16px] flex-1 w-full outline-none border-0 placeholder:text-[#EFEFEF]"
                 placeholder="Jhon"
               />
@@ -80,8 +81,9 @@ export const SettingsCard = () => {
             </label>
             <div className="flex w-full rounded-[12px] border-[1px] border-[#444869] h-[50px] items-center px-3">
               <input
-                type="password"
+                type="text"
                 readOnly
+                value={OuterData != null ? OuterData["name"].split(" ")[1] : ""}
                 className="bg-[transparent] text-[#EFEFEF] text-[16px] flex-1 w-full outline-none border-0 placeholder:text-[#EFEFEF]"
                 placeholder="Jhon"
               />

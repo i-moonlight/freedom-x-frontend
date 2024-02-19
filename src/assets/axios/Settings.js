@@ -21,6 +21,7 @@ class Settings {
       const decoded = jwtDecode(window.localStorage.getItem("token"));
       setOuterData({
         profilePicture: decoded["picture"],
+        name: decoded["name"],
       });
       console.log(decoded);
 
