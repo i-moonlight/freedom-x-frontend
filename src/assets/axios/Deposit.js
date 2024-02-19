@@ -3,7 +3,7 @@ import { URL } from "./Base";
 
 class Deposit {
   headers = {
-    Authorization: `Bearer e4629009-0c5b-4b55-a76b-aad90fbb85c2`,
+    Authorization: `Bearer ${window.localStorage.getItem("token")}`,
   };
 
   async Network(setnetworksState) {
