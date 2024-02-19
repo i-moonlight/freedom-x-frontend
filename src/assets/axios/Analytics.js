@@ -11,7 +11,9 @@ class Analytics {
       let { data } = await axios.get(
         `${URL}/analytics?start=2024-02-01T00:00:00`,
         {
-          headers: this.headers,
+          headers: {
+            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+          },
         }
       );
       setloading(false);
