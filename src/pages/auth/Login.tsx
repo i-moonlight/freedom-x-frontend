@@ -28,7 +28,7 @@ export const Login = () => {
                   console.log(credentialResponse);
 
                   account.loginUser(credentialResponse["credential"]);
-                  navigate("/bets");
+                  // navigate("/bets");
                 }}
                 onError={() => {
                   console.log("Login Failed");
