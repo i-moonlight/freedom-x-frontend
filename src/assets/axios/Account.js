@@ -37,7 +37,9 @@ class Account {
   async getHistory(setAccountHistory, sethistoryUtilArea, setloading) {
     try {
       let { data } = await axios.get(`${URL}/ledger?symbol=USDT`, {
-        headers: this.headers,
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+        },
       });
       setloading(false);
       sethistoryUtilArea(data["ledger"]);
@@ -55,7 +57,9 @@ class Account {
       let { data } = await axios.get(
         `${URL}/accounts/cumulative_pnl?symbol=USDT`,
         {
-          headers: this.headers,
+          headers: {
+            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+          },
         }
       );
 
