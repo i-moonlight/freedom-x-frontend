@@ -24,25 +24,6 @@ export const SettingsCard = () => {
     setting.getUser(setmultiplier, setmultiplierVal, setloading);
   }, []);
 
-  const marks = [
-    {
-      value: 0.1,
-      label: "0.1",
-    },
-    {
-      value: 0.5,
-      label: "0.5",
-    },
-    {
-      value: 1,
-      label: "1",
-    },
-    {
-      value: 2,
-      label: "2",
-    },
-  ];
-
   const setSettings = (e: any) => {
     if (multiplierVal != "") {
       setloading(true);
@@ -166,7 +147,7 @@ export const SettingsCard = () => {
               />
             )}
 
-            <div className="flex gap-[10px]">
+            {/* <div className="flex gap-[10px]">
               {multiplier.map((Each, key) => (
                 <div>
                   <input
@@ -190,7 +171,7 @@ export const SettingsCard = () => {
                   </label>
                 </div>
               ))}
-            </div>
+            </div> */}
           </div>
         </div>
 
