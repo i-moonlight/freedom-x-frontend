@@ -7,7 +7,7 @@ import { account } from "../../assets/axios/Account";
 import { useState } from "react";
 export const Login = () => {
   const navigate = useNavigate();
-  const [loading, setloading] = useState(true);
+  const [loading, setloading] = useState(false);
   return (
     <div className="h-[100vh] w-full flex items-center justify-center">
       {loading && (
