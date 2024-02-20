@@ -89,7 +89,7 @@ export const Bet = () => {
             </h1>
             <div className="flex items-center justify-between mt-2">
               <p className="text-[30px] text-[#EFEFEF] font-bold lg:text-[20px]">
-                <span className=" inline-block w-[80px] sm:w-[unset] sm:mr-1">
+                <span className=" inline-block min-w-[80px] sm:w-[unset] sm:mr-1">
                   {Number(currentBalance.balance).toFixed(2)}
                 </span>
                 {currentBalance.symbol}

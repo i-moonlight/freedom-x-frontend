@@ -25,12 +25,11 @@ export const Login = () => {
         <div className="sm:flex sm:flex-col sm:items-center">
           <img src={logo} alt="" />
           <h1 className="text-[30px] md:text-center mt-8 font-bold text-[#EFEFEF]">
-            Welcome to Bet History
+            Welcome to Freedom X
           </h1>
           <p className="text-[#EFEFEF] p-login sm:text-center text-[17px] mt-5 mb-8">
-            Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
-            sint. Velit officia consequat duis enim velit mollit. Exercitation
-            veniam consequat sunt nostrud amet.
+            We create returns for your money using Sports Betting, in a
+            transparent and analytical way. This is not leasure nor gambling.
           </p>
 
           <div className="relative">

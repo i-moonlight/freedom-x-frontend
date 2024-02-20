@@ -7,6 +7,8 @@ export const DropdownNetwork = ({
   setAddress,
   setnetworkSelect,
   setSymbol,
+  setactiveDropdown,
+  activeDropdown,
 }: any) => {
   const [active, setActive] = useState(false);
   const [activeList, setActiveList] = useState(list[0]);
@@ -24,14 +26,16 @@ export const DropdownNetwork = ({
           active && "rounded-bl-none rounded-br-none"
         }`}
         onClick={(e) => {
-          setActive(!active);
+          activeDropdown == "dropdownNetwork"
+            ? setactiveDropdown(null)
+            : setactiveDropdown("dropdownNetwork");
         }}
       >
         <h1 className="text-[#fff] text-[16px] flex-1">{activeList?._id}</h1>
 
         <img src={dropdown} alt="" />
       </div>
-      {active && (
+      {activeDropdown == "dropdownNetwork" && (
         <ul className="bg-[#23284F] px-[20px] border-[1px] border-[#3958FF] rounded-bl-[8px] rounded-br-[8px] absolute w-full z-20">
           {list.map((EachList: any) => (
             <li
@@ -41,7 +45,7 @@ export const DropdownNetwork = ({
                 setnetworkSelect(EachList["_id"]);
                 setSymbol(EachList["symbols"]["0"]["id"]);
                 setAddress(EachList["our_addresses"][0]);
-                setActive(false);
+                setactiveDropdown(null);
               }}
             >
               {EachList._id}

@@ -52,7 +52,11 @@ export const SettingsCard = () => {
       <ToastContainer hideProgressBar={true} />
       <div className="md:w-[90%] mx-auto  w-[575px] p-[30px] bg-[#23284F] rounded-[24px] border-[1px] border-[#444869] sm:p-[16px] mb-5">
         <div className="flex items-center justify-center">
-          <img src={avatar} alt="" />
+          <img
+            src={OuterData != null ? OuterData.profilePicture : avatar}
+            alt=""
+            className="rounded-lg"
+          />
         </div>
         <div className="grid grid-cols-2 mt-6 gap-5 ">
           <div>

@@ -49,34 +49,44 @@ export const Analytics = () => {
           <div className="grid grid-cols-3  mt-4 gap-4 lg:grid-cols-2 md:!grid-cols-1">
             <PerformanceBox
               heading="Average Monthly Return"
+              hoverData="The average return on investment per month over the selected period."
               number={`${Number(
                 Number(analyticsData.monthly_return) * 100
               ).toFixed(2)}%`}
             />
             <PerformanceBox
-              heading="Sharp Ratio"
-              number={`${analyticsData.montly_sharpe_ratio}`}
+              heading="Sharpe Ratio"
+              hoverData="A measure of risk-adjusted return. Higher values indicate better performance. Calculated monthly."
+              number={`${
+                analyticsData.montly_sharpe_ratio == null
+                  ? "N/A"
+                  : analyticsData.montly_sharpe_ratio
+              }`}
             />
             <PerformanceBox
               heading="Largest Drawdown"
+              hoverData="The largest peak-to-trough decline in the value of the fund over the selected period."
               number={`${Number(
                 Number(analyticsData.largest_drawdown) * 100
               ).toFixed(2)}%`}
             />
             <PerformanceBox
               heading="Winning bets %"
+              hoverData="The percentage of bets that resulted in a profit over the selected period."
               number={`${Number(
                 Number(analyticsData.winning_bets_ratio) * 100
               ).toFixed(2)}%`}
             />
             <PerformanceBox
-              heading="Compound Return "
+              heading="Compound Return"
+              hoverData="The overall return on investment when gains are reinvested, calculated over the selected period."
               number={`${Number(
                 Number(analyticsData.compound_return) * 100
               ).toFixed(2)}%`}
             />
             <PerformanceBox
               heading="Annualised Return"
+              hoverData="The average return on investment per year over the selected period."
               number={`${Number(
                 Number(analyticsData.yearly_return) * 100
               ).toFixed(2)}%`}
@@ -92,8 +102,18 @@ export const Analytics = () => {
           </div>
           <div className="grid grid-cols-[357px_1fr] lg:grid-cols-1  mt-4 gap-4">
             <div className="flex flex-col gap-4">
-              <PerformanceBox heading="PnL" number="+60 USDT" line={1} />
-              <PerformanceBox heading="PnL (%)" number="+30.45%" pie={1} />
+              <PerformanceBox
+                heading="PnL"
+                number="+60 USDT"
+                line={1}
+                hoverData="Absolute Profit (or Loss) for the account over the selected period."
+              />
+              <PerformanceBox
+                heading="PnL (%)"
+                number="+30.45%"
+                pie={1}
+                hoverData="Profit or Loss as a percentage of the total balance for the selected period"
+              />
               <PerformanceBox heading="PnL (%)" number="+30.45%" pie={1} />
             </div>
             {chartsData && (

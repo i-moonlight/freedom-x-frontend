@@ -3,7 +3,7 @@ import plus from "../assets/img/plus.svg";
 import minus from "../assets/img/minus.svg";
 import { FaqInner } from "./FaqInner";
 export const FaqOver = ({ EachFaq }: any) => {
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState(true);
   return (
     <li
       className={`border-[1px] border-[#3C3E56] rounded-[12px] w-full ${
@@ -16,7 +16,7 @@ export const FaqOver = ({ EachFaq }: any) => {
           setActive(!active);
         }}
       >
-        <h1 className="text-[#EFEFEF] font-semibold text-[18px]">
+        <h1 className="text-[#EFEFEF] capitalize font-semibold text-[18px]">
           {EachFaq.heading}
         </h1>
         {active ? <img src={minus} alt="" /> : <img src={plus} alt="" />}

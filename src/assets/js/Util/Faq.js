@@ -1,6 +1,6 @@
 export const FaqUtil = [
   {
-    heading: "CHANNEL CONTEXT",
+    heading: "Channel Context",
     list: [
       {
         heading: "What is the objective of the channel?",
@@ -43,7 +43,7 @@ export const FaqUtil = [
     ],
   },
   {
-    heading: "PRE-REQUISITES",
+    heading: "Pre-Requisites",
     list: [
       {
         heading:
@@ -59,7 +59,7 @@ export const FaqUtil = [
     ],
   },
   {
-    heading: "THEORETICAL QUESTIONS",
+    heading: "Theoretical Questions",
     subpara:
       "In order to dive into the questions below, I advise reading the document with core concepts thoroughly, as it will allow us to directly refer to the ideas explained there.",
     list: [

@@ -248,7 +248,9 @@ export const History = () => {
                 </p>
               </div>
               <div className="w-[172px] 1lg:hidden 1lg:justify-start flex items-center  gap-2">
-                <p className="text-[#CCCCCC] text-[16px] font-medium">Amount</p>
+                <p className="text-[#CCCCCC] text-[16px] pl-5 font-medium">
+                  Amount
+                </p>
               </div>
               <div className="w-[104px] 1lg:hidden 1lg:justify-start flex items-center justify-end ">
                 <p className="text-[#CCCCCC] text-[16px] font-medium">
@@ -292,7 +294,7 @@ export const History = () => {
                     {Each.description}
                   </p>
                 </div>
-                <div className="w-[172px] 1lg:w-full 1lg:justify-start flex items-center  gap-2">
+                <div className="w-[172px] pl-5 1lg:w-full 1lg:justify-start flex items-center  gap-2">
                   <p
                     className={`text-[#27AE60] text-[16px] font-medium ${
                       Each.change.split("-").length > 1 && "text-[#EB5757]"

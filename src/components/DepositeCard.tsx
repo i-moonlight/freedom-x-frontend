@@ -17,7 +17,7 @@ export const DepositeCard = ({ logoCustom }: any) => {
 
   const Errornotify = (errorContent: String) => toast(errorContent);
   const [loading, setloading] = useState(true);
-  const [password, setPassword] = useState(true);
+  const [activeDropdown, setactiveDropdown] = useState(null);
   const [pasteValue, setpasteValue] = useState("Atif Asim");
   const [networksState, setnetworksState] = useState([]);
   const [address, setAddress] = useState("");
@@ -75,6 +75,8 @@ export const DepositeCard = ({ logoCustom }: any) => {
           <DropdownCustom
             list={userAccount}
             setglobalDataAccount={setglobalDataAccount}
+            setactiveDropdown={setactiveDropdown}
+            activeDropdown={activeDropdown}
           />
         </div>
         <div className="mt-6">
@@ -87,6 +89,8 @@ export const DepositeCard = ({ logoCustom }: any) => {
             setAddress={setAddress}
             setnetworkSelect={setnetworkSelect}
             setSymbol={setSymbol}
+            setactiveDropdown={setactiveDropdown}
+            activeDropdown={activeDropdown}
           />
         </div>
         <div className="mt-6 flex items-center  gap-[13px]">
@@ -116,12 +120,12 @@ export const DepositeCard = ({ logoCustom }: any) => {
         </div>
         <div className="my-6">
           <label htmlFor="#" className="text-[#FFFFFF] text-[17px] mb-2 block">
-            Add your TXH
+            Transaction Proof (Transaction Hash)
           </label>
 
           <div className="flex bg-[#171B35] w-full rounded-[12px] border-[1px] border-[#3B3D53] h-[50px] items-center px-3 cursor-pointer">
             <input
-              type={password ? "password" : "text"}
+              type="text"
               className="bg-[transparent] text-[#CCCCCC] text-[16px] flex-1 w-full outline-none border-0"
               value={pasteValue}
               onChange={(e) => {
@@ -129,14 +133,6 @@ export const DepositeCard = ({ logoCustom }: any) => {
               }}
             />
 
-            <img
-              src={eye}
-              alt=""
-              className="w-[20px] mr-2"
-              onClick={(e) => {
-                setPassword(!password);
-              }}
-            />
             <img
               src={copys}
               alt=""

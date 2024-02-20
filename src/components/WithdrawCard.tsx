@@ -15,6 +15,8 @@ export const WithdrawCard = ({ setDone }: any) => {
   const [loading, setloading] = useState(true);
   const [Amount, setAmount] = useState("");
   const [password, setPassword] = useState(true);
+  const [activeDropdown, setactiveDropdown] = useState(null);
+
   const [globalDataAccount, setglobalDataAccount] = useState({
     balance: "0",
     commission: "0",
@@ -71,6 +73,8 @@ export const WithdrawCard = ({ setDone }: any) => {
             networksState={networksState}
             setadditionState={setadditionState}
             setcurrentFee={setcurrentFee}
+            setactiveDropdown={setactiveDropdown}
+            activeDropdown={activeDropdown}
           />
         </div>
 
@@ -81,25 +85,16 @@ export const WithdrawCard = ({ setDone }: any) => {
 
           <div
             className={`flex bg-[#171B35] w-full rounded-[12px] border-[1px] border-[#3B3D53] h-[50px] items-center px-3 cursor-pointer ${
-              active.length > 0 && "rounded-bl-none rounded-br-none"
+              active.length > 1000 && "rounded-bl-none rounded-br-none"
             }`}
           >
             <input
-              type={password ? "password" : "text"}
+              type="text"
               className="bg-[transparent] text-[#CCCCCC] text-[16px] flex-1 w-full outline-none border-0"
               placeholder="Enter address"
               value={active}
               onChange={(e) => {
                 setActive(e.target.value);
-              }}
-            />
-
-            <img
-              src={eye}
-              alt=""
-              className="w-[20px] mr-2"
-              onClick={(e) => {
-                setPassword(!password);
               }}
             />
 
@@ -142,7 +137,11 @@ export const WithdrawCard = ({ setDone }: any) => {
             Network
           </label>
 
-          <WithdrawNetwork list={additionState} />
+          <WithdrawNetwork
+            list={additionState}
+            setactiveDropdown={setactiveDropdown}
+            activeDropdown={activeDropdown}
+          />
         </div>
         <div className="mt-6">
           <div className=" bg-[#171B35] w-full rounded-[12px] border-[1px] border-[#3B3D53] h-[81px]  px-3 cursor-pointer flex flex-col justify-center">
@@ -160,15 +159,16 @@ export const WithdrawCard = ({ setDone }: any) => {
               <button
                 className="text-[#EFEFEF] text-[15px] border-[1px] border-[#3958FF]  h-[31px] w-[60px] rounded"
                 onClick={(e) => {
-                  setAmount(globalDataAccount?.balance);
+                  setAmount(Number(globalDataAccount?.balance).toFixed(2));
                 }}
               >
-                Max{" "}
+                Max
               </button>
             </div>
           </div>
           <p className="text-[#EFEFEF] text-[12px] mt-2">
-            Available {globalDataAccount?.balance} {globalDataAccount?.symbol}
+            Available {Number(globalDataAccount?.balance).toFixed(2)}{" "}
+            {globalDataAccount?.symbol}
           </p>
         </div>
         <div className="mt-4 mb-6">

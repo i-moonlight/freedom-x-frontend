@@ -7,6 +7,7 @@ import { useEffect } from "react";
 export const PerformanceBox = ({
   heading,
   number,
+  hoverData,
   line = null,
   pie = null,
   bar = null,
@@ -85,9 +86,8 @@ export const PerformanceBox = ({
           <h1 className="text-[#CCCCCC]  relative inline-flex items-center gap-2 text-[16px] font-bold">
             {heading}
             <img src={info} alt="" className="info-area cursor-pointer" />
-            <span className="text-[14px] font-medium text-[#EFEFEF] bg-[#3958FF] p-[10px] rounded-[12px] block absolute w-[260px] transition-all top-[100%] right-0 z-10 opacity-0">
-              Amet minim mollit non deserunt ullamco est sit aliqua dolor do
-              amet sint. Velit officia consequat duis enim velit mollit.
+            <span className="text-[14px] font-medium text-[#EFEFEF] bg-[#3958FF] p-[10px] rounded-[12px] block absolute w-[260px] transition-all top-[100%] -right-5 z-10 opacity-0">
+              {hoverData}
             </span>
           </h1>
 
