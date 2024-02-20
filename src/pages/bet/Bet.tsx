@@ -12,11 +12,6 @@ import Cycling from "../../assets/img/sports/Cycling.jpeg";
 import Formula from "../../assets/img/sports/Formula 1.jpeg";
 import Motorcycling from "../../assets/img/sports/Motorcycling.jpeg";
 import Tennis from "../../assets/img/sports/Tennis.jpeg";
-
-import back from "../../assets/img/arrow-back-dbl.svg";
-import front from "../../assets/img/arrow-front-dbl.svg";
-import backSingle from "../../assets/img/arrow-back-single.svg";
-import frontSingle from "../../assets/img/arrow-front-single.svg";
 import { useState, useEffect } from "react";
 import { bets } from "../../assets/axios/Bets";
 import { account } from "../../assets/axios/Account";
@@ -42,9 +37,7 @@ export const Bet = () => {
 
   const handlePageClick = (value: any) => {
     const newOffset = (value * 10) % betsState.length;
-    console.log(
-      `User requested page number ${value}, which is offset ${newOffset}`
-    );
+
     setItemOffset(newOffset);
 
     const endOffset = newOffset + 10;
@@ -80,7 +73,7 @@ export const Bet = () => {
       <div className="1lg:w-[90%] sm:!w-full sm:pl-4   w-[1140px] mx-auto mt-[36px] ">
         <div className="grid grid-cols-3 gap-3 mb-8 sm:flex sm:overflow-scroll">
           <div
-            className={`px-[20px] sm:px-[15px]   py-[12px] sm:min-w-[181px] rounded-[16px] bg-[#3958FF] relative sm:static ${
+            className={`px-[20px] sm:px-[15px]   py-[12px] sm:min-w-[201px] rounded-[16px] bg-[#3958FF] relative sm:static ${
               active && "rounded-bl-none rounded-br-none"
             }`}
           >
@@ -115,11 +108,16 @@ export const Bet = () => {
               )}
             </div>
             {active && (
-              <ul className="bg-[#23284F] px-[20px] border-[1px] border-[#3958FF] rounded-bl-[8px] left-0 top-[100%] rounded-br-[8px] absolute w-full z-20 sm:top-[185px] sm:w-[181px] sm:left-[1rem]">
+              <ul className="bg-[#23284F] px-[20px] border-[1px] border-[#3958FF] rounded-bl-[8px] left-0 top-[100%] rounded-br-[8px] absolute w-full z-20 sm:top-[185px] sm:w-[201px] sm:left-[1rem]">
                 {userAccount.map((EachList: any) => (
                   <li
                     onClick={(e) => {
                       setActive(false);
+
+                      window.localStorage.setItem(
+                        "balance",
+                        JSON.stringify(EachList)
+                      );
                       setcurrentBalance(EachList);
                     }}
                     className="text-[16px] font-bold text-[#EFEFEF] h-[56px] border-b-[1px] border-b-[#444869] flex items-center cursor-pointer sm:w-[unset]"
@@ -136,7 +134,7 @@ export const Bet = () => {
             )}
           </div>
 
-          <div className="px-[20px] sm:min-w-[94px] py-[12px] rounded-[16px] bg-[#23284F] border-[1px] border-[#444869]  sm:px-[15px]">
+          <div className="px-[20px] sm:min-w-[124px] py-[12px] rounded-[16px] bg-[#23284F] border-[1px] border-[#444869]  sm:px-[15px]">
             <h1 className="text-[16px] text-[#CCCCCC]  lg:text-[13px]  font-bold">
               Profit
             </h1>
@@ -173,7 +171,7 @@ export const Bet = () => {
                 key={EachBet._id}
                 className=" bg-[#171B35] py-4 px-5 rounded-[16px]  border-[1px] border-[#444869] flex items-center 1lg:flex-col 1lg:items-start 1lg:gap-2"
               >
-                <div className="w-[377px] flex items-center gap-3 1lg:w-full">
+                <div className="w-[377px] pr-[30px] sm:pr-[0px] flex items-center gap-3 1lg:w-full">
                   {EachBet.sport == "Football" && (
                     <img
                       src={football}
@@ -254,19 +252,23 @@ export const Bet = () => {
                     />
                   )}
 
-                  <p className="text-[#EFEFEF] font-bold">{EachBet["event"]}</p>
+                  <p className="text-[#EFEFEF] font-bold sm:text-[15px]">
+                    {EachBet["event"]}
+                  </p>
                 </div>
-                <div className="w-[168px] 1lg:w-full">
-                  <p className="text-[#EFEFEF] text-[16px]">{EachBet["bet"]}</p>
+                <div className="w-[198px] 1lg:w-full">
+                  <p className="text-[#EFEFEF] text-[16px] sm:text-[14px]">
+                    {EachBet["bet"]}
+                  </p>
                 </div>
                 <div className="flex-1 flex items-center justify-center">
-                  <p className="text-[#EFEFEF] text-[16px] font-medium">
+                  <p className="text-[#EFEFEF] text-[16px]  w-[100px] font-medium">
                     Stake: {EachBet["stake"]}
                   </p>
                 </div>
-                <div className="w-[268px] 1lg:w-full 1lg:justify-start flex items-center justify-end gap-2">
+                <div className="w-[268px] 1lg:w-full 1lg:justify-start flex items-center  gap-2 ">
                   <span
-                    className="flex text-[14px] items-center justify-center font-semibold  px-[10px] sm:text-[12px] rounded-[10px] text-[18px] 1lg:w-[70%]"
+                    className="flex items-center  font-semibold  pr-[10px] sm:text-[12px] flex-1  sm:flex-[unset] sm:w-[100px] sm:text-center sm:justify-center rounded-[10px] text-[18px]"
                     style={
                       EachBet["status"] == "win"
                         ? {
@@ -278,26 +280,26 @@ export const Bet = () => {
                     }
                   >
                     {EachBet["status"] == "win" &&
-                      Math.abs(EachBet["stake"] * (1 - EachBet["odd"])).toFixed(
-                        3
-                      )}
+                      Math.abs(
+                        EachBet["staked"] * (1 - EachBet["odd"])
+                      ).toFixed(3)}
 
                     {EachBet["status"] == "lose" &&
-                      Number(EachBet["stake"] * (1 - EachBet["odd"])).toFixed(
+                      Number(EachBet["staked"] * (1 - EachBet["odd"])).toFixed(
                         3
                       )}
                   </span>
-                  <span className="flex text-[14px] items-center justify-center text-[#fff] font-bold  border-[1px] border-[#3958FF] 1lg:w-full px-[10px] py-[9px] rounded-[10px]  sm:px-[10px] sm:text-[12px]">
-                    Odd: {EachBet["odd"]}
+                  <span className="flex w-[90px] text-[14px] items-center justify-center text-[#fff] font-bold  border-[1px] border-[#3958FF] 1lg:w-full px-[10px] py-[9px] rounded-[10px] sm:!w-[100px]  sm:px-[10px] sm:text-[12px]">
+                    Odd: {Number(EachBet["odd"]).toFixed(2)}
                   </span>
                   <span
-                    className="flex items-center text-[14px] justify-center  font-bold border-[1px] 1lg:w-full  px-[20px] py-[9px] rounded-[10px] sm:px-[10px] sm:text-[12px] capitalize"
+                    className="flex items-center text-[14px] justify-center  font-bold border-[1px] 1lg:w-full  px-[20px] py-[9px] rounded-[10px] sm:px-[10px] sm:text-[12px] w-[60px]  capitalize sm:!w-[100px]"
                     style={
                       EachBet["status"] == "win"
                         ? {
-                            color: "#3958FF",
-                            borderColor: "#3958FF",
-                            backgroundColor: "#1D285D",
+                            color: "#25AF60",
+                            borderColor: "#25AF60",
+                            backgroundColor: "#25af614e",
                           }
                         : {
                             color: "#EB5757",
@@ -306,22 +308,25 @@ export const Bet = () => {
                           }
                     }
                   >
-                    {EachBet["status"]}
+                    {EachBet["status"] == "win" && "Won"}
+                    {EachBet["status"] == "lose" && "Lost"}
+                    {EachBet["status"] == "open" && "Open"}
                   </span>
                 </div>
               </li>
             ))}
           </ul>
-
-          <div className="flex items-center mt-5 justify-center gap-[5px] sm:gap-[2px]">
-            <Pagination
-              count={pageCount}
-              onClick={(e: any) => {
-                handlePageClick(e.target.textContent);
-              }}
-              color="primary"
-            />
-          </div>
+          {window.innerWidth > 500 && (
+            <div className="flex items-center mt-5 justify-center gap-[5px] sm:gap-[2px]">
+              <Pagination
+                count={pageCount}
+                onClick={(e: any) => {
+                  handlePageClick(e.target.textContent);
+                }}
+                color="primary"
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>

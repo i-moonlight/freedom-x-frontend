@@ -8,7 +8,6 @@ class Account {
         token: token,
       });
 
-      console.log(data);
       window.localStorage.setItem("token", data["token"]);
 
       setloading(false);
@@ -26,17 +25,24 @@ class Account {
           Authorization: `Bearer ${window.localStorage.getItem("token")}`,
         },
       });
+      console.log(data["accounts"]);
       setloading(false);
       setuserAccount(data["accounts"]);
       setcurrentBalance(data["accounts"][0]);
+      window.localStorage.setItem(
+        "balance",
+        JSON.stringify(data["accounts"][0])
+      );
     } catch (err) {
       setloading(false);
     }
   }
 
   async getHistory(setAccountHistory, sethistoryUtilArea, setloading) {
+    let balance = JSON.parse(window.localStorage.getItem("balance") || "{}");
+
     try {
-      let { data } = await axios.get(`${URL}/ledger?symbol=USDT`, {
+      let { data } = await axios.get(`${URL}/ledger?symbol=${balance.symbol}`, {
         headers: {
           Authorization: `Bearer ${window.localStorage.getItem("token")}`,
         },

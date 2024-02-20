@@ -14,6 +14,7 @@ import { account } from "../../assets/axios/Account";
 export const History = () => {
   const [active, setActive] = useState(false);
   const [loading, setloading] = useState(true);
+  const [typeMbl, settypeMbl] = useState("");
   const [historyUtilArea, sethistoryUtilArea] = useState<any>([]);
   const [accountHistory, setAccountHistory] = useState<any>([]);
   const [pagination, setPagination] = useState(1);
@@ -132,23 +133,7 @@ export const History = () => {
                     Bet Placed
                   </p>
                 </li>
-                <li className="flex items-center gap-2 px-4 h-[56px] border-b-[1px] border-b-[#444869]">
-                  <input
-                    type="checkbox"
-                    id="listsix"
-                    className="checkbox-type hidden"
-                    value="Commission Paid"
-                  />
-                  <label
-                    htmlFor="listsix"
-                    className="w-[22px] h-[22px] border-[1px] border-[#CCCCCC] rounded flex items-center justify-center"
-                  >
-                    <img src={tick} alt="" className="hidden" />
-                  </label>
-                  <p className="text-[#EFEFEF] text-[16px] font-bold">
-                    Commission Paid{" "}
-                  </p>
-                </li>
+
                 <li className="flex items-center gap-2 px-4 h-[56px] border-b-[1px] border-b-[#444869]">
                   <input
                     type="checkbox"
@@ -199,10 +184,13 @@ export const History = () => {
 
                       let checkboxvalues = [] as any;
                       let historyLocal = [] as any;
-
-                      checkedInputs?.forEach((EachInput) => {
+                      let checkboxInputValue = "";
+                      checkedInputs?.forEach((EachInput, key) => {
                         let input = EachInput as HTMLInputElement;
                         checkboxvalues.push(input.value);
+                        checkboxInputValue += `${key > 0 ? "," : ""} ${
+                          input.value
+                        }`;
                       });
 
                       historyUtilArea.forEach((Each: any) => {
@@ -216,6 +204,8 @@ export const History = () => {
                           }
                         });
                       });
+                      console.log(checkedInputs);
+                      settypeMbl(checkboxInputValue);
 
                       setAccountHistory(historyLocal);
                       setActive(false);
@@ -239,7 +229,12 @@ export const History = () => {
                   setActive(!active);
                 }}
               >
-                <p className="text-[#CCCCCC] text-[16px] font-medium">Type</p>
+                <p className="text-[#CCCCCC] text-[16px] font-medium sm:hidden">
+                  Type
+                </p>
+                <p className="text-[#CCCCCC] text-[16px] font-medium hidden sm:block">
+                  {typeMbl == "" ? "Type" : typeMbl}
+                </p>
                 <img src={dropdown} alt="" className="cursor-pointer" />
               </div>
               <div className="flex-1 flex items-center 1lg:hidden ">
@@ -272,7 +267,7 @@ export const History = () => {
                 </div>
                 <div className="w-[211px] 1lg:w-[101px] 1lg:ml-auto">
                   <button
-                    className="flex items-center justify-center font-bold  border-[1px]  1lg:w-full px-[20px] py-[9px] text-[#27AE60] bg-[#18293A] border-[#27AE60] rounded-[10px]  sm:px-[10px]"
+                    className="flex items-center justify-center font-bold  border-[1px]  1lg:w-full px-[20px] py-[9px] text-[#27AE60] bg-[#18293A] border-[#27AE60 ] rounded-[10px] border-[#27AE60]  sm:px-[0px] capitalize"
                     style={
                       Each.type == "bet placed"
                         ? {
@@ -294,7 +289,7 @@ export const History = () => {
                     {Each.description}
                   </p>
                 </div>
-                <div className="w-[172px] pl-5 1lg:w-full 1lg:justify-start flex items-center  gap-2">
+                <div className="w-[172px] pl-5 1lg:w-full 1lg:justify-start flex items-center  gap-2 sm:pl-0">
                   <p
                     className={`text-[#27AE60] text-[16px] font-medium ${
                       Each.change.split("-").length > 1 && "text-[#EB5757]"
@@ -310,67 +305,79 @@ export const History = () => {
                 </div>
               </li>
             ))}
+
+            {accountHistory.length == 0 && (
+              <li className=" bg-[#171B35] py-4 px-5 rounded-[16px]  border-[1px] border-[#444869] h-[200px] flex items-center justify-center">
+                <div className="w-full text-center">
+                  <p className="text-[#EFEFEF] text-[20px] font-bold">
+                    No History Found
+                  </p>
+                </div>
+              </li>
+            )}
           </ul>
 
-          <div className="flex items-center mt-5 justify-center gap-[5px] sm:gap-[2px]">
-            <button className="w-8 h-8 rounded-full bg-[#171B35] border-[1px] border-[#3B3D53] flex items-center justify-center">
-              <img src={back} alt="" />
-            </button>
-            <button className="w-8 h-8 rounded-full bg-[#171B35] border-[1px] border-[#3B3D53] flex items-center justify-center">
-              <img src={backSingle} alt="" />
-            </button>
+          {accountHistory.length > 9 && (
+            <div className="flex items-center mt-5 justify-center gap-[5px] sm:gap-[2px]">
+              <button className="w-8 h-8 rounded-full bg-[#171B35] border-[1px] border-[#3B3D53] flex items-center justify-center">
+                <img src={back} alt="" />
+              </button>
+              <button className="w-8 h-8 rounded-full bg-[#171B35] border-[1px] border-[#3B3D53] flex items-center justify-center">
+                <img src={backSingle} alt="" />
+              </button>
 
-            <button
-              className={`w-8 h-8 rounded-full bg-[#171B35] border-[1px] border-[#3B3D53] text-[#CCCCCC] text-[12px] flex items-center justify-center ${
-                pagination == 1 && "bg-[#3958FF]"
-              }`}
-              onClick={(e) => {
-                setPagination(1);
-              }}
-            >
-              1
-            </button>
-            <button
-              className={`w-8 h-8 rounded-full bg-[#171B35] border-[1px] border-[#3B3D53] text-[#CCCCCC] text-[12px] flex items-center justify-center ${
-                pagination == 2 && "bg-[#3958FF]"
-              }`}
-              onClick={(e) => {
-                setPagination(2);
-              }}
-            >
-              2
-            </button>
-            <button
-              className={`w-8 h-8 rounded-full bg-[#171B35] border-[1px] border-[#3B3D53] text-[#CCCCCC] text-[12px] flex items-center justify-center ${
-                pagination == 3 && "bg-[#3958FF]"
-              }`}
-              onClick={(e) => {
-                setPagination(3);
-              }}
-            >
-              3
-            </button>
-            <button className="w-8 h-8 rounded-[8px] bg-[#171B35] text-[#CCCCCC] text-[12px] flex items-center justify-center">
-              ...
-            </button>
-            <button
-              className={`w-8 h-8 rounded-full bg-[#171B35] border-[1px] border-[#3B3D53] text-[#CCCCCC] text-[12px] flex items-center justify-center ${
-                pagination == 10 && "bg-[#3958FF]"
-              }`}
-              onClick={(e) => {
-                setPagination(10);
-              }}
-            >
-              10
-            </button>
-            <button className="w-8 h-8 rounded-full bg-[#171B35] border-[1px] border-[#3B3D53] flex items-center justify-center">
-              <img src={frontSingle} alt="" />
-            </button>
+              <button
+                className={`w-8 h-8 rounded-full bg-[#171B35] border-[1px] border-[#3B3D53] text-[#CCCCCC] text-[12px] flex items-center justify-center ${
+                  pagination == 1 && "bg-[#3958FF]"
+                }`}
+                onClick={(e) => {
+                  setPagination(1);
+                }}
+              >
+                1
+              </button>
+              <button
+                className={`w-8 h-8 rounded-full bg-[#171B35] border-[1px] border-[#3B3D53] text-[#CCCCCC] text-[12px] flex items-center justify-center ${
+                  pagination == 2 && "bg-[#3958FF]"
+                }`}
+                onClick={(e) => {
+                  setPagination(2);
+                }}
+              >
+                2
+              </button>
+              <button
+                className={`w-8 h-8 rounded-full bg-[#171B35] border-[1px] border-[#3B3D53] text-[#CCCCCC] text-[12px] flex items-center justify-center ${
+                  pagination == 3 && "bg-[#3958FF]"
+                }`}
+                onClick={(e) => {
+                  setPagination(3);
+                }}
+              >
+                3
+              </button>
+              <button className="w-8 h-8 rounded-[8px] bg-[#171B35] text-[#CCCCCC] text-[12px] flex items-center justify-center">
+                ...
+              </button>
+              <button
+                className={`w-8 h-8 rounded-full bg-[#171B35] border-[1px] border-[#3B3D53] text-[#CCCCCC] text-[12px] flex items-center justify-center ${
+                  pagination == 10 && "bg-[#3958FF]"
+                }`}
+                onClick={(e) => {
+                  setPagination(10);
+                }}
+              >
+                10
+              </button>
+              <button className="w-8 h-8 rounded-full bg-[#171B35] border-[1px] border-[#3B3D53] flex items-center justify-center">
+                <img src={frontSingle} alt="" />
+              </button>
 
-            <button className="w-8 h-8 rounded-full bg-[#171B35] border-[1px] border-[#3B3D53] flex items-center justify-center">
-              <img src={front} alt="" />
-            </button>
-          </div>
+              <button className="w-8 h-8 rounded-full bg-[#171B35] border-[1px] border-[#3B3D53] flex items-center justify-center">
+                <img src={front} alt="" />
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -11,7 +11,6 @@ export const DropdownCustom = ({
   setactiveDropdown,
   activeDropdown,
 }: any) => {
-  const [active, setActive] = useState(false);
   const [activeList, setActiveList] = useState(list[0]);
 
   useEffect(() => {

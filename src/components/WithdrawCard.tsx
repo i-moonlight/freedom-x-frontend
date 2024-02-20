@@ -14,7 +14,6 @@ export const WithdrawCard = ({ setDone }: any) => {
   const [active, setActive] = useState("");
   const [loading, setloading] = useState(true);
   const [Amount, setAmount] = useState("");
-  const [password, setPassword] = useState(true);
   const [activeDropdown, setactiveDropdown] = useState(null);
 
   const [globalDataAccount, setglobalDataAccount] = useState({

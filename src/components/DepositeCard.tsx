@@ -20,11 +20,14 @@ export const DepositeCard = ({ logoCustom }: any) => {
   const [activeDropdown, setactiveDropdown] = useState(null);
   const [pasteValue, setpasteValue] = useState("Atif Asim");
   const [networksState, setnetworksState] = useState([]);
+
   const [address, setAddress] = useState("");
   const [networkSelect, setnetworkSelect] = useState("");
   const [symbol, setSymbol] = useState("");
   const [userAccount, setuserAccount] = useState(true);
+  const [additionState, setadditionState] = useState([]);
   const [currentBalance, setcurrentBalance] = useState(true);
+  const [currentFee, setcurrentFee] = useState("");
   const [globalDataAccount, setglobalDataAccount] = useState({
     balance: "0",
     commission: "0",
@@ -77,6 +80,9 @@ export const DepositeCard = ({ logoCustom }: any) => {
             setglobalDataAccount={setglobalDataAccount}
             setactiveDropdown={setactiveDropdown}
             activeDropdown={activeDropdown}
+            setadditionState={setadditionState}
+            networksState={networksState}
+            setcurrentFee={setcurrentFee}
           />
         </div>
         <div className="mt-6">
@@ -85,7 +91,7 @@ export const DepositeCard = ({ logoCustom }: any) => {
           </label>
 
           <DropdownNetwork
-            list={networksState}
+            list={additionState}
             setAddress={setAddress}
             setnetworkSelect={setnetworkSelect}
             setSymbol={setSymbol}

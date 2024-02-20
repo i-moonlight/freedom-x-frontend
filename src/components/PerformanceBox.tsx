@@ -91,11 +91,11 @@ export const PerformanceBox = ({
             </span>
           </h1>
 
-          <p className="text-[#EFEFEF] font-bold text-[30px] mt-2 md:text-[20px]">
+          <p className="text-[#EFEFEF] font-bold text-[25px] mt-2 md:text-[20px]">
             {number}
           </p>
         </div>
-        {line === 1 && <img src={lineimg} alt="" />}
+        {line === 1 && <img src={lineimg} alt="" className="w-[130px]" />}
         {pie === 1 && <img src={pieImg} alt="" />}
       </div>
       {bar === 1 && (

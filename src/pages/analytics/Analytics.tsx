@@ -9,6 +9,7 @@ import { account } from "../../assets/axios/Account";
 export const Analytics = () => {
   const [chartsData, setchartsData] = useState(null);
   const [loading, setloading] = useState(true);
+  const [anayticsHistoryData, setanayticsHistoryData] = useState<any>(null);
   const [analyticsData, setanalyticsData] = useState({
     compound_return: "0",
     largest_drawdown: "0",
@@ -20,6 +21,8 @@ export const Analytics = () => {
   useEffect(() => {
     analytics.getAnalyticsData(setanalyticsData, setloading);
     account.getAccountMoreDetails(setchartsData, setloading);
+    let balance = JSON.parse(window.localStorage.getItem("balance") || "{}");
+    setanayticsHistoryData(balance);
   }, []);
 
   return (
@@ -104,7 +107,10 @@ export const Analytics = () => {
             <div className="flex flex-col gap-4">
               <PerformanceBox
                 heading="PnL"
-                number="+60 USDT"
+                number={`${
+                  anayticsHistoryData != null &&
+                  Number(anayticsHistoryData.pnl).toFixed(3)
+                } ${anayticsHistoryData != null && anayticsHistoryData.symbol}`}
                 line={1}
                 hoverData="Absolute Profit (or Loss) for the account over the selected period."
               />

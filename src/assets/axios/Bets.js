@@ -20,12 +20,20 @@ class Bets {
           Authorization: `Bearer ${window.localStorage.getItem("token")}`,
         },
       });
+
+      console.log(data["bets"]);
+
       setbetsState(data["bets"]);
       setbetsStateBackup(data["bets"]);
       setpageCount(Math.ceil(data["bets"].length / 10));
 
       const endOffset = itemOffset + 10;
-      setcurrentItems(data["bets"].slice(itemOffset, endOffset));
+
+      if (window.innerWidth < 500) {
+        setcurrentItems(data["bets"]);
+      } else {
+        setcurrentItems(data["bets"].slice(itemOffset, endOffset));
+      }
 
       setloading(false);
     } catch (err) {
