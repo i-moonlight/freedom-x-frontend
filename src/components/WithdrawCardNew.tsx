@@ -17,7 +17,7 @@ export const WithdrawCardNew = ({ logoCustom }: any) => {
   const Errornotify = (errorContent: String) => toast(errorContent);
 
   const [password, setPassword] = useState(true);
-  const [pasteValue, setpasteValue] = useState("Atif Asim");
+  const [pasteValue, setpasteValue] = useState("");
   const [networksState, setnetworksState] = useState([]);
   const [address, setAddress] = useState("");
   const [networkSelect, setnetworkSelect] = useState("");

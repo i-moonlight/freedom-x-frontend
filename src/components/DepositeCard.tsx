@@ -18,7 +18,7 @@ export const DepositeCard = ({ logoCustom }: any) => {
   const Errornotify = (errorContent: String) => toast(errorContent);
   const [loading, setloading] = useState(true);
   const [activeDropdown, setactiveDropdown] = useState(null);
-  const [pasteValue, setpasteValue] = useState("Atif Asim");
+  const [pasteValue, setpasteValue] = useState("");
   const [networksState, setnetworksState] = useState([]);
 
   const [address, setAddress] = useState("");
