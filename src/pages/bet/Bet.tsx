@@ -19,7 +19,6 @@ import Pagination from "@mui/material/Pagination";
 
 export const Bet = () => {
   const [active, setActive] = useState(false);
-  const [pagination, setPagination] = useState(1);
   const [betsState, setbetsState] = useState([]);
   const [loading, setloading] = useState(true);
   const [betsStateBackup, setbetsStateBackup] = useState([]);
@@ -83,7 +82,9 @@ export const Bet = () => {
             <div className="flex items-center justify-between mt-2">
               <p className="text-[30px] text-[#EFEFEF] font-bold lg:text-[20px]">
                 <span className=" inline-block min-w-[80px] sm:w-[unset] sm:mr-1">
-                  {Number(currentBalance.balance).toFixed(2)}
+                  {Number(currentBalance.balance).toFixed(
+                    currentBalance.symbol == "USDT" ? 2 : 8
+                  )}
                 </span>
                 {currentBalance.symbol}
               </p>
@@ -122,8 +123,10 @@ export const Bet = () => {
                     }}
                     className="text-[16px] font-bold text-[#EFEFEF] h-[56px] border-b-[1px] border-b-[#444869] flex items-center cursor-pointer sm:w-[unset]"
                   >
-                    <span className="inline-block w-[70px] sm:w-[unset] mr-3 text-right sm:text-left ">
-                      {Number(EachList.balance).toFixed(4)}
+                    <span className="inline-block w-[100px] sm:w-[unset] mr-3 text-right sm:text-left ">
+                      {Number(EachList.balance).toFixed(
+                        EachList.symbol == "USDT" ? 2 : 8
+                      )}
                     </span>
                     <span className=" inline-block w-[80px] ">
                       {EachList.symbol}
