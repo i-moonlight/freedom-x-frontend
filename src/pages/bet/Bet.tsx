@@ -266,29 +266,40 @@ export const Bet = () => {
                     Stake: {EachBet["stake"]}
                   </p>
                 </div>
-                <div className="w-[268px] 1lg:w-full 1lg:justify-start flex items-center  gap-2 ">
-                  <span
-                    className="flex items-center  font-semibold  pr-[10px] sm:text-[12px] flex-1  sm:flex-[unset] sm:w-[100px] sm:text-center sm:justify-center rounded-[10px] text-[18px]"
-                    style={
-                      EachBet["status"] == "win"
-                        ? {
-                            color: "#27AE60",
-                          }
-                        : {
-                            color: "#EB5757",
-                          }
-                    }
-                  >
-                    {EachBet["status"] == "win" &&
-                      Math.abs(
-                        EachBet["staked"] * (1 - EachBet["odd"])
-                      ).toFixed(3)}
+                <div
+                  className={`w-[268px] 1lg:w-full 1lg:justify-start flex items-center  gap-2 ${
+                    Math.abs(EachBet["staked"] * (1 - EachBet["odd"])).toFixed(
+                      3
+                    ) == "0.000" && "justify-end"
+                  }`}
+                >
+                  {Math.abs(EachBet["staked"] * (1 - EachBet["odd"])).toFixed(
+                    3
+                  ) !== "0.000" && (
+                    <span
+                      className="flex items-center  font-semibold  pr-[10px] sm:text-[12px] flex-1  sm:flex-[unset] sm:w-[100px] sm:text-center sm:justify-center rounded-[10px] text-[18px]"
+                      style={
+                        EachBet["status"] == "win"
+                          ? {
+                              color: "#27AE60",
+                            }
+                          : {
+                              color: "#EB5757",
+                            }
+                      }
+                    >
+                      {EachBet["status"] == "win" &&
+                        Math.abs(
+                          EachBet["staked"] * (1 - EachBet["odd"])
+                        ).toFixed(3)}
 
-                    {EachBet["status"] == "lose" &&
-                      Number(EachBet["staked"] * (1 - EachBet["odd"])).toFixed(
-                        3
-                      )}
-                  </span>
+                      {EachBet["status"] == "lose" &&
+                        Number(
+                          EachBet["staked"] * (1 - EachBet["odd"])
+                        ).toFixed(3)}
+                    </span>
+                  )}
+
                   <span className="flex w-[90px] text-[14px] items-center justify-center text-[#fff] font-bold  border-[1px] border-[#3958FF] 1lg:w-full px-[10px] py-[9px] rounded-[10px] sm:!w-[100px]  sm:px-[10px] sm:text-[12px]">
                     Odd: {Number(EachBet["odd"]).toFixed(2)}
                   </span>
@@ -301,10 +312,16 @@ export const Bet = () => {
                             borderColor: "#25AF60",
                             backgroundColor: "#25af614e",
                           }
-                        : {
+                        : EachBet["status"] == "lose"
+                        ? {
                             color: "#EB5757",
                             borderColor: "#EB5757",
                             backgroundColor: "#2D2139",
+                          }
+                        : {
+                            color: "#3958FF",
+                            borderColor: "#3958FF",
+                            backgroundColor: "#1D285D",
                           }
                     }
                   >
