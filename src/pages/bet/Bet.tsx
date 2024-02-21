@@ -262,8 +262,8 @@ export const Bet = () => {
                   </p>
                 </div>
                 <div className="flex-1 flex items-center justify-center">
-                  <p className="text-[#EFEFEF] text-[16px]  w-[100px] font-medium">
-                    Stake: {EachBet["stake"]}
+                  <p className="text-[#EFEFEF] text-[16px]  w-[110px] font-medium">
+                    Stake: {Number(EachBet["stake"] * 100).toFixed(2)}%
                   </p>
                 </div>
                 <div
@@ -328,6 +328,7 @@ export const Bet = () => {
                     {EachBet["status"] == "win" && "Won"}
                     {EachBet["status"] == "lose" && "Lost"}
                     {EachBet["status"] == "open" && "Open"}
+                    {EachBet["status"] == "live" && "Live"}
                   </span>
                 </div>
               </li>
