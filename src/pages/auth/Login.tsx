@@ -4,10 +4,17 @@ import placeholder from "../../assets/img/video-placeholder.svg";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { account } from "../../assets/axios/Account";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 export const Login = () => {
   const navigate = useNavigate();
   const [loading, setloading] = useState(false);
+  useEffect(() => {
+    let token = window.localStorage.getItem("token");
+
+    if (token) {
+      navigate("/bet");
+    }
+  }, []);
   return (
     <div className="h-[100vh] w-full flex items-center justify-center">
       {loading && (
