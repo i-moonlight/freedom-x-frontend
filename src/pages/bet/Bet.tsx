@@ -129,7 +129,7 @@ export const Bet = () => {
                       )}
                     </span>
                     <span className=" inline-block w-[80px] ">
-                      {EachList.symbol}
+                      {' '}{EachList.symbol}
                     </span>
                   </li>
                 ))}
