@@ -86,7 +86,7 @@ export const Bet = () => {
                     currentBalance.symbol == "USDT" ? 2 : 8
                   )}
                 </span>
-                {currentBalance.symbol}
+                {' '}{currentBalance.symbol}
               </p>
               {active ? (
                 <img
@@ -129,7 +129,7 @@ export const Bet = () => {
                       )}
                     </span>
                     <span className=" inline-block w-[80px] ">
-                      {' '}{EachList.symbol}
+                      {EachList.symbol}
                     </span>
                   </li>
                 ))}
