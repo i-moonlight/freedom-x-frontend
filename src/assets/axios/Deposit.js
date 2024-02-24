@@ -37,11 +37,9 @@ class Deposit {
       }
 
       setloading(false);
-      console.log(data);
     } catch (err) {
       setloading(false);
       Errornotify(err.response.data.error);
-      console.log(err.response.data.error);
     }
   }
 }

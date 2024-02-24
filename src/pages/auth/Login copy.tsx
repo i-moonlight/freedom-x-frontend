@@ -20,8 +20,6 @@ export const Login = () => {
   const loginUser = useGoogleLogin({
     onSuccess: (tokenResponse) => {
       window.localStorage.setItem("token", tokenResponse["access_token"]);
-
-      console.log(tokenResponse);
     },
     onError: () => {
       console.log("Login Failed");

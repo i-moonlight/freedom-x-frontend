@@ -55,7 +55,7 @@ export const Analytics = () => {
               hoverData="The average return on investment per month over the selected period."
               number={`${Number(
                 Number(analyticsData.monthly_return) * 100
-              ).toFixed(2)}%`}
+              ).toFixed(anayticsHistoryData?.symbol == "USDT" ? 2 : 8)}%`}
             />
             <PerformanceBox
               heading="Sharpe Ratio"
@@ -71,28 +71,28 @@ export const Analytics = () => {
               hoverData="The largest peak-to-trough decline in the value of the fund over the selected period."
               number={`${Number(
                 Number(analyticsData.largest_drawdown) * 100
-              ).toFixed(2)}%`}
+              ).toFixed(anayticsHistoryData?.symbol == "USDT" ? 2 : 8)}%`}
             />
             <PerformanceBox
               heading="Winning bets %"
               hoverData="The percentage of bets that resulted in a profit over the selected period."
               number={`${Number(
                 Number(analyticsData.winning_bets_ratio) * 100
-              ).toFixed(2)}%`}
+              ).toFixed(anayticsHistoryData?.symbol == "USDT" ? 2 : 8)}%`}
             />
             <PerformanceBox
               heading="Compound Return"
               hoverData="The overall return on investment when gains are reinvested, calculated over the selected period."
               number={`${Number(
                 Number(analyticsData.compound_return) * 100
-              ).toFixed(2)}%`}
+              ).toFixed(anayticsHistoryData?.symbol == "USDT" ? 2 : 8)}%`}
             />
             <PerformanceBox
               heading="Annualised Return"
               hoverData="The average return on investment per year over the selected period."
               number={`${Number(
                 Number(analyticsData.yearly_return) * 100
-              ).toFixed(2)}%`}
+              ).toFixed(anayticsHistoryData?.symbol == "USDT" ? 2 : 8)}%`}
             />
           </div>
         </div>
@@ -109,7 +109,9 @@ export const Analytics = () => {
                 heading="PnL"
                 number={`${
                   anayticsHistoryData != null &&
-                  Number(anayticsHistoryData.pnl).toFixed(3)
+                  Number(anayticsHistoryData.pnl).toFixed(
+                    anayticsHistoryData?.symbol == "USDT" ? 2 : 8
+                  )
                 } ${anayticsHistoryData != null && anayticsHistoryData.symbol}`}
                 line={1}
                 hoverData="Absolute Profit (or Loss) for the account over the selected period."

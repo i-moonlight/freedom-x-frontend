@@ -21,8 +21,6 @@ class Bets {
         },
       });
 
-      console.log(data["bets"]);
-
       setbetsState(data["bets"]);
       setbetsStateBackup(data["bets"]);
       setpageCount(Math.ceil(data["bets"].length / 10));

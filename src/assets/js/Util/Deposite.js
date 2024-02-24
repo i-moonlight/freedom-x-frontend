@@ -106,7 +106,6 @@ document
         }
       })
       .then((data) => {
-        console.log("Deposit submitted successfully:", data);
         var depositResultElement = document.getElementById("deposit_result");
         depositResultElement.textContent = "Deposit added";
         depositResultElement.style.display = "inline-block";

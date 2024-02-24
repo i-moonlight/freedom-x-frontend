@@ -25,20 +25,33 @@ class Account {
           Authorization: `Bearer ${window.localStorage.getItem("token")}`,
         },
       });
-      console.log(data["accounts"]);
+
       setloading(false);
       setuserAccount(data["accounts"]);
       setcurrentBalance(data["accounts"][0]);
-      window.localStorage.setItem(
-        "balance",
-        JSON.stringify(data["accounts"][0])
-      );
+
+      let balance = JSON.parse(window.localStorage.getItem("balance") || "{}");
+      if (balance.symbol) {
+        setcurrentBalance(balance);
+      } else {
+        window.localStorage.setItem(
+          "balance",
+          JSON.stringify(data["accounts"][0])
+        );
+      }
     } catch (err) {
       setloading(false);
     }
   }
 
-  async getHistory(setAccountHistory, sethistoryUtilArea, setloading) {
+  async getHistory(
+    setAccountHistory,
+    sethistoryUtilArea,
+    setloading,
+    setpageCount,
+    setcurrentItems,
+    itemOffset
+  ) {
     let balance = JSON.parse(window.localStorage.getItem("balance") || "{}");
 
     try {
@@ -50,6 +63,14 @@ class Account {
       setloading(false);
       sethistoryUtilArea(data["ledger"]);
       setAccountHistory(data["ledger"]);
+      setpageCount(Math.ceil(data["ledger"].length / 10));
+      const endOffset = itemOffset + 10;
+
+      if (window.innerWidth < 500) {
+        setcurrentItems(data["ledger"]);
+      } else {
+        setcurrentItems(data["ledger"].slice(itemOffset, endOffset));
+      }
     } catch (err) {
       setloading(false);
     }

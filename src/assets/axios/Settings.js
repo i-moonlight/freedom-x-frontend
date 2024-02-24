@@ -16,23 +16,19 @@ class Settings {
       });
       setmultiplier(data["multipliers"]);
       setmultiplierVal(data["user"][["multiplier"]]);
-      console.log(data);
 
       const decoded = jwtDecode(window.localStorage.getItem("token"));
       setOuterData({
         profilePicture: decoded["picture"],
         name: decoded["name"],
       });
-      console.log(decoded);
 
       setloading(false);
     } catch (err) {
       setloading(false);
-      console.log(err.response.data.error);
     }
   }
   async patchUser(multiplierVal, setloading) {
-    console.log(multiplierVal);
     try {
       let { data } = await axios.patch(
         `${URL}/users`,

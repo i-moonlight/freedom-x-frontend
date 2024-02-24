@@ -35,7 +35,7 @@ export const Bet = () => {
   const [currentItems, setcurrentItems] = useState([]);
 
   const handlePageClick = (value: any) => {
-    const newOffset = (value * 10) % betsState.length;
+    const newOffset = ((value - 1) * 10) % betsState.length;
 
     setItemOffset(newOffset);
 
@@ -150,7 +150,9 @@ export const Bet = () => {
                    : "text-[#27AE60] "
                }`}
               >
-                {Number(currentBalance.pnl).toFixed(4)}
+                {Number(currentBalance.pnl).toFixed(
+                  currentBalance.symbol == "USDT" ? 2 : 8
+                )}
               </p>
             </div>
           </div>
@@ -160,7 +162,9 @@ export const Bet = () => {
             </h1>
             <div className="flex items-center justify-between mt-2">
               <p className="text-[30px] text-[#EFEFEF] font-bold lg:text-[20px]">
-                {Number(currentBalance.unsettled_balance).toFixed(4)}
+                {Number(currentBalance.unsettled_balance).toFixed(
+                  currentBalance.symbol == "USDT" ? 2 : 8
+                )}
               </p>
             </div>
           </div>
@@ -174,7 +178,7 @@ export const Bet = () => {
                 key={EachBet._id}
                 className=" bg-[#171B35] py-4 px-5 rounded-[16px]  border-[1px] border-[#444869] flex items-center 1lg:flex-col 1lg:items-start 1lg:gap-2"
               >
-                <div className="w-[377px] pr-[30px] sm:pr-[0px] flex items-center gap-3 1lg:w-full">
+                <div className="w-[330px] pr-[30px] sm:pr-[0px] flex items-center gap-3 1lg:w-full">
                   {EachBet.sport == "Football" && (
                     <img
                       src={football}
@@ -264,21 +268,23 @@ export const Bet = () => {
                     {EachBet["bet"]}
                   </p>
                 </div>
-                <div className="flex-1 flex items-center justify-center">
-                  <p className="text-[#EFEFEF] text-[16px]  w-[110px] font-medium">
-                    Stake: {Number(EachBet["stake"] * 100).toFixed(2)}%
+                <div className="flex-1  flex items-center justify-center">
+                  <p className="text-[#EFEFEF] text-[16px]   font-medium">
+                    Stake:{" "}
+                    {Number(EachBet["stake"] * 100).toFixed(
+                      currentBalance.symbol == "USDT" ? 2 : 8
+                    )}
+                    %
                   </p>
                 </div>
                 <div
-                  className={`w-[268px] 1lg:w-full 1lg:justify-start flex items-center  gap-2 ${
+                  className={`w-[288px] 1lg:w-full 1lg:justify-start flex items-center  gap-2 ${
                     Math.abs(EachBet["staked"] * (1 - EachBet["odd"])).toFixed(
                       3
                     ) == "0.000" && "justify-end"
                   }`}
                 >
-                  {Math.abs(EachBet["staked"] * (1 - EachBet["odd"])).toFixed(
-                    3
-                  ) !== "0.000" && (
+                  {Math.abs(EachBet["staked"] * (1 - EachBet["odd"])) !== 0 && (
                     <span
                       className="flex items-center  font-semibold  pr-[10px] sm:text-[12px] flex-1  sm:flex-[unset] sm:w-[100px] sm:text-center sm:justify-center rounded-[10px] text-[18px]"
                       style={
@@ -291,15 +297,13 @@ export const Bet = () => {
                             }
                       }
                     >
-                      {EachBet["status"] == "win" &&
-                        Math.abs(
-                          EachBet["staked"] * (1 - EachBet["odd"])
-                        ).toFixed(3)}
-
-                      {EachBet["status"] == "lose" &&
-                        Number(
-                          EachBet["staked"] * (1 - EachBet["odd"])
-                        ).toFixed(3)}
+                      {EachBet["status"] == "lose"
+                        ? Number(
+                            EachBet["staked"] * (1 - EachBet["odd"])
+                          ).toFixed(currentBalance.symbol == "USDT" ? 2 : 8)
+                        : Math.abs(
+                            EachBet["staked"] * (1 - EachBet["odd"])
+                          ).toFixed(currentBalance.symbol == "USDT" ? 2 : 8)}
                     </span>
                   )}
 
@@ -341,8 +345,11 @@ export const Bet = () => {
             <div className="flex items-center mt-5 justify-center gap-[5px] sm:gap-[2px]">
               <Pagination
                 count={pageCount}
-                onClick={(e: any) => {
-                  handlePageClick(e.target.textContent);
+                onChange={(
+                  event: React.ChangeEvent<unknown>,
+                  value: number
+                ) => {
+                  handlePageClick(value);
                 }}
                 color="primary"
               />

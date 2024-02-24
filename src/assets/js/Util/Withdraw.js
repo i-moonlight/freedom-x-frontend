@@ -124,7 +124,6 @@ document
         }
       })
       .then((data) => {
-        console.log("Withdrawal submitted successfully:", data);
         var withdrawResultElement = document.getElementById("withdraw_result");
         withdrawResultElement.textContent = "Withdrawal requested";
         withdrawResultElement.style.display = "inline-block";

@@ -71,7 +71,6 @@ document
         }
       })
       .then((data) => {
-        console.log("settings submitted successfully:", data);
         var settingsResultElement = document.getElementById("settings_result");
         settingsResultElement.textContent = "Settings updated";
         settingsResultElement.style.display = "inline-block";

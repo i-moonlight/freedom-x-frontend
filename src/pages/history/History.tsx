@@ -10,6 +10,7 @@ import backSingle from "../../assets/img/arrow-back-single.svg";
 import frontSingle from "../../assets/img/arrow-front-single.svg";
 import { useEffect, useState } from "react";
 import { account } from "../../assets/axios/Account";
+import { Pagination } from "@mui/material";
 
 export const History = () => {
   const [active, setActive] = useState(false);
@@ -17,10 +18,32 @@ export const History = () => {
   const [typeMbl, settypeMbl] = useState("");
   const [historyUtilArea, sethistoryUtilArea] = useState<any>([]);
   const [accountHistory, setAccountHistory] = useState<any>([]);
-  const [pagination, setPagination] = useState(1);
+  const [balance, setbalance] = useState<any>(null);
+  const [itemOffset, setItemOffset] = useState(0);
+  const [pageCount, setpageCount] = useState(0);
+  const [currentItems, setcurrentItems] = useState([]);
+
+  const handlePageClick = (value: any) => {
+    const newOffset = ((value - 1) * 10) % accountHistory.length;
+
+    setItemOffset(newOffset);
+
+    const endOffset = newOffset + 10;
+    setcurrentItems(accountHistory.slice(newOffset, endOffset));
+  };
 
   useEffect(() => {
-    account.getHistory(setAccountHistory, sethistoryUtilArea, setloading);
+    account.getHistory(
+      setAccountHistory,
+      sethistoryUtilArea,
+      setloading,
+      setpageCount,
+      setcurrentItems,
+      itemOffset
+    );
+
+    let balance = JSON.parse(window.localStorage.getItem("balance") || "{}");
+    setbalance(balance);
   }, []);
 
   return (
@@ -204,7 +227,7 @@ export const History = () => {
                           }
                         });
                       });
-                      console.log(checkedInputs);
+
                       settypeMbl(checkboxInputValue);
 
                       setAccountHistory(historyLocal);
@@ -254,7 +277,7 @@ export const History = () => {
               </div>
             </li>
 
-            {accountHistory.map((Each: any, key: any) => (
+            {currentItems.map((Each: any, key: any) => (
               <li
                 key={key}
                 className=" bg-[#171B35] py-4 px-5 rounded-[16px]  border-[1px] border-[#444869] flex items-center 1lg:grid 1lg:grid-cols-2 1lg:items-start 1lg:gap-2"
@@ -295,12 +318,16 @@ export const History = () => {
                       Each.change.split("-").length > 1 && "text-[#EB5757]"
                     }`}
                   >
-                    {Number(Each.change).toFixed(6)}
+                    {Number(Each.change).toFixed(
+                      balance?.symbol == "USDT" ? 2 : 8
+                    )}
                   </p>
                 </div>
                 <div className="w-[104px] 1lg:w-full 1lg:justify-end flex items-center justify-end ">
                   <p className="text-[#EFEFEF] text-[16px] font-medium">
-                    {Number(Each.balance).toFixed(6)}
+                    {Number(Each.balance).toFixed(
+                      balance?.symbol == "USDT" ? 2 : 8
+                    )}
                   </p>
                 </div>
               </li>
@@ -317,7 +344,22 @@ export const History = () => {
             )}
           </ul>
 
-          {accountHistory.length > 9 && (
+          {window.innerWidth > 500 && (
+            <div className="flex items-center mt-5 justify-center gap-[5px] sm:gap-[2px]">
+              <Pagination
+                count={pageCount}
+                onChange={(
+                  event: React.ChangeEvent<unknown>,
+                  value: number
+                ) => {
+                  handlePageClick(value);
+                }}
+                color="primary"
+              />
+            </div>
+          )}
+
+          {/* {accountHistory.length > 9 && (
             <div className="flex items-center mt-5 justify-center gap-[5px] sm:gap-[2px]">
               <button className="w-8 h-8 rounded-full bg-[#171B35] border-[1px] border-[#3B3D53] flex items-center justify-center">
                 <img src={back} alt="" />
@@ -377,7 +419,7 @@ export const History = () => {
                 <img src={front} alt="" />
               </button>
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </div>
