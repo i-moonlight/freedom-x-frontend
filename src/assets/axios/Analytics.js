@@ -16,6 +16,7 @@ class Analytics {
           },
         }
       );
+
       setloading(false);
       setanalyticsData(data["analytics"]);
     } catch (err) {

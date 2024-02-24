@@ -55,7 +55,7 @@ export const Analytics = () => {
               hoverData="The average return on investment per month over the selected period."
               number={`${Number(
                 Number(analyticsData.monthly_return) * 100
-              ).toFixed(anayticsHistoryData?.symbol == "USDT" ? 2 : 8)}%`}
+              ).toFixed(2)}%`}
             />
             <PerformanceBox
               heading="Sharpe Ratio"
@@ -71,28 +71,28 @@ export const Analytics = () => {
               hoverData="The largest peak-to-trough decline in the value of the fund over the selected period."
               number={`${Number(
                 Number(analyticsData.largest_drawdown) * 100
-              ).toFixed(anayticsHistoryData?.symbol == "USDT" ? 2 : 8)}%`}
+              ).toFixed(2)}%`}
             />
             <PerformanceBox
               heading="Winning bets %"
               hoverData="The percentage of bets that resulted in a profit over the selected period."
               number={`${Number(
                 Number(analyticsData.winning_bets_ratio) * 100
-              ).toFixed(anayticsHistoryData?.symbol == "USDT" ? 2 : 8)}%`}
+              ).toFixed(2)}%`}
             />
             <PerformanceBox
               heading="Compound Return"
               hoverData="The overall return on investment when gains are reinvested, calculated over the selected period."
               number={`${Number(
                 Number(analyticsData.compound_return) * 100
-              ).toFixed(anayticsHistoryData?.symbol == "USDT" ? 2 : 8)}%`}
+              ).toFixed(2)}%`}
             />
             <PerformanceBox
               heading="Annualised Return"
               hoverData="The average return on investment per year over the selected period."
               number={`${Number(
                 Number(analyticsData.yearly_return) * 100
-              ).toFixed(anayticsHistoryData?.symbol == "USDT" ? 2 : 8)}%`}
+              ).toFixed(2)}%`}
             />
           </div>
         </div>
@@ -114,18 +114,21 @@ export const Analytics = () => {
                   )
                 } ${anayticsHistoryData != null && anayticsHistoryData.symbol}`}
                 line={1}
+                left
                 hoverData="Absolute Profit (or Loss) for the account over the selected period."
               />
               <PerformanceBox
                 heading="PnL (%)"
                 number="+30.45%"
                 pie={1}
+                left
                 hoverData="Profit or Loss as a percentage of the total balance for the selected period"
               />
-              <PerformanceBox 
-                heading="Total Bets" 
-                number="100" 
-                hand={1} 
+
+              <PerformanceBox
+                heading="Total Bets"
+                number="100"
+                hand={1}
                 hoverData="Total number of bets placed over the selected period."
               />
             </div>

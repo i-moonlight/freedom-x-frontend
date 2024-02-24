@@ -14,6 +14,7 @@ export const PerformanceBox = ({
   bar = null,
   hand = null,
   chartsData = null,
+  left = null,
 }: any) => {
   let options: ApexOptions = {};
   if (chartsData != null) {
@@ -88,7 +89,11 @@ export const PerformanceBox = ({
           <h1 className="text-[#CCCCCC]  relative inline-flex items-center gap-2 text-[16px] font-bold">
             {heading}
             <img src={info} alt="" className="info-area cursor-pointer" />
-            <span className="text-[14px] font-medium text-[#EFEFEF] bg-[#3958FF] p-[10px] rounded-[12px] block absolute w-[260px] transition-all top-[100%] -right-5 z-10 opacity-0">
+            <span
+              className={`text-[14px] font-medium text-[#EFEFEF] bg-[#3958FF] p-[10px] rounded-[12px] block absolute w-[260px] transition-all top-[100%] -right-5 z-10 opacity-0 ${
+                left && "right-[unset] left-0"
+              }`}
+            >
               {hoverData}
             </span>
           </h1>

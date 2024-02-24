@@ -137,7 +137,7 @@ export const Bet = () => {
             )}
           </div>
 
-          <div className="px-[20px] sm:min-w-[124px] py-[12px] rounded-[16px] bg-[#23284F] border-[1px] border-[#444869]  sm:px-[15px]">
+          <div className="px-[20px] sm:min-w-[154px] py-[12px] rounded-[16px] bg-[#23284F] border-[1px] border-[#444869]  sm:px-[15px]">
             <h1 className="text-[16px] text-[#CCCCCC]  lg:text-[13px]  font-bold">
               Profit
             </h1>
@@ -156,7 +156,7 @@ export const Bet = () => {
               </p>
             </div>
           </div>
-          <div className="px-[20px] py-[12px] rounded-[16px] bg-[#23284F]  border-[1px] border-[#444869]  sm:min-w-[104px] sm:px-[15px] sm:mr-3">
+          <div className="px-[20px] py-[12px] rounded-[16px] bg-[#23284F]  border-[1px] border-[#444869]  sm:min-w-[154px] sm:px-[15px] sm:mr-3">
             <h1 className="text-[16px] text-[#CCCCCC] lg:text-[13px]  font-bold">
               Open bets
             </h1>
