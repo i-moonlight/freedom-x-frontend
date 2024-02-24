@@ -2,12 +2,6 @@ import { Header } from "../../components/Header";
 import dropdown from "../../assets/img/type-dropdown.svg";
 import date from "../../assets/img/date.svg";
 import tick from "../../assets/img/tick.svg";
-
-import back from "../../assets/img/arrow-back-dbl.svg";
-import front from "../../assets/img/arrow-front-dbl.svg";
-
-import backSingle from "../../assets/img/arrow-back-single.svg";
-import frontSingle from "../../assets/img/arrow-front-single.svg";
 import { useEffect, useState } from "react";
 import { account } from "../../assets/axios/Account";
 import { Pagination } from "@mui/material";

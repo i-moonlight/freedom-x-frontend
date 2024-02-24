@@ -1,6 +1,5 @@
 import logo from "../assets/img/logo.svg";
 import { DropdownCustom } from "./Dropdown";
-import tether from "../assets/img/tether.svg";
 import copys from "../assets/img/copy.svg";
 import copyQr from "../assets/img/copy-qr.svg";
 import QRCode from "react-qr-code";
@@ -8,7 +7,6 @@ import copy from "copy-to-clipboard";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { DropdownNetwork } from "./DropdownNetwork";
-import eye from "../assets/img/eye.svg";
 import { useEffect, useState } from "react";
 import { depositObj } from "../assets/axios/Deposit";
 import { account } from "../assets/axios/Account";

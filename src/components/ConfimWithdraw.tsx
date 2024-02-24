@@ -1,4 +1,3 @@
-import React from "react";
 import done from "../assets/img/done.svg";
 import circleSuccess from "../assets/img/gradient/circle-success.svg";
 

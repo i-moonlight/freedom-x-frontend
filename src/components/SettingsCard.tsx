@@ -8,8 +8,6 @@ import eye from "../assets/img/eye.svg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { setting } from "../assets/axios/Settings";
-import Box from "@mui/material/Box";
-import Slider from "@mui/material/Slider";
 import DiscreteSlider from "./DiscreteSlider";
 
 export const SettingsCard = () => {

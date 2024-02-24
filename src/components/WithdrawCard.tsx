@@ -2,15 +2,13 @@ import { DropdownCustom } from "../components/Dropdown";
 import copys from "../assets/img/copy.svg";
 import { useEffect, useState } from "react";
 
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import eye from "../assets/img/eye.svg";
 import { account } from "../assets/axios/Account";
 import { depositObj } from "../assets/axios/Deposit";
 import { WithdrawNetwork } from "./WithdrawNetwork";
 import { withdrawObj } from "../assets/axios/Withdraw";
 export const WithdrawCard = ({ setDone }: any) => {
-  const notify = () => toast("Copied The Content");
   const [active, setActive] = useState("");
   const [loading, setloading] = useState(true);
   const [Amount, setAmount] = useState("");

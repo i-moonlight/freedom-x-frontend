@@ -4,7 +4,6 @@ import pieImg from "../assets/img/pie.svg";
 import handImg from "../assets/img/hand.svg";
 import ReactApexChart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
-import { useEffect } from "react";
 export const PerformanceBox = ({
   heading,
   number,
