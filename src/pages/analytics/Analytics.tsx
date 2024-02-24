@@ -122,7 +122,12 @@ export const Analytics = () => {
                 pie={1}
                 hoverData="Profit or Loss as a percentage of the total balance for the selected period"
               />
-              <PerformanceBox heading="PnL (%)" number="+30.45%" pie={1} />
+              <PerformanceBox 
+                heading="Total Bets" 
+                number="100" 
+                hand={1} 
+                hoverData="Total number of bets placed over the selected period."
+              />
             </div>
             {chartsData && (
               <PerformanceBox

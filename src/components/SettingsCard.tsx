@@ -116,7 +116,6 @@ export const SettingsCard = () => {
               <input
                 type={password ? "password" : "text"}
                 className="bg-[transparent] text-[#CCCCCC] text-[16px] flex-1 w-full outline-none border-0"
-                placeholder="Enter address"
                 value={refCode}
                 onChange={(e) => {
                   setrefCode(e.target.value);

@@ -1,6 +1,7 @@
 import info from "../assets/img/info.svg";
 import lineimg from "../assets/img/line.svg";
 import pieImg from "../assets/img/pie.svg";
+import handImg from "../assets/img/hand.svg";
 import ReactApexChart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
 import { useEffect } from "react";
@@ -11,6 +12,7 @@ export const PerformanceBox = ({
   line = null,
   pie = null,
   bar = null,
+  hand = null,
   chartsData = null,
 }: any) => {
   let options: ApexOptions = {};
@@ -97,6 +99,7 @@ export const PerformanceBox = ({
         </div>
         {line === 1 && <img src={lineimg} alt="" className="w-[130px]" />}
         {pie === 1 && <img src={pieImg} alt="" />}
+        {hand === 1 && <img src={handImg} alt="" />}
       </div>
       {bar === 1 && (
         <ReactApexChart
