@@ -271,10 +271,9 @@ export const Bet = () => {
                 <div className="flex-1  flex items-center justify-center">
                   <p className="text-[#EFEFEF] text-[16px]   font-medium">
                     Stake:{" "}
-                    {Number(EachBet["stake"] * 100).toFixed(
+                    {Number(EachBet["staked"]).toFixed(
                       currentBalance.symbol == "USDT" ? 2 : 8
                     )}
-                    %
                   </p>
                 </div>
                 <div
