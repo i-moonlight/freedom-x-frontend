@@ -46,10 +46,10 @@ export const Login = () => {
             // onClick={(e) => {
             //   // const firstTimeDone = getCookie("token");
             //   // if (firstTimeDone) {
-            //   //   navigate("/deposite");
+            //   //   navigate("/deposit");
             //   // } else {
             //   //   document.cookie = `token=true; path=/`;
-            //   //   navigate("/deposite/new");
+            //   //   navigate("/deposit/new");
             //   // }
             // }}
           >

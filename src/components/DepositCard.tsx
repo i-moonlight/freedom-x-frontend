@@ -1,5 +1,5 @@
 import logo from "../assets/img/logo.svg";
-import { DropdownCustom } from "../components/Dropdown";
+import { DropdownCustom } from "./Dropdown";
 import tether from "../assets/img/tether.svg";
 import copys from "../assets/img/copy.svg";
 import copyQr from "../assets/img/copy-qr.svg";
@@ -12,7 +12,7 @@ import eye from "../assets/img/eye.svg";
 import { useEffect, useState } from "react";
 import { depositObj } from "../assets/axios/Deposit";
 import { account } from "../assets/axios/Account";
-export const DepositeCard = ({ logoCustom }: any) => {
+export const DepositCard = ({ logoCustom }: any) => {
   const notify = () => toast("Copied The Content");
 
   const Errornotify = (errorContent: String) => toast(errorContent);

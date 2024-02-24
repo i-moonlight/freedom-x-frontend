@@ -196,13 +196,13 @@ input[type="number"] {
   }
 }
 @media screen and (max-height: 851px) {
-  .Deposite {
+  .Deposit {
     height: unset;
     padding: 3rem 0rem;
     flex-direction: column;
   }
 
-  .Deposite .skipbutton {
+  .Deposit .skipbutton {
     position: static;
     margin-top: 2rem;
   }

@@ -5,10 +5,10 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import { Login } from "./pages/auth/Login";
-import { Deposite } from "./pages/deposite/Deposite";
+import { Deposit } from "./pages/deposit/Deposit";
 import { Bet } from "./pages/bet/Bet";
 import { Withdraw } from "./pages/withdraw/Withdraw";
-import { DepositeNew } from "./pages/deposite/DepositeNew";
+import { DepositNew } from "./pages/deposit/DepositNew";
 import { Settings } from "./pages/settings/Settings";
 import { Faq } from "./pages/faq/Faq";
 import { History } from "./pages/history/History";
@@ -22,12 +22,12 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: "/deposite",
-    element: <Deposite />,
+    path: "/deposit",
+    element: <Deposit />,
   },
   {
-    path: "/deposite/new",
-    element: <DepositeNew />,
+    path: "/deposit/new",
+    element: <DepositNew />,
   },
   {
     path: "/withdraw",

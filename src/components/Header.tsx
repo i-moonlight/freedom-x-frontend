@@ -40,7 +40,7 @@ export const Header = ({ active, page }: any) => {
             Account History
           </Link>
           <Link
-            to="/deposite"
+            to="/deposit"
             className={`text-[#FFFFFF] font-semibold text-[16px] h-[58px] px-4 justify-center flex border-b-[1px] border-b-[#3B3C54] items-center ${
               active === 4 &&
               "bg-[#2E2633] rounded-lg border-b-[#FC8623] border-[1px] border-[#FC8623]"
@@ -142,7 +142,7 @@ export const Header = ({ active, page }: any) => {
               Account History
             </Link>
             <Link
-              to="/deposite"
+              to="/deposit"
               className={`text-[#FFFFFF] font-semibold text-[16px] h-[44px] px-4 justify-center flex items-center ${
                 active === 4 &&
                 "bg-[#2E2633] rounded-full border-[1px] border-[#FC8623]"
