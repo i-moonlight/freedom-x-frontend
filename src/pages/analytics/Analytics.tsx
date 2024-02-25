@@ -139,6 +139,7 @@ export const Analytics = () => {
                 heading="Compound Profit"
                 number=""
                 bar={1}
+                hoverData="Compound Profit (or Loss) for the account over the selected period."
               />
             )}
           </div>
