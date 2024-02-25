@@ -129,6 +129,7 @@ export const Analytics = () => {
                 heading="Total Bets"
                 number="100"
                 hand={1}
+                left
                 hoverData="Total number of bets placed over the selected period."
               />
             </div>
