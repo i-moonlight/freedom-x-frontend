@@ -139,7 +139,7 @@ export const Bet = () => {
 
           <div className="px-[20px] sm:min-w-[154px] py-[12px] rounded-[16px] bg-[#23284F] border-[1px] border-[#444869]  sm:px-[15px]">
             <h1 className="text-[16px] text-[#CCCCCC]  lg:text-[13px]  font-bold">
-              Profit
+              P&L
             </h1>
             <div className="flex items-center justify-between mt-2">
               <p

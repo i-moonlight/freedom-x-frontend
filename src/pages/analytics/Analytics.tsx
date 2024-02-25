@@ -106,7 +106,7 @@ export const Analytics = () => {
           <div className="grid grid-cols-[357px_1fr] lg:grid-cols-1  mt-4 gap-4">
             <div className="flex flex-col gap-4">
               <PerformanceBox
-                heading="PnL"
+                heading="P&L"
                 number={`${
                   anayticsHistoryData != null &&
                   Number(anayticsHistoryData.pnl).toFixed(
@@ -118,7 +118,7 @@ export const Analytics = () => {
                 hoverData="Absolute Profit (or Loss) for the account over the selected period."
               />
               <PerformanceBox
-                heading="PnL (%)"
+                heading="P&L (%)"
                 number="+30.45%"
                 pie={1}
                 left
