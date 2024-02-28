@@ -102,7 +102,7 @@ export const SettingsCard = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-5 my-6 md:grid-cols-1">
+        <div className="gap-5 my-6 md:grid-cols-1">
           <div>
             <label
               htmlFor="#"
@@ -139,7 +139,7 @@ export const SettingsCard = () => {
             </div>
           </div>
           <div>
-            <label
+            {/* <label
               htmlFor="#"
               className="text-[#FFFFFF] text-[17px] mb-2 block"
             >
@@ -150,7 +150,7 @@ export const SettingsCard = () => {
                 defaultValue={multiplierVal}
                 setmultiplierVal={setmultiplierVal}
               />
-            )}
+            )} */}
 
             {/* <div className="flex gap-[10px]">
               {multiplier.map((Each, key) => (
