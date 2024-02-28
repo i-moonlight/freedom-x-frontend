@@ -313,14 +313,14 @@ export const History = () => {
                     }`}
                   >
                     {Number(Each.change).toFixed(
-                      balance?.symbol == "USDT" ? 2 : 8
+                      balance?.symbol == "BTC" ? 8 : 2
                     )}
                   </p>
                 </div>
                 <div className="w-[104px] 1lg:w-full 1lg:justify-end flex items-center justify-end ">
                   <p className="text-[#EFEFEF] text-[16px] font-medium">
                     {Number(Each.balance).toFixed(
-                      balance?.symbol == "USDT" ? 2 : 8
+                      balance?.symbol == "BTC" ? 8 : 2
                     )}
                   </p>
                 </div>

@@ -83,7 +83,7 @@ export const Bet = () => {
               <p className="text-[30px] text-[#EFEFEF] font-bold lg:text-[20px]">
                 <span className=" inline-block min-w-[80px] sm:w-[unset] sm:mr-1">
                   {Number(currentBalance.balance).toFixed(
-                    currentBalance.symbol == "USDT" ? 2 : 8
+                    currentBalance.symbol == "BTC" ? 8 : 2
                   )}
                 </span>
                 {' '}{currentBalance.symbol}
@@ -125,7 +125,7 @@ export const Bet = () => {
                   >
                     <span className="inline-block w-[100px] sm:w-[unset] mr-3 text-right sm:text-left ">
                       {Number(EachList.balance).toFixed(
-                        EachList.symbol == "USDT" ? 2 : 8
+                        EachList.symbol == "BTC" ? 8 : 2
                       )}
                     </span>
                     <span className=" inline-block w-[80px] ">
@@ -151,7 +151,7 @@ export const Bet = () => {
                }`}
               >
                 {Number(currentBalance.pnl).toFixed(
-                  currentBalance.symbol == "USDT" ? 2 : 8
+                  currentBalance.symbol == "BTC" ? 8 : 2
                 )}
               </p>
             </div>
@@ -163,7 +163,7 @@ export const Bet = () => {
             <div className="flex items-center justify-between mt-2">
               <p className="text-[30px] text-[#EFEFEF] font-bold lg:text-[20px]">
                 {Number(currentBalance.unsettled_balance).toFixed(
-                  currentBalance.symbol == "USDT" ? 2 : 8
+                  currentBalance.symbol == "BTC" ? 8 : 2
                 )}
               </p>
             </div>
@@ -272,7 +272,7 @@ export const Bet = () => {
                   <p className="text-[#EFEFEF] text-[16px]   font-medium">
                     Stake:{" "}
                     {Number(EachBet["staked"]).toFixed(
-                      currentBalance.symbol == "USDT" ? 2 : 8
+                      currentBalance.symbol == "BTC" ? 8 : 2
                     )}
                   </p>
                 </div>
@@ -299,10 +299,10 @@ export const Bet = () => {
                       {EachBet["status"] == "lose"
                         ? Number(
                             EachBet["staked"] * (1 - EachBet["odd"])
-                          ).toFixed(currentBalance.symbol == "USDT" ? 2 : 8)
+                          ).toFixed(currentBalance.symbol == "BTC" ? 8 : 2)
                         : Math.abs(
                             EachBet["staked"] * (1 - EachBet["odd"])
-                          ).toFixed(currentBalance.symbol == "USDT" ? 2 : 8)}
+                          ).toFixed(currentBalance.symbol == "BTC" ? 8 : 2)}
                     </span>
                   )}
 

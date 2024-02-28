@@ -110,7 +110,7 @@ export const Analytics = () => {
                 number={`${
                   anayticsHistoryData != null &&
                   Number(anayticsHistoryData.pnl).toFixed(
-                    anayticsHistoryData?.symbol == "USDT" ? 2 : 8
+                    anayticsHistoryData?.symbol == "BTC" ? 8 : 2
                   )
                 } ${anayticsHistoryData != null && anayticsHistoryData.symbol}`}
                 line={1}
