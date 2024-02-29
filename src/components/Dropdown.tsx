@@ -8,6 +8,7 @@ export const DropdownCustom = ({
   networksState = null,
   setadditionState = null,
   setcurrentFee = null,
+  setSymbol = null,
   setactiveDropdown,
   activeDropdown,
 }: any) => {
@@ -68,6 +69,9 @@ export const DropdownCustom = ({
                     }
                   );
                   setadditionState(additionalnetwork);
+                }
+                if (setSymbol) {
+                  setSymbol(EachList.symbol);
                 }
               }}
             >

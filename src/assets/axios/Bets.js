@@ -15,16 +15,20 @@ class Bets {
     itemOffset
   ) {
     try {
-      let { data } = await axios.get(`${URL}/bets?symbol=BTC`, {
-        headers: {
-          Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-        },
-      });
+      let balance = JSON.parse(window.localStorage.getItem("balance") || "{}");
+      let { data } = await axios.get(
+        `${URL}/bets?symbol=${balance.symbol ? balance.symbol : "BTC"}`,
+        {
+          headers: {
+            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+          },
+        }
+      );
 
       setbetsState(data["bets"]);
       setbetsStateBackup(data["bets"]);
       setpageCount(Math.ceil(data["bets"].length / 10));
-
+      console.log(data["bets"]);
       const endOffset = itemOffset + 10;
 
       if (window.innerWidth < 500) {

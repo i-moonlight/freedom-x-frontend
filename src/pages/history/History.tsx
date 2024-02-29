@@ -130,7 +130,7 @@ export const History = () => {
                     <img src={tick} alt="" className="hidden" />
                   </label>
                   <p className="text-[#EFEFEF] text-[16px] font-bold">
-                    Withdrawal Cancelled{" "}
+                    Withdrawal Cancelled
                   </p>
                 </li>
                 <li className="flex items-center gap-2 px-4 h-[56px] border-b-[1px] border-b-[#444869]">
@@ -193,7 +193,7 @@ export const History = () => {
                       let checkedInputs =
                         parent?.querySelectorAll("li input:checked");
 
-                      if (checkedInputs?.length == 0) {
+                      if (checkedInputs?.length === 0) {
                         setAccountHistory(historyUtilArea);
                         setActive(false);
                         return;
@@ -216,7 +216,7 @@ export const History = () => {
                         checkboxvalues.forEach((EachValue: any) => {
                           let valueLower = EachValue.toLowerCase();
 
-                          if (valueLower == type) {
+                          if (valueLower === type) {
                             historyLocal.push(Each);
                           }
                         });
@@ -250,7 +250,7 @@ export const History = () => {
                   Type
                 </p>
                 <p className="text-[#CCCCCC] text-[16px] font-medium hidden sm:block">
-                  {typeMbl == "" ? "Type" : typeMbl}
+                  {typeMbl === "" ? "Type" : typeMbl}
                 </p>
                 <img src={dropdown} alt="" className="cursor-pointer" />
               </div>
@@ -286,7 +286,7 @@ export const History = () => {
                   <button
                     className="flex items-center justify-center font-bold  border-[1px]  1lg:w-full px-[20px] py-[9px] text-[#27AE60] bg-[#18293A] border-[#27AE60 ] rounded-[10px] border-[#27AE60]  sm:px-[0px] capitalize"
                     style={
-                      Each.type == "bet placed"
+                      Each.type === "bet placed"
                         ? {
                             background: `#2D2139`,
                             borderColor: `#EB5757`,
@@ -313,21 +313,21 @@ export const History = () => {
                     }`}
                   >
                     {Number(Each.change).toFixed(
-                      balance?.symbol == "BTC" ? 8 : 2
+                      balance?.symbol === "BTC" ? 8 : 2
                     )}
                   </p>
                 </div>
                 <div className="w-[104px] 1lg:w-full 1lg:justify-end flex items-center justify-end ">
                   <p className="text-[#EFEFEF] text-[16px] font-medium">
                     {Number(Each.balance).toFixed(
-                      balance?.symbol == "BTC" ? 8 : 2
+                      balance?.symbol === "BTC" ? 8 : 2
                     )}
                   </p>
                 </div>
               </li>
             ))}
 
-            {accountHistory.length == 0 && (
+            {accountHistory.length === 0 && (
               <li className=" bg-[#171B35] py-4 px-5 rounded-[16px]  border-[1px] border-[#444869] h-[200px] flex items-center justify-center">
                 <div className="w-full text-center">
                   <p className="text-[#EFEFEF] text-[20px] font-bold">

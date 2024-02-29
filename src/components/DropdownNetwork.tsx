@@ -14,6 +14,11 @@ export const DropdownNetwork = ({
   const [activeList, setActiveList] = useState(list[0]);
 
   useEffect(() => {
+    console.log(list);
+    // setSymbol(list[0]["symbols"]["0"]["id"]);
+  }, [list]);
+
+  useEffect(() => {
     if (list.length > 0) {
       setActiveList(list[0]);
       setAddress(list[0]["our_addresses"][0]);

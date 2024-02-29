@@ -72,7 +72,7 @@ export const Bet = () => {
       <div className="1lg:w-[90%] sm:!w-full sm:pl-4   w-[1140px] mx-auto mt-[36px] ">
         <div className="grid grid-cols-3 gap-3 mb-8 sm:flex sm:overflow-scroll">
           <div
-            className={`px-[20px] sm:px-[15px]   py-[12px] sm:min-w-[201px] rounded-[16px] bg-[#3958FF] relative sm:static ${
+            className={`px-[20px] sm:px-[15px]   py-[12px] sm:min-w-[251px] rounded-[16px] bg-[#3958FF] relative sm:static ${
               active && "rounded-bl-none rounded-br-none"
             }`}
           >
@@ -83,10 +83,10 @@ export const Bet = () => {
               <p className="text-[30px] text-[#EFEFEF] font-bold lg:text-[20px]">
                 <span className=" inline-block min-w-[80px] sm:w-[unset] sm:mr-1">
                   {Number(currentBalance.balance).toFixed(
-                    currentBalance.symbol == "BTC" ? 8 : 2
+                    currentBalance.symbol === "BTC" ? 8 : 2
                   )}
-                </span>
-                {' '}{currentBalance.symbol}
+                </span>{" "}
+                {currentBalance.symbol}
               </p>
               {active ? (
                 <img
@@ -109,7 +109,7 @@ export const Bet = () => {
               )}
             </div>
             {active && (
-              <ul className="bg-[#23284F] px-[20px] border-[1px] border-[#3958FF] rounded-bl-[8px] left-0 top-[100%] rounded-br-[8px] absolute w-full z-20 sm:top-[185px] sm:w-[201px] sm:left-[1rem]">
+              <ul className="bg-[#23284F] px-[20px] border-[1px] border-[#3958FF] rounded-bl-[8px] left-0 top-[100%] rounded-br-[8px] absolute w-full z-20 sm:top-[185px] sm:w-[251px] sm:left-[1rem]">
                 {userAccount.map((EachList: any) => (
                   <li
                     onClick={(e) => {
@@ -120,12 +120,21 @@ export const Bet = () => {
                         JSON.stringify(EachList)
                       );
                       setcurrentBalance(EachList);
+
+                      bets.getBets(
+                        setbetsState,
+                        setbetsStateBackup,
+                        setloading,
+                        setpageCount,
+                        setcurrentItems,
+                        itemOffset
+                      );
                     }}
                     className="text-[16px] font-bold text-[#EFEFEF] h-[56px] border-b-[1px] border-b-[#444869] flex items-center cursor-pointer sm:w-[unset]"
                   >
                     <span className="inline-block w-[100px] sm:w-[unset] mr-3 text-right sm:text-left ">
                       {Number(EachList.balance).toFixed(
-                        EachList.symbol == "BTC" ? 8 : 2
+                        EachList.symbol === "BTC" ? 8 : 2
                       )}
                     </span>
                     <span className=" inline-block w-[80px] ">
@@ -283,29 +292,33 @@ export const Bet = () => {
                     ) == "0.000" && "justify-end"
                   }`}
                 >
-                  {Math.abs(EachBet["staked"] * (1 - EachBet["odd"])) !== 0 && (
-                    <span
-                      className="flex items-center  font-semibold  pr-[10px] sm:text-[12px] flex-1  sm:flex-[unset] sm:w-[100px] sm:text-center sm:justify-center rounded-[10px] text-[18px]"
-                      style={
-                        EachBet["status"] == "win"
-                          ? {
-                              color: "#27AE60",
-                            }
-                          : {
-                              color: "#EB5757",
-                            }
-                      }
-                    >
-                      {EachBet["status"] == "lose"
-                        ? Number(
-                            EachBet["staked"] * (1 - EachBet["odd"])
-                          ).toFixed(currentBalance.symbol == "BTC" ? 8 : 2)
-                        : Math.abs(
-                            EachBet["staked"] * (1 - EachBet["odd"])
-                          ).toFixed(currentBalance.symbol == "BTC" ? 8 : 2)}
-                    </span>
+                  {EachBet["status"] == "open" && (
+                    <>
+                      {Math.abs(EachBet["staked"] * (1 - EachBet["odd"])) !==
+                        0 && (
+                        <span
+                          className="flex items-center  font-semibold  pr-[10px] sm:text-[12px] flex-1  sm:flex-[unset] sm:w-[100px] sm:text-center sm:justify-center rounded-[10px] text-[18px]"
+                          style={
+                            EachBet["status"] == "win"
+                              ? {
+                                  color: "#27AE60",
+                                }
+                              : {
+                                  color: "#EB5757",
+                                }
+                          }
+                        >
+                          {EachBet["status"] == "lose"
+                            ? Number(
+                                EachBet["staked"] * (1 - EachBet["odd"])
+                              ).toFixed(currentBalance.symbol == "BTC" ? 8 : 2)
+                            : Math.abs(
+                                EachBet["staked"] * (1 - EachBet["odd"])
+                              ).toFixed(currentBalance.symbol == "BTC" ? 8 : 2)}
+                        </span>
+                      )}
+                    </>
                   )}
-
                   <span className="flex w-[90px] text-[14px] items-center justify-center text-[#fff] font-bold  border-[1px] border-[#3958FF] 1lg:w-full px-[10px] py-[9px] rounded-[10px] sm:!w-[100px]  sm:px-[10px] sm:text-[12px]">
                     Odd: {Number(EachBet["odd"]).toFixed(2)}
                   </span>
