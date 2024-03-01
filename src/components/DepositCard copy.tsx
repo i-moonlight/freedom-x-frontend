@@ -18,7 +18,7 @@ export const DepositCard = ({ logoCustom }: any) => {
   const [activeDropdown, setactiveDropdown] = useState(null);
   const [pasteValue, setpasteValue] = useState("");
   const [networksState, setnetworksState] = useState([]);
-  const [transfervalue, settransfervalue] = useState("Joao.moa@gmail.com");
+
   const [address, setAddress] = useState("");
   const [networkSelect, setnetworkSelect] = useState("");
   const [symbol, setSymbol] = useState("EUR");
@@ -155,39 +155,6 @@ export const DepositCard = ({ logoCustom }: any) => {
             </div>
           </div>
         )}
-
-        {symbol == "EUR" && (
-          <div className="my-6">
-            <label
-              htmlFor="#"
-              className="text-[#FFFFFF] text-[17px] mb-2 block"
-            >
-              Transfer Reference
-            </label>
-
-            <div className="flex bg-[#171B35] w-full rounded-[12px] border-[1px] border-[#3B3D53] h-[50px] items-center px-3 cursor-pointer">
-              <input
-                type="text"
-                className="bg-[transparent] text-[#CCCCCC] text-[16px] flex-1 w-full outline-none border-0"
-                value={transfervalue}
-                onChange={(e) => {
-                  settransfervalue(e.target.value);
-                }}
-              />
-
-              <img
-                src={copys}
-                alt=""
-                className="cursor-pointer"
-                onClick={async (e) => {
-                  const text = await navigator.clipboard.readText();
-                  setpasteValue(text);
-                }}
-              />
-            </div>
-          </div>
-        )}
-
         {symbol != "EUR" && (
           <button
             className="text-[#FFFFFF] tect-[16px] w-full h-[49px] bg-[#3958FF]  rounded-[12px]"
