@@ -9,6 +9,9 @@ import { account } from "../../assets/axios/Account";
 export const Analytics = () => {
   const [chartsData, setchartsData] = useState(null);
   const [loading, setloading] = useState(true);
+  const [totalbets, settotalbets] = useState(0);
+  const [accountstat, setaccountstat] = useState("This month");
+  const [performancestat, setperformancestat] = useState("This month");
   const [anayticsHistoryData, setanayticsHistoryData] = useState<any>(null);
   const [analyticsData, setanalyticsData] = useState({
     compound_return: "0",
@@ -20,11 +23,13 @@ export const Analytics = () => {
   });
   useEffect(() => {
     analytics.getAnalyticsData(setanalyticsData, setloading);
-    account.getAccountMoreDetails(setchartsData, setloading);
+    account.getAccountMoreDetails(setchartsData, setloading, accountstat);
     let balance = JSON.parse(window.localStorage.getItem("balance") || "{}");
     setanayticsHistoryData(balance);
   }, []);
-
+  useEffect(() => {
+    account.getBetsData(setloading, settotalbets, accountstat);
+  }, [accountstat]);
   return (
     <div className="w-full">
       {loading && (
@@ -47,7 +52,7 @@ export const Analytics = () => {
             <h1 className="text-[#FFFFFF] md:text-[18px] font-bold text-[25px]">
               Overall Performance
             </h1>
-            <MonthDropdown />
+            <MonthDropdown setupdateval={setperformancestat} />
           </div>
           <div className="grid grid-cols-3  mt-4 gap-4 lg:grid-cols-2 md:!grid-cols-1">
             <PerformanceBox
@@ -101,7 +106,7 @@ export const Analytics = () => {
             <h1 className="text-[#FFFFFF] md:text-[18px] font-bold text-[25px]">
               Account stats
             </h1>
-            <MonthDropdown />
+            <MonthDropdown setupdateval={setaccountstat} />
           </div>
           <div className="grid grid-cols-[357px_1fr] lg:grid-cols-1  mt-4 gap-4">
             <div className="flex flex-col gap-4">
@@ -127,7 +132,7 @@ export const Analytics = () => {
 
               <PerformanceBox
                 heading="Total Bets"
-                number="100"
+                number={totalbets}
                 hand={1}
                 left
                 hoverData="Total number of bets placed over the selected period."

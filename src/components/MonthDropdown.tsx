@@ -1,8 +1,8 @@
 import { useState } from "react";
 import date from "../assets/img/date.svg";
-export const MonthDropdown = () => {
+export const MonthDropdown = ({ setupdateval }: any) => {
   const [active, setActive] = useState(false);
-  const [value, setValue] = useState("Last month");
+  const [value, setValue] = useState("This Month");
   return (
     <div className="relative">
       <div
@@ -26,6 +26,7 @@ export const MonthDropdown = () => {
             onClick={(e) => {
               setActive(false);
               setValue("This month");
+              setupdateval("This month");
             }}
           >
             This month
@@ -34,6 +35,7 @@ export const MonthDropdown = () => {
             onClick={(e) => {
               setActive(false);
               setValue("last 3 months");
+              setupdateval("last 3 months");
             }}
             className={`text-[#EFEFEF] font-bold text-[16px] h-[58px] justify-center flex items-center capitalize cursor-pointer border-b-[1px] border-b-[#3B3C54]`}
           >
@@ -43,6 +45,7 @@ export const MonthDropdown = () => {
             onClick={(e) => {
               setActive(false);
               setValue("Last 6 months");
+              setupdateval("Last 6 months");
             }}
             className={`text-[#EFEFEF] font-bold text-[16px] h-[58px]  justify-center flex items-center capitalize cursor-pointer border-b-[1px] border-b-[#3B3C54]`}
           >
@@ -52,6 +55,7 @@ export const MonthDropdown = () => {
             onClick={(e) => {
               setActive(false);
               setValue("Last year");
+              setupdateval("Last year");
             }}
             className={`text-[#EFEFEF] font-bold text-[16px] h-[58px] justify-center flex items-center capitalize cursor-pointer border-b-[1px] border-b-[#3B3C54]`}
           >
@@ -61,6 +65,7 @@ export const MonthDropdown = () => {
             onClick={(e) => {
               setActive(false);
               setValue("Last 5 Years");
+              setupdateval("Last 5 Years");
             }}
             className={`text-[#EFEFEF] font-bold text-[16px] h-[58px] justify-center flex items-center capitalize cursor-pointer border-b-[1px] border-b-[#3B3C54]`}
           >

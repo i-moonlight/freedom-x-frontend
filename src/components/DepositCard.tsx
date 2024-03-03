@@ -11,8 +11,6 @@ import { useEffect, useState } from "react";
 import { depositObj } from "../assets/axios/Deposit";
 import { account } from "../assets/axios/Account";
 import { jwtDecode } from "jwt-decode";
-import "core-js/stable/atob";
-
 export const DepositCard = ({ logoCustom }: any) => {
   const notify = () => toast("Copied");
 
@@ -21,13 +19,7 @@ export const DepositCard = ({ logoCustom }: any) => {
   const [activeDropdown, setactiveDropdown] = useState(null);
   const [pasteValue, setpasteValue] = useState("");
   const [networksState, setnetworksState] = useState([]);
-  const token = window.localStorage.getItem("token");
-  let email = ""
-  if (token) {
-    const decoded: { email: string } = jwtDecode(token);
-    email = decoded.email
-  }
-  const [transfervalue, settransfervalue] = useState(email);
+  const [transfervalue, settransfervalue] = useState<any>("");
   const [address, setAddress] = useState("");
   const [networkSelect, setnetworkSelect] = useState("Bitcoin");
   const [symbol, setSymbol] = useState("BTC");
@@ -44,6 +36,12 @@ export const DepositCard = ({ logoCustom }: any) => {
   });
 
   useEffect(() => {
+    // settransfervalue
+    const token = window.localStorage.getItem("token") || "{}";
+    const decoded = jwtDecode(token) as any;
+
+    settransfervalue(decoded["email"]);
+
     account.getUserData(setuserAccount, setcurrentBalance, setloading);
     depositObj.Network(setnetworksState, setloading);
   }, []);
@@ -179,6 +177,7 @@ export const DepositCard = ({ logoCustom }: any) => {
               <input
                 type="text"
                 className="bg-[transparent] text-[#CCCCCC] text-[16px] flex-1 w-full outline-none border-0"
+                readOnly
                 value={transfervalue}
                 onChange={(e) => {
                   settransfervalue(e.target.value);
@@ -197,8 +196,9 @@ export const DepositCard = ({ logoCustom }: any) => {
             </div>
 
             <p className="text-[#CCCCCC] text-[14px] mt-2">
-            Please add the above as the reference of the transfer, so that the deposit can be identified.
-          </p>
+              Please add the above as the reference of the transfer, so that the
+              deposit can be identified.
+            </p>
           </div>
         )}
 
@@ -211,6 +211,9 @@ export const DepositCard = ({ logoCustom }: any) => {
           </button>
         )}
       </div>
+      <p className="text-[#FFFFFF] text-center mt-2 text-[13px] mb-2 block">
+        You need to add the reference to the transfer.
+      </p>
     </div>
   );
 };
