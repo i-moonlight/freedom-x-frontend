@@ -264,7 +264,7 @@ export const History = () => {
                   Amount
                 </p>
               </div>
-              <div className="w-[104px] 1lg:hidden 1lg:justify-start flex items-center justify-end ">
+              <div className="w-[104px] 1lg:hidden 1lg:justify-start flex items-center justify-start ">
                 <p className="text-[#CCCCCC] text-[16px] font-medium">
                   Final Balance
                 </p>
@@ -312,12 +312,13 @@ export const History = () => {
                       Each.change.split("-").length > 1 && "text-[#EB5757]"
                     }`}
                   >
+                    {Each.change.split("-").length == 1 && "+"}
                     {Number(Each.change).toFixed(
                       balance?.symbol === "BTC" ? 8 : 2
                     )}
                   </p>
                 </div>
-                <div className="w-[104px] 1lg:w-full 1lg:justify-end flex items-center justify-end ">
+                <div className="w-[104px] 1lg:w-full 1lg:justify-start flex items-center justify-start ">
                   <p className="text-[#EFEFEF] text-[16px] font-medium">
                     {Number(Each.balance).toFixed(
                       balance?.symbol === "BTC" ? 8 : 2
