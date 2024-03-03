@@ -292,7 +292,7 @@ export const Bet = () => {
                     ) == "0.000" && "justify-end"
                   }`}
                 >
-                  {EachBet["status"] == "open" && (
+                  {EachBet["status"] != "open" && (
                     <>
                       {Math.abs(EachBet["staked"] * (1 - EachBet["odd"])) !==
                         0 && (
@@ -310,7 +310,7 @@ export const Bet = () => {
                         >
                           {EachBet["status"] == "lose"
                             ? Number(
-                                EachBet["staked"] * (1 - EachBet["odd"])
+                                EachBet["staked"] 
                               ).toFixed(currentBalance.symbol == "BTC" ? 8 : 2)
                             : Math.abs(
                                 EachBet["staked"] * (1 - EachBet["odd"])

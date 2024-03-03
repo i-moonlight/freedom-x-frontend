@@ -7,7 +7,7 @@ export const ConfimWithdraw = ({ message }: any) => {
       <img src={circleSuccess} alt="" className="absolute bottom-0" />
 
       <img src={done} alt="" />
-      <h1 className="text-[#fff]  mt-4 mb-1">Confirmation!</h1>
+      <h1 className="text-[#fff]  mt-4 mb-1">Withdrawal Requested</h1>
       <p className="text-[#C8C5C5] text-[16px] ">{message}</p>
     </div>
   );

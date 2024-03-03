@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import { depositObj } from "../assets/axios/Deposit";
 import { account } from "../assets/axios/Account";
 export const DepositCard = ({ logoCustom }: any) => {
-  const notify = () => toast("Copied The Content");
+  const notify = () => toast("Copied");
 
   const Errornotify = (errorContent: String) => toast(errorContent);
   const [loading, setloading] = useState(true);

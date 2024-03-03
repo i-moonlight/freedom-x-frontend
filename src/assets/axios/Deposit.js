@@ -34,6 +34,8 @@ class Deposit {
       );
       if (data.error) {
         Errornotify(data.error);
+      } else {
+        Errornotify("Deposit Added")
       }
 
       setloading(false);

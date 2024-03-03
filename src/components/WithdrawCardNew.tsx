@@ -12,7 +12,7 @@ import eye from "../assets/img/eye.svg";
 import { useEffect, useState } from "react";
 import { depositObj } from "../assets/axios/Deposit";
 export const WithdrawCardNew = ({ logoCustom }: any) => {
-  const notify = () => toast("Copied The Content");
+  const notify = () => toast("Copied");
 
   const Errornotify = (errorContent: String) => toast(errorContent);
 

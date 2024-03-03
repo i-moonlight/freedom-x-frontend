@@ -7,6 +7,7 @@ export const DropdownCustom = ({
   setglobalDataAccount,
   networksState = null,
   setadditionState = null,
+  setnetworkSelect = null,
   setcurrentFee = null,
   setSymbol = null,
   setactiveDropdown,
@@ -61,6 +62,7 @@ export const DropdownCustom = ({
                   let additionalnetwork = networksState.filter(
                     (EachNetwork: any) => {
                       if (EachNetwork.symbols[0]["id"] == EachList.symbol) {
+                        setnetworkSelect(EachNetwork._id)
                         setcurrentFee(EachNetwork.symbols[0]["fee"]);
                         return true;
                       }

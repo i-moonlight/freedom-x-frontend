@@ -156,7 +156,7 @@ export const WithdrawCard = ({ setDone }: any) => {
               <button
                 className="text-[#EFEFEF] text-[15px] border-[1px] border-[#3958FF]  h-[31px] w-[60px] rounded"
                 onClick={(e) => {
-                  setAmount(Number(globalDataAccount?.balance).toFixed(2));
+                  setAmount(Number(globalDataAccount?.balance).toFixed(globalDataAccount?.symbol == "BTC" ? 8 : 2));
                 }}
               >
                 Max
@@ -164,7 +164,7 @@ export const WithdrawCard = ({ setDone }: any) => {
             </div>
           </div>
           <p className="text-[#EFEFEF] text-[12px] mt-2">
-            Available {Number(globalDataAccount?.balance).toFixed(2)}{" "}
+            Available {Number(globalDataAccount?.balance).toFixed(globalDataAccount?.symbol == "BTC" ? 8 : 2)}{" "}
             {globalDataAccount?.symbol}
           </p>
         </div>

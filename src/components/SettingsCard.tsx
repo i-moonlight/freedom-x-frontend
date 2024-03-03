@@ -18,7 +18,7 @@ export const SettingsCard = () => {
   const [OuterData, setOuterData] = useState<any>(null);
 
   const [multiplierVal, setmultiplierVal] = useState("");
-  const notify = () => toast("Copied The Content");
+  const notify = () => toast("Copied");
   const [loading, setloading] = useState(true);
   useEffect(() => {
     setting.getUser(setmultiplier, setmultiplierVal, setloading, setOuterData);

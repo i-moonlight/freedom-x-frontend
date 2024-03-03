@@ -10,18 +10,27 @@ import { DropdownNetwork } from "./DropdownNetwork";
 import { useEffect, useState } from "react";
 import { depositObj } from "../assets/axios/Deposit";
 import { account } from "../assets/axios/Account";
+import { jwtDecode } from "jwt-decode";
+import "core-js/stable/atob";
+
 export const DepositCard = ({ logoCustom }: any) => {
-  const notify = () => toast("Copied The Content");
+  const notify = () => toast("Copied");
 
   const Errornotify = (errorContent: String) => toast(errorContent);
   const [loading, setloading] = useState(true);
   const [activeDropdown, setactiveDropdown] = useState(null);
   const [pasteValue, setpasteValue] = useState("");
   const [networksState, setnetworksState] = useState([]);
-  const [transfervalue, settransfervalue] = useState("Joao.moa@gmail.com");
+  const token = window.localStorage.getItem("token");
+  let email = ""
+  if (token) {
+    const decoded: { email: string } = jwtDecode(token);
+    email = decoded.email
+  }
+  const [transfervalue, settransfervalue] = useState(email);
   const [address, setAddress] = useState("");
-  const [networkSelect, setnetworkSelect] = useState("");
-  const [symbol, setSymbol] = useState("EUR");
+  const [networkSelect, setnetworkSelect] = useState("Bitcoin");
+  const [symbol, setSymbol] = useState("BTC");
   const [userAccount, setuserAccount] = useState(true);
   const [additionState, setadditionState] = useState<any>([]);
   const [currentBalance, setcurrentBalance] = useState(true);
@@ -79,6 +88,7 @@ export const DepositCard = ({ logoCustom }: any) => {
             setactiveDropdown={setactiveDropdown}
             activeDropdown={activeDropdown}
             setadditionState={setadditionState}
+            setnetworkSelect={setnetworkSelect}
             networksState={networksState}
             setcurrentFee={setcurrentFee}
             setSymbol={setSymbol}
@@ -185,6 +195,10 @@ export const DepositCard = ({ logoCustom }: any) => {
                 }}
               />
             </div>
+
+            <p className="text-[#CCCCCC] text-[14px] mt-2">
+            Please add the above as the reference of the transfer, so that the deposit can be identified.
+          </p>
           </div>
         )}
 
