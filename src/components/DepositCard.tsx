@@ -22,7 +22,7 @@ export const DepositCard = ({ logoCustom }: any) => {
   const [transfervalue, settransfervalue] = useState<any>("");
   const [address, setAddress] = useState("");
   const [networkSelect, setnetworkSelect] = useState("Bitcoin");
-  const [symbol, setSymbol] = useState("BTC");
+  const [symbol, setSymbol] = useState("EUR");
   const [userAccount, setuserAccount] = useState(true);
   const [additionState, setadditionState] = useState<any>([]);
   const [currentBalance, setcurrentBalance] = useState(true);
@@ -211,9 +211,6 @@ export const DepositCard = ({ logoCustom }: any) => {
           </button>
         )}
       </div>
-      <p className="text-[#FFFFFF] text-center mt-2 text-[13px] mb-2 block">
-        You need to add the reference to the transfer.
-      </p>
     </div>
   );
 };
